@@ -538,7 +538,7 @@ const initialTestimonials: Testimonial[] = [
     graduationYear: '2014',
     program: 'Doctor of Ministry (D.Min.)',
     currentRole: 'Regional Overseer, AIC Fellowship',
-    testimonial: 'I have sent dozens of ministry leaders and pastors to Grace Theological Seminary. Its unflinching loyalty to Scripture and ministry relevance is unmatched.',
+    testimonial: 'I have sent dozens of ministry leaders and pastors to Victory International Apostolic Biblical Institute. Its unflinching loyalty to Scripture and ministry relevance is unmatched.',
     photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200',
     order: 3,
     isActive: true
@@ -559,7 +559,7 @@ const initialTestimonials: Testimonial[] = [
 const initialNewsArticles: NewsArticle[] = [
   {
     id: 'news-1',
-    title: 'Grace Theological Seminary Celebrates 50 Years of Faithful Biblical Training',
+    title: 'Victory International Apostolic Biblical Institute Celebrates 50 Years of Faithful Biblical Training',
     slug: 'grace-celebrates-50-years-of-biblical-training',
     category: 'Institutional News',
     author: 'Office of the President',
@@ -567,7 +567,7 @@ const initialNewsArticles: NewsArticle[] = [
     readTime: '4 min read',
     featuredImage: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=1200',
     summary: 'Over five decades of preparing gospel workers across 20 nations, marked by a thanksgiving convocation and legacy research symposium.',
-    content: 'Grace Theological Seminary marked its 50th Golden Jubilee anniversary with an international convocation gathering over 800 alumni, church leaders, and academic partners. Founded on an unyielding dedication to the inerrancy and authority of Scripture, the institution has graduated more than 1,500 pastors, theologians, translators, and educators currently serving in urban church plants, rural mission fields, and academic institutions worldwide.',
+    content: 'Victory International Apostolic Biblical Institute marked its 50th Golden Jubilee anniversary with an international convocation gathering over 800 alumni, church leaders, and academic partners. Founded on an unyielding dedication to the inerrancy and authority of Scripture, the institution has graduated more than 1,500 pastors, theologians, translators, and educators currently serving in urban church plants, rural mission fields, and academic institutions worldwide.',
     isFeatured: true,
     published: true
   },

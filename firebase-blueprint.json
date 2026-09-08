@@ -12,7 +12,7 @@
         "role": { 
           "type": "string", 
           "description": "Institutional permission tier", 
-          "enum": ["SUPER_ADMIN", "ADMIN", "PRINCIPAL", "PRESIDENT", "REGISTRAR", "ACADEMIC_DEAN", "ACADEMIC_OFFICER", "LECTURER", "FACULTY", "FINANCE", "FINANCE_OFFICER", "MINISTRY_COORDINATOR", "LIBRARIAN", "CHAPLAIN", "STUDENT_AFFAIRS", "HOSTEL_MANAGER", "EXAM_OFFICER", "STUDENT", "ALUMNI"] 
+          "enum": ["SUPER_ADMIN", "ADMIN"] 
         },
         "department": { "type": "string", "description": "Associated academic or administrative department" },
         "phoneNumber": { "type": "string", "description": "Contact telephone number" },
