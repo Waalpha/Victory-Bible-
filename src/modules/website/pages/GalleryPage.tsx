@@ -59,7 +59,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
               Campus Photographic Gallery
             </h1>
             <p className="text-slate-300 text-lg leading-relaxed">
-              Explore the daily life, academic vigor, worship, and residential community at Grace Theological Seminary.
+              Explore the daily life, academic vigor, worship, and residential community at Victory International Apostolic Biblical Institute.
             </p>
           </div>
         </div>

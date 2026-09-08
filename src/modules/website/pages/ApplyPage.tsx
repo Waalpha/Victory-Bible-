@@ -709,7 +709,7 @@ export const ApplyPage: React.FC<ApplyPageProps> = ({ initialProgramId, onNaviga
                       className="mt-0.5 w-4 h-4 rounded text-amber-600 focus:ring-amber-500 border-slate-300"
                     />
                     <span className="text-xs text-slate-600 leading-relaxed">
-                      I solemnly affirm that the information supplied is true and accurate. I affirm my personal faith in the Lord Jesus Christ and promise to abide by the spiritual and academic statutes of Grace Theological Seminary.
+                      I solemnly affirm that the information supplied is true and accurate. I affirm my personal faith in the Lord Jesus Christ and promise to abide by the spiritual and academic statutes of Victory International Apostolic Biblical Institute.
                     </span>
                   </label>
                 </div>

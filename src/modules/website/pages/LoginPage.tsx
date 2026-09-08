@@ -143,7 +143,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onEnterErp, onNavigate }) 
           </div>
           <div>
             <div className="font-serif font-bold text-sm text-white group-hover:text-amber-400 transition-colors">
-              Grace Theological Seminary
+              Victory International Apostolic Biblical Institute
             </div>
             <div className="text-[10px] text-slate-400">
               Theological ERP & Academic Management Portal

@@ -170,7 +170,7 @@ export const FacultyPage: React.FC<FacultyPageProps> = ({ onNavigate }) => {
               <div className="space-y-4 text-xs text-slate-600 leading-relaxed">
                 <h4 className="font-serif font-bold text-sm text-slate-900">Academic & Pastoral Biography</h4>
                 <p>
-                  {activeBioMember.fullName} serves with distinction on the faculty of Grace Theological Seminary. With over a decade of dedicated teaching and pastoral shepherding, they mentor candidates across bachelor, master, and doctoral cohorts.
+                  {activeBioMember.fullName} serves with distinction on the faculty of Victory International Apostolic Biblical Institute. With over a decade of dedicated teaching and pastoral shepherding, they mentor candidates across bachelor, master, and doctoral cohorts.
                 </p>
                 <p>
                   Their scholarly research focuses on {activeBioMember.specialization}, with numerous publications in evangelical theological journals and monographs presented at ACTEA theological colloquiums.

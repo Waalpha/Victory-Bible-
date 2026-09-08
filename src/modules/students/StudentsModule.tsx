@@ -1612,7 +1612,7 @@ export const StudentsModule: React.FC = () => {
             <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 text-white p-5 rounded-2xl border border-slate-700 shadow-xl space-y-4">
               <div className="flex justify-between items-start border-b border-slate-700/80 pb-3">
                 <div>
-                  <div className="text-[9px] uppercase font-bold text-amber-400 tracking-widest">Grace Theological Seminary</div>
+                  <div className="text-[9px] uppercase font-bold text-amber-400 tracking-widest">Victory International Apostolic Biblical Institute</div>
                   <div className="text-xs font-semibold text-slate-300">Official Student Identity Card</div>
                 </div>
                 <span className="px-2 py-0.5 bg-amber-500/20 text-amber-400 font-mono text-[10px] font-bold rounded border border-amber-500/40">

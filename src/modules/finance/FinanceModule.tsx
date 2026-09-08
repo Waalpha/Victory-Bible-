@@ -708,7 +708,7 @@ export const FinanceModule: React.FC = () => {
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-md w-full p-8 space-y-6 shadow-2xl border border-slate-200 text-xs text-slate-800">
             <div className="border-b-2 border-slate-900 pb-4 text-center">
-              <h2 className="font-serif font-black text-lg text-slate-950">{settings.institutionName || 'Grace Theological Seminary'}</h2>
+              <h2 className="font-serif font-black text-lg text-slate-950">{settings.institutionName || 'Victory International Apostolic Biblical Institute'}</h2>
               <p className="text-[11px] text-slate-500">Official Student Bursary Fee Receipt</p>
               <span className="inline-block mt-2 font-mono font-bold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">
                 {printingReceipt.receiptNumber}

@@ -68,7 +68,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               A Legacy of Uncompromising Truth and Faithful Ministry
             </h1>
             <p className="text-slate-300 text-lg leading-relaxed">
-              Founded on the bedrock of the Reformation solas, Grace Theological Seminary prepares shepherds, missionaries, and teachers to preach Christ with clarity and compassion.
+              Founded on the bedrock of the Reformation solas, Victory International Apostolic Biblical Institute prepares shepherds, missionaries, and teachers to preach Christ with clarity and compassion.
             </p>
           </div>
         </div>
@@ -114,13 +114,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </h2>
               <div className="space-y-4 text-slate-600 text-base leading-relaxed">
                 <p>
-                  Established in 1976 by evangelical missionary pioneers and African church elders, Grace Theological Seminary began with a modest cohort of twelve pastoral candidates gathered under an acacia canopy in Nairobi.
+                  Established in 1976 by evangelical missionary pioneers and African church elders, Victory International Apostolic Biblical Institute began with a modest cohort of twelve pastoral candidates gathered under an acacia canopy in Nairobi.
                 </p>
                 <p>
                   Guided by a profound burden for theological depth and expository preaching, the founders laid down an unwavering mandate: that every student must be saturated in original biblical languages, historical theology, systematic doctrine, and genuine pastoral compassion.
                 </p>
                 <p>
-                  Today, Grace Theological Seminary has graduated over 1,500 pastors, church planters, missionary translators, and educators currently serving across 20 countries in Africa, Europe, Asia, and North America.
+                  Today, Victory International Apostolic Biblical Institute has graduated over 1,500 pastors, church planters, missionary translators, and educators currently serving across 20 countries in Africa, Europe, Asia, and North America.
                 </p>
               </div>
 
@@ -167,7 +167,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               Biblical Statement of Faith
             </h2>
             <p className="text-slate-300 text-base leading-relaxed">
-              Every trustee, professor, and teaching fellow at Grace Theological Seminary subscribes annually without mental reservation to the following theological affirmations:
+              Every trustee, professor, and teaching fellow at Victory International Apostolic Biblical Institute subscribes annually without mental reservation to the following theological affirmations:
             </p>
           </div>
 

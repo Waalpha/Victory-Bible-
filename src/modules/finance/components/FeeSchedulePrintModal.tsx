@@ -69,7 +69,7 @@ export const FeeSchedulePrintModal: React.FC<FeeSchedulePrintModalProps> = ({
               )}
               <div>
                 <h1 className="font-serif font-black text-2xl tracking-tight text-slate-950">
-                  {settings.institutionName || 'Grace Theological Seminary'}
+                  {settings.institutionName || 'Victory International Apostolic Biblical Institute'}
                 </h1>
                 <p className="text-xs text-slate-600 font-medium">{settings.tagline || 'Rooted in Scripture, Trained for Ministry'}</p>
                 <p className="text-[11px] text-slate-500 mt-1">{settings.address || 'P.O. Box 45012-00100, Nairobi, Kenya'} • {settings.email || 'admissions@gracetheo.edu'}</p>
@@ -188,7 +188,7 @@ export const FeeSchedulePrintModal: React.FC<FeeSchedulePrintModalProps> = ({
             <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
               <strong className="block text-slate-900 font-bold mb-1">Official Payment Bank Details:</strong>
               <p>Bank: Standard Chartered / KCB Bank</p>
-              <p>Account Name: Grace Theological Seminary</p>
+              <p>Account Name: Victory International Apostolic Biblical Institute</p>
               <p>M-Pesa Paybill: <strong>400200</strong> (A/C: Student ID)</p>
             </div>
           </div>

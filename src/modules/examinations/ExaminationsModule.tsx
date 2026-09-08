@@ -251,7 +251,7 @@ export const ExaminationsModule: React.FC = () => {
             <div className="pt-12 grid grid-cols-3 gap-4 items-center font-sans text-xs">
               <div className="text-left space-y-1 border-t border-slate-400 pt-3">
                 <p className="font-bold text-slate-900">Academic Dean</p>
-                <p className="text-slate-500">Grace Theological Seminary</p>
+                <p className="text-slate-500">Victory International Apostolic Biblical Institute Seminary</p>
               </div>
               <div className="flex flex-col items-center justify-center">
                 <div className="w-16 h-16 bg-amber-500/10 rounded-full border border-amber-500/30 flex items-center justify-center text-amber-700 font-bold text-xs">

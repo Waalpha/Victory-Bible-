@@ -70,7 +70,7 @@ export const VerifyPage: React.FC<VerifyPageProps> = ({ onNavigate }) => {
               Online Certificate Verification Portal
             </h1>
             <p className="text-slate-300 text-lg leading-relaxed">
-              Verify the authenticity of diplomas, degrees, academic transcripts, and ordained credentials issued by Grace Theological Seminary.
+              Verify the authenticity of diplomas, degrees, academic transcripts, and ordained credentials issued by Victory International Apostolic Biblical Institute.
             </p>
           </div>
         </div>

@@ -969,7 +969,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
               <QrCode className="w-4 h-4 text-slate-400" />
               <span>Cryptographically Sealed</span>
             </span>
-            <span className="font-mono text-[10px] text-slate-400">Grace Theological Seminary</span>
+            <span className="font-mono text-[10px] text-slate-400">Victory International Apostolic Biblical Institute Seminary</span>
           </div>
         </div>
       </div>

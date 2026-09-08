@@ -10,7 +10,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
 
   const faqs = [
     {
-      q: 'Is Grace Theological Seminary accredited?',
+      q: 'Is Victory International Apostolic Biblical Institute accredited?',
       a: 'Yes. Grace Seminary holds full institutional accreditation from the Association for Christian Theological Education in Africa (ACTEA) and is chartered by the Ministry of Education. Our degrees are recognized globally by evangelical theological networks.'
     },
     {

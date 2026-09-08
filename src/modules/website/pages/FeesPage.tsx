@@ -272,7 +272,7 @@ export const FeesPage: React.FC<FeesPageProps> = ({ onNavigate }) => {
                 Pastoral Scholarships & Need-Based Ministry Aid
               </h3>
               <p className="text-xs text-amber-900/80 leading-relaxed mb-4 max-w-2xl">
-                {settings.institutionName || 'Grace Theological Seminary'} operates a generous endowment fund supported by partner churches worldwide. Scholarships covering up to 50% of tuition are awarded each semester to full-time pastors from economically disadvantaged rural congregations and missionary church planters.
+                {settings.institutionName || 'Victory International Apostolic Biblical Institute'} operates a generous endowment fund supported by partner churches worldwide. Scholarships covering up to 50% of tuition are awarded each semester to full-time pastors from economically disadvantaged rural congregations and missionary church planters.
               </p>
               <button
                 onClick={() => onNavigate('/contact')}
@@ -306,7 +306,7 @@ export const FeesPage: React.FC<FeesPageProps> = ({ onNavigate }) => {
                 Bank Wire / Direct Deposit
               </span>
               <p className="text-slate-300 mb-1"><span className="text-slate-400">Bank:</span> <span className="font-bold text-white">Standard Chartered Bank / KCB</span></p>
-              <p className="text-slate-300 mb-1"><span className="text-slate-400">Account Name:</span> <span className="font-bold text-white">{settings.institutionName || 'Grace Theological Seminary'}</span></p>
+              <p className="text-slate-300 mb-1"><span className="text-slate-400">Account Name:</span> <span className="font-bold text-white">{settings.institutionName || 'Victory International Apostolic Biblical Institute'}</span></p>
               <p className="text-slate-300 mb-1"><span className="text-slate-400">A/C Number:</span> <span className="font-mono font-bold text-white">0102049583900</span></p>
             </div>
           </div>

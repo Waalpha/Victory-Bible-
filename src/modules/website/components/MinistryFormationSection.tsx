@@ -45,7 +45,7 @@ export const MinistryFormationSection: React.FC<MinistryFormationSectionProps> =
               Theology That Lives in the Local Church and Mission Field
             </h2>
             <p className="text-slate-300 text-base leading-relaxed mb-8">
-              At Grace Theological Seminary, theological education is inseparable from active ministry. Every student is paired with a seasoned pastoral supervisor and placed in a partnering local church.
+              At Victory International Apostolic Biblical Institute, theological education is inseparable from active ministry. Every student is paired with a seasoned pastoral supervisor and placed in a partnering local church.
             </p>
 
             <div className="space-y-4 mb-8">
