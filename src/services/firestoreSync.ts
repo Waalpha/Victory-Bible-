@@ -8,6 +8,7 @@ import {
 } from 'firebase/firestore';
 import { db, firebaseConfig, cleanFirestoreData } from './firebase';
 import { erpService } from './erpService';
+import { authService } from './authService';
 
 export interface SyncProgress {
   status: 'idle' | 'in_progress' | 'success' | 'error';
@@ -118,7 +119,8 @@ class FirestoreSyncService {
       { name: 'testimonials', items: erpService.getTestimonials() },
       { name: 'newsArticles', items: erpService.getNewsArticles() },
       { name: 'publicEvents', items: erpService.getPublicEvents() },
-      { name: 'contactMessages', items: erpService.getContactMessages() }
+      { name: 'contactMessages', items: erpService.getContactMessages() },
+      { name: 'users', items: authService.getAllUserAccounts() }
     ];
 
     let totalDocsPushed = 0;

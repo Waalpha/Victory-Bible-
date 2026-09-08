@@ -12,7 +12,7 @@ import { doc, setDoc, deleteDoc } from 'firebase/firestore';
 const STORAGE_PREFIX = 'theo_erp_';
 
 export const defaultSettings: SystemSettings = {
-  institutionName: 'Grace Theological Seminary & Bible College',
+  institutionName: 'Victory International Apostolic Biblical Institute',
   tagline: 'Equipping Faithful Leaders for Global Gospel Ministry',
   address: '124 Covenant Way, Redeemer City, RC 40210',
   phone: '+1 (800) 555-THEO',
@@ -419,7 +419,7 @@ export const defaultWebsiteSettings: WebsiteSettings = {
     countriesReached: '20+'
   },
   branding: {
-    institutionName: 'Grace Theological Seminary & Bible College',
+    institutionName: 'Victory International Apostolic Biblical Institute',
     tagline: 'Equipping Faithful Leaders for Global Gospel Ministry',
     motto: 'Veritas, Pietas, Missio — Biblical Truth, Spiritual Piety, Global Mission',
     primaryColor: '#0b1528',

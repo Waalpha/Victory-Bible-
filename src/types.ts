@@ -32,6 +32,14 @@ export interface UserProfile {
   createdAt: string;
 }
 
+export interface UserAccount extends UserProfile {
+  lastLogin?: string;
+  mustChangePassword?: boolean;
+  notes?: string;
+  accountType?: 'Firebase Auth' | 'Institutional Account';
+  passwordHash?: string; // Stored locally for offline/demo institutional accounts
+}
+
 export type ApplicantStatus = 'Draft' | 'Submitted' | 'Under Review' | 'Accepted' | 'Rejected' | 'Waitlisted' | 'Enrolled';
 
 export interface Applicant {

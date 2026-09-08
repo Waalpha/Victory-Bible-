@@ -1,0 +1,51 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account and profile for authentication and institutional role access control",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the user account" },
+        "uid": { "type": "string", "description": "Firebase Auth UID or unique credentials identifier" },
+        "email": { "type": "string", "format": "email", "description": "Institutional email address" },
+        "fullName": { "type": "string", "description": "Full legal or institutional name" },
+        "role": { 
+          "type": "string", 
+          "description": "Institutional permission tier", 
+          "enum": ["SUPER_ADMIN", "ADMIN", "PRINCIPAL", "PRESIDENT", "REGISTRAR", "ACADEMIC_DEAN", "ACADEMIC_OFFICER", "LECTURER", "FACULTY", "FINANCE", "FINANCE_OFFICER", "MINISTRY_COORDINATOR", "LIBRARIAN", "CHAPLAIN", "STUDENT_AFFAIRS", "HOSTEL_MANAGER", "EXAM_OFFICER", "STUDENT", "ALUMNI"] 
+        },
+        "department": { "type": "string", "description": "Associated academic or administrative department" },
+        "phoneNumber": { "type": "string", "description": "Contact telephone number" },
+        "avatarUrl": { "type": "string", "description": "Profile picture URL" },
+        "status": { "type": "string", "enum": ["Active", "Inactive", "Suspended"], "description": "Account status" },
+        "lastLogin": { "type": "string", "description": "ISO timestamp of last sign in" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of account creation" }
+      },
+      "required": ["id", "email", "fullName", "role", "status"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Student record in the Theological ERP",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentNumber": { "type": "string" },
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "programId": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "studentNumber", "fullName", "email", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User accounts and authentication profiles"
+    },
+    "/students/{studentId}": {
+      "schema": "Student",
+      "description": "Student academic and demographic records"
+    }
+  }
+}

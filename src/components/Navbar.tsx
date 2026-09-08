@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   Menu, Search, Bell, Shield, ExternalLink, Globe, Database, 
-  ChevronDown, MapPin, Calendar, CheckCircle2, User, Sparkles, X, ShieldCheck
+  ChevronDown, MapPin, Calendar, CheckCircle2, User, Sparkles, X, ShieldCheck,
+  LogOut, KeyRound, Lock
 } from 'lucide-react';
-import { UserRole } from '../types';
+import { UserRole, UserAccount } from '../types';
 
 interface NavbarProps {
   onToggleSidebar: () => void;
@@ -13,6 +14,9 @@ interface NavbarProps {
   onNavigatePublic: (page: string) => void;
   onOpenFirestoreSync: () => void;
   onNavigateModule?: (module: string) => void;
+  currentUser?: UserAccount | null;
+  onOpenProfileModal?: () => void;
+  onSignOut?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ 
