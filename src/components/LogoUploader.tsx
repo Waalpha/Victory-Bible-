@@ -11,31 +11,14 @@ interface LogoUploaderProps {
 
 const PRESET_CRESTS = [
   {
-    name: 'Veritas Cross Crest',
-    url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=240',
-    desc: 'Classic classical seal'
-  },
-  {
-    name: 'Open Scriptures & Light',
-    url: 'https://images.unsplash.com/photo-1507842229451-79731e71a802?auto=format&fit=crop&q=80&w=240',
-    desc: 'Golden open bible'
-  },
-  {
-    name: 'Seminary Tower & Cross',
-    url: 'https://images.unsplash.com/photo-1548625361-195fe57e937d?auto=format&fit=crop&q=80&w=240',
-    desc: 'Historical collegiate crest'
-  },
-  {
-    name: 'Sola Scriptura Shield',
-    url: 'https://images.unsplash.com/photo-1519791883288-dc8bd696e667?auto=format&fit=crop&q=80&w=240',
-    desc: 'Reformation academic emblem'
+
   }
 ];
 
 export const LogoUploader: React.FC<LogoUploaderProps> = ({
   currentLogoUrl = '',
   onLogoChange,
-  institutionName = 'Grace Theological Seminary'
+  institutionName = 'Victory International Apostolic Biblical Institute'
 }) => {
   const [logoUrl, setLogoUrl] = useState(currentLogoUrl);
   const [urlInput, setUrlInput] = useState(currentLogoUrl);

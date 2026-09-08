@@ -36,10 +36,10 @@ export const VerifyPage: React.FC<VerifyPageProps> = ({ onNavigate }) => {
         status: found.status,
         graduationDate: 'November 22, 2025',
         classification: 'First Class Honours (Magna Cum Laude)',
-        verificationSerial: `GTS-VER-${Math.floor(100000 + Math.random() * 900000)}`,
+        verificationSerial: `VIABI-VER-${Math.floor(100000 + Math.random() * 900000)}`,
         verified: true
       });
-    } else if (cleanInput.includes('CERT') || cleanInput.includes('GTS')) {
+    } else if (cleanInput.includes('CERT') || cleanInput.includes('VIABI')) {
       // Valid formatted certificate mock match
       setMatchedRecord({
         studentName: 'Rev. Emmanuel Kiprono Langat',
@@ -49,7 +49,7 @@ export const VerifyPage: React.FC<VerifyPageProps> = ({ onNavigate }) => {
         status: 'Graduated / Conferred',
         graduationDate: 'November 18, 2024',
         classification: 'Second Class Honours (Upper Division)',
-        verificationSerial: `GTS-VER-${Math.floor(100000 + Math.random() * 900000)}`,
+        verificationSerial: `VIABI-VER-${Math.floor(100000 + Math.random() * 900000)}`,
         verified: true
       });
     } else {
@@ -87,7 +87,7 @@ export const VerifyPage: React.FC<VerifyPageProps> = ({ onNavigate }) => {
               Institutional Credential Search
             </h2>
             <p className="text-xs text-slate-500 mt-1">
-              Enter Student Registration Number or Certificate Serial (e.g. <code>GTS/BTH/2023/042</code> or <code>CERT-2024-089</code>)
+              Enter Student Registration Number or Certificate Serial (e.g. <code>VIABI/BTH/2023/042</code> or <code>CERT-2024-089</code>)
             </p>
           </div>
 
@@ -97,7 +97,7 @@ export const VerifyPage: React.FC<VerifyPageProps> = ({ onNavigate }) => {
               <input
                 type="text"
                 required
-                placeholder="e.g. GTS/BTH/2023/042"
+                placeholder="e.g. VIABI/BTH/2023/042"
                 value={certInput}
                 onChange={(e) => setCertInput(e.target.value)}
                 className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-mono font-bold text-slate-800 placeholder-slate-400 uppercase tracking-wider focus:outline-hidden focus:ring-2 focus:ring-amber-500/30"

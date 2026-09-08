@@ -139,7 +139,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onEnterErp, onNavigate }) 
           className="flex items-center gap-3 text-left group cursor-pointer"
         >
           <div className="w-9 h-9 rounded-xl bg-linear-to-br from-amber-400 to-amber-600 flex items-center justify-center font-serif font-black text-slate-950 shadow-md">
-            GTS
+            VIABI
           </div>
           <div>
             <div className="font-serif font-bold text-sm text-white group-hover:text-amber-400 transition-colors">
