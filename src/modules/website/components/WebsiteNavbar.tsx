@@ -75,7 +75,7 @@ export const WebsiteNavbar: React.FC<WebsiteNavbarProps> = ({
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo & Seminary Identity */}
           <div 
-            className="flex items-center gap-2.5 sm:gap-3.5 cursor-pointer group min-w-0 flex-1 mr-2"
+            className="flex items-center gap-2.5 sm:gap-3.5 cursor-pointer group shrink-0 mr-4"
             onClick={() => onNavigate('/')}
           >
             {settings.branding.logoUrl ? (
@@ -96,11 +96,11 @@ export const WebsiteNavbar: React.FC<WebsiteNavbarProps> = ({
                 ✝
               </div>
             )}
-            <div className="flex flex-col min-w-0">
-              <span className="font-serif font-black text-sm sm:text-base md:text-lg tracking-tight text-white leading-tight truncate group-hover:text-amber-300 transition-colors">
+            <div className="flex flex-col">
+              <span className="font-serif font-black text-xs sm:text-sm md:text-base lg:text-lg tracking-tight text-white leading-tight group-hover:text-amber-300 transition-colors whitespace-nowrap">
                 {settings.branding.institutionName || 'Grace Theological Seminary'}
               </span>
-              <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider sm:tracking-widest text-amber-400/90 font-mono truncate hidden xs:block">
+              <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider text-amber-400/90 font-mono hidden xs:block whitespace-nowrap">
                 {settings.branding.motto || 'Veritas • Pietas • Missio'}
               </span>
             </div>
