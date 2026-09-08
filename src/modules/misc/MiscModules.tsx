@@ -70,41 +70,8 @@ export const DocumentsModule: React.FC = () => (
   </div>
 );
 
-export const StaffModule: React.FC = () => {
-  const staff = erpService.getStaff();
-  return (
-    <div className="space-y-6 animate-fade-in pb-12">
-      <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h2 className="text-xl font-bold text-slate-900">Staff & Theological Faculty Directory</h2>
-          <p className="text-xs text-slate-500 mt-1">Manage professorial workloads, faculty qualifications, and department allocations.</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="px-3 py-1 bg-amber-50 text-amber-800 rounded-lg text-xs font-bold border border-amber-200/60">
-            {staff.length} Faculty Members
-          </span>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {staff.map(st => (
-          <div key={st.id} className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-4 hover:border-amber-400/50 transition-colors">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 rounded-xl bg-slate-900 text-amber-400 font-bold flex items-center justify-center text-sm shadow-xs">
-                {st.avatarUrl ? <img src={st.avatarUrl} alt="" className="w-full h-full object-cover rounded-xl" /> : st.fullName.split(' ').map(n => n[0]).join('').substring(0, 2)}
-              </div>
-              <div className="min-w-0 flex-1">
-                <h3 className="font-bold text-slate-900 text-sm truncate">{st.fullName}</h3>
-                <p className="text-xs text-amber-700 font-medium truncate">{st.position} • {st.department}</p>
-              </div>
-            </div>
-            <p className="text-xs text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-100">{st.qualifications}</p>
-            <div className="text-[10px] text-slate-400 font-mono">{st.email} • {st.phone}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+// Re-export full-featured StaffModule with complete add + delete functionality
+export { StaffModule } from '../staff/StaffModule';
 
 export const AlumniModule: React.FC = () => (
   <div className="space-y-6 animate-fade-in pb-12">

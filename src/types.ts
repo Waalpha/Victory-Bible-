@@ -76,7 +76,9 @@ export interface Student {
   address: string;
   photoUrl?: string;
   nextOfKinName: string;
+  nextOfKinRelationship?: string;
   nextOfKinPhone: string;
+  nextOfKinEmail?: string;
   emergencyContact: string;
   churchName: string;
   churchPastor: string;

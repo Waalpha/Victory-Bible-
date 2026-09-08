@@ -6,7 +6,7 @@ import {
   HeroSlide, WebsiteSettings, Testimonial, NewsArticle, PublicEvent, ContactMessage
 } from '../types';
 import { db, cleanFirestoreData } from './firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, deleteDoc } from 'firebase/firestore';
 
 // Storage keys for robust local persistence that mirrors Firestore collections
 const STORAGE_PREFIX = 'theo_erp_';
@@ -72,8 +72,10 @@ const initialStudents: Student[] = [
     nationality: 'Kenyan',
     address: 'P.O. Box 450, Eldoret',
     photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
-    nextOfKinName: 'Esther Koech (Mother)',
+    nextOfKinName: 'Esther Koech',
+    nextOfKinRelationship: 'Mother',
     nextOfKinPhone: '+254 722 000 111',
+    nextOfKinEmail: 'esther.koech@gmail.com',
     emergencyContact: '+254 733 444 555',
     churchName: 'Grace Baptist Church, Eldoret',
     churchPastor: 'Rev. James Mwangi',
@@ -103,8 +105,10 @@ const initialStudents: Student[] = [
     nationality: 'Kenyan',
     address: 'P.O. Box 12, Nairobi',
     photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200',
-    nextOfKinName: 'David Mwangi (Father)',
+    nextOfKinName: 'David Mwangi',
+    nextOfKinRelationship: 'Father',
     nextOfKinPhone: '+254 711 222 333',
+    nextOfKinEmail: 'david.mwangi@gmail.com',
     emergencyContact: '+254 722 555 666',
     churchName: 'Nairobi Chapel, Ngong Road',
     churchPastor: 'Rev. Nick Korir',
@@ -135,7 +139,9 @@ const initialStudents: Student[] = [
     address: 'P.O. Box 89, Kisumu',
     photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200',
     nextOfKinName: 'Grace Odhiambo',
+    nextOfKinRelationship: 'Spouse',
     nextOfKinPhone: '+254 700 111 222',
+    nextOfKinEmail: 'grace.odhiambo@gmail.com',
     emergencyContact: '+254 700 333 444',
     churchName: 'Lake Basin Fellowship',
     churchPastor: 'Pastor Tom Mboya',
@@ -755,6 +761,16 @@ export const erpService = {
     saveCollection('students', list);
     return updated;
   },
+  deleteStudent: (id: string): void => {
+    const list = erpService.getStudents();
+    const filtered = list.filter(s => s.id !== id);
+    saveCollection('students', filtered);
+    if (db) {
+      deleteDoc(doc(db, 'students', id)).catch(err => {
+        console.warn('Firestore student delete note:', err);
+      });
+    }
+  },
 
   // Applicants
   getApplicants: (): Applicant[] => getCollection('applicants', initialApplicants),
@@ -781,6 +797,34 @@ export const erpService = {
   // Staff
   getStaff: (): StaffMember[] => getCollection('staff', initialStaff),
   saveStaff: (items: StaffMember[]) => saveCollection('staff', items),
+  addStaff: (staff: Omit<StaffMember, 'id'>): StaffMember => {
+    const staffList = erpService.getStaff();
+    const newStaff: StaffMember = {
+      ...staff,
+      id: 'stf-' + Date.now()
+    };
+    saveCollection('staff', [newStaff, ...staffList]);
+    return newStaff;
+  },
+  updateStaff: (id: string, updates: Partial<StaffMember>): StaffMember | null => {
+    const list = erpService.getStaff();
+    const idx = list.findIndex(s => s.id === id);
+    if (idx === -1) return null;
+    const updated = { ...list[idx], ...updates };
+    list[idx] = updated;
+    saveCollection('staff', list);
+    return updated;
+  },
+  deleteStaff: (id: string): void => {
+    const list = erpService.getStaff();
+    const filtered = list.filter(s => s.id !== id);
+    saveCollection('staff', filtered);
+    if (db) {
+      deleteDoc(doc(db, 'staff', id)).catch(err => {
+        console.warn('Firestore staff delete note:', err);
+      });
+    }
+  },
 
   // Timetable
   getTimetable: (): TimetableEntry[] => getCollection('timetable', initialTimetable),
