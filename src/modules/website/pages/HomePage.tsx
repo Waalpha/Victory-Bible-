@@ -76,7 +76,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 Cultivating Minds. Shepherding Hearts. Transforming Nations.
               </h2>
               <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-6">
-                Grace Theological Seminary & Bible College stands as a beacon of evangelical scholarship in Africa and beyond. For over half a century, we have remained anchored in the authority of Holy Scripture, providing deep theological study, rigorous academic degrees, and hands-on ministry apprenticeship.
+                Victory International Apostolic Biblical Institute stands as a beacon of evangelical scholarship in Africa and beyond. For over half a century, we have remained anchored in the authority of Holy Scripture, providing deep theological study, rigorous academic degrees, and hands-on ministry apprenticeship.
               </p>
               <p className="text-slate-600 text-sm leading-relaxed mb-8">
                 Whether God is calling you to pastoral ordination, cross-cultural missions, biblical counseling, youth leadership, or theological scholarship, you will find here a praying faculty and a dedicated community walking alongside you.

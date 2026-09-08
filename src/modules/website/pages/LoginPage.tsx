@@ -537,7 +537,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onEnterErp, onNavigate }) 
 
       {/* Footer copyright */}
       <div className="max-w-7xl mx-auto w-full px-4 py-6 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} Grace Theological Seminary & Bible College. All rights reserved.
+        © {new Date().getFullYear()} Victory International Apostolic Biblical Institute. All rights reserved.
       </div>
     </div>
   );

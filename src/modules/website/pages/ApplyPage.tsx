@@ -262,7 +262,7 @@ export const ApplyPage: React.FC<ApplyPageProps> = ({ initialProgramId, onNaviga
             Application for Theological Study
           </h1>
           <p className="text-slate-600 text-sm mt-1">
-            2026/2027 Academic Year • Grace Theological Seminary & Bible College
+            2026/2027 Academic Year • Victory International Apostolic Biblical Institute
           </p>
         </div>
 

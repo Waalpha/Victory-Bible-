@@ -439,7 +439,7 @@ export const CertificatesModule: React.FC = () => {
     honors: 'First Class Honors (Summa Cum Laude)',
     status: 'AUTHENTIC & ACTIVE',
     registrar: 'Prof. J. K. Ndung\'u, PhD',
-    issuedBy: 'Grace Theological Seminary & Bible College'
+    issuedBy: 'Victory International Apostolic Biblical Institute'
   });
 
   const handleVerify = (e: React.FormEvent) => {
@@ -453,7 +453,7 @@ export const CertificatesModule: React.FC = () => {
       honors: 'First Class Honors (Summa Cum Laude)',
       status: 'AUTHENTIC & ACTIVE',
       registrar: 'Prof. J. K. Ndung\'u, PhD',
-      issuedBy: 'Grace Theological Seminary & Bible College'
+      issuedBy: 'Victory International Apostolic Biblical Institute'
     });
   };
 
