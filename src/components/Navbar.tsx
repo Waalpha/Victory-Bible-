@@ -63,10 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const roles: UserRole[] = [
-    'SUPER_ADMIN', 'ADMIN', 'PRINCIPAL', 'PRESIDENT', 'REGISTRAR', 
-    'ACADEMIC_DEAN', 'ACADEMIC_OFFICER', 'LECTURER', 'FACULTY', 'FINANCE', 
-    'FINANCE_OFFICER', 'MINISTRY_COORDINATOR', 'LIBRARIAN', 'CHAPLAIN', 
-    'STUDENT_AFFAIRS', 'HOSTEL_MANAGER', 'EXAM_OFFICER', 'STUDENT', 'ALUMNI'
+    'SUPER_ADMIN', 'ADMIN'
   ];
 
   const notifications = [
@@ -91,7 +88,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="min-w-0">
           <div className="flex items-center gap-1.5 sm:gap-2">
             <h2 className="text-sm sm:text-base md:text-lg font-bold text-slate-900 tracking-tight leading-tight truncate">
-              {institutionName || 'Grace Theological Seminary & Bible College'}
+              {institutionName || 'Victory International'}
             </h2>
             <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200/60 shrink-0">
               Seminary ERP

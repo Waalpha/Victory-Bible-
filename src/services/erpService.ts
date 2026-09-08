@@ -77,7 +77,7 @@ const initialStudents: Student[] = [
     nextOfKinPhone: '+254 722 000 111',
     nextOfKinEmail: 'esther.koech@gmail.com',
     emergencyContact: '+254 733 444 555',
-    churchName: 'Grace Baptist Church, Eldoret',
+    churchName: 'Victory InternationalBaptist Church, Eldoret',
     churchPastor: 'Rev. James Mwangi',
     previousEducation: 'High School KCSE Aggregate B+',
     programId: 'prog-3',
@@ -138,7 +138,7 @@ const initialStudents: Student[] = [
     nationality: 'Kenyan',
     address: 'P.O. Box 89, Kisumu',
     photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200',
-    nextOfKinName: 'Grace Odhiambo',
+    nextOfKinName: 'Victory InternationalOdhiambo',
     nextOfKinRelationship: 'Spouse',
     nextOfKinPhone: '+254 700 111 222',
     nextOfKinEmail: 'grace.odhiambo@gmail.com',
@@ -370,7 +370,7 @@ const initialPayments: PaymentRecord[] = [
 ];
 
 const initialMinistryPlacements: MinistryPlacement[] = [
-  { id: 'mp-1', studentId: 'std-1', studentName: 'Caleb Kiprop Koech', churchOrOrganization: 'Grace Baptist Church Eldoret', supervisorName: 'Rev. James Mwangi', supervisorPhone: '+254 722 000 111', supervisorEmail: 'pastor.james@gracebaptist.org', placementType: 'Church Attachment', startDate: '2026-09-01', endDate: '2026-12-15', status: 'Active' }
+  { id: 'mp-1', studentId: 'std-1', studentName: 'Caleb Kiprop Koech', churchOrOrganization: 'Victory InternationalBaptist Church Eldoret', supervisorName: 'Rev. James Mwangi', supervisorPhone: '+254 722 000 111', supervisorEmail: 'pastor.james@gracebaptist.org', placementType: 'Church Attachment', startDate: '2026-09-01', endDate: '2026-12-15', status: 'Active' }
 ];
 
 const initialMinistryReports: MinistryReport[] = [
@@ -428,7 +428,7 @@ export const defaultWebsiteSettings: WebsiteSettings = {
     logoUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=200'
   },
   contact: {
-    address: '124 Covenant Way, Grace Hill, P.O. Box 450-30100, Eldoret / Nairobi Campus',
+    address: '124 Covenant Way, Victory InternationalHill, P.O. Box 450-30100, Eldoret / Nairobi Campus',
     phone: '+254 (0) 712 345 678 / +1 (800) 555-THEO',
     email: 'admissions@gracetheo.edu',
     officeHours: 'Monday – Friday: 8:00 AM – 5:00 PM (EAT)',
@@ -516,7 +516,7 @@ const initialTestimonials: Testimonial[] = [
     graduationYear: '2018',
     program: 'Master of Divinity (M.Div.)',
     currentRole: 'Senior Pastor, Nairobi Baptist Fellowship',
-    testimonial: 'The balance between rigorous biblical exegesis and deep spiritual mentorship at Grace shaped not only my mind but my heart for shepherd ministry.',
+    testimonial: 'The balance between rigorous biblical exegesis and deep spiritual mentorship at Victory Internationalshaped not only my mind but my heart for shepherd ministry.',
     photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
     order: 1,
     isActive: true
@@ -527,7 +527,7 @@ const initialTestimonials: Testimonial[] = [
     graduationYear: '2022',
     program: 'Bachelor of Theology (B.Th.)',
     currentRole: 'Church Planter & Missions Director',
-    testimonial: 'Grace prepared me with both intellectual depth and practical field resilience. Cross-cultural evangelism weeks and chapel devotions were truly life-defining.',
+    testimonial: 'Victory Internationalprepared me with both intellectual depth and practical field resilience. Cross-cultural evangelism weeks and chapel devotions were truly life-defining.',
     photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200',
     order: 2,
     isActive: true
@@ -595,7 +595,7 @@ const initialNewsArticles: NewsArticle[] = [
     readTime: '3 min read',
     featuredImage: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=1200',
     summary: 'Students spent two weeks ministering alongside rural church plants, conducting door-to-door evangelism, medical camps, and children Bible clubs.',
-    content: 'Practical ministerial formation is the heartbeat of Grace Seminary. Last month, our student body engaged in our annual 14-day field ministry immersion, partnering with 42 local congregations. Results include over 280 decisions for Christ, 15 new home fellowships established, and invaluable pastoral preaching and counseling experience.',
+    content: 'Practical ministerial formation is the heartbeat of Victory InternationalSeminary. Last month, our student body engaged in our annual 14-day field ministry immersion, partnering with 42 local congregations. Results include over 280 decisions for Christ, 15 new home fellowships established, and invaluable pastoral preaching and counseling experience.',
     isFeatured: true,
     published: true
   },
@@ -621,7 +621,7 @@ const initialPublicEvents: PublicEvent[] = [
     title: 'Annual Theological Conference: Faithfulness in a Changing World',
     date: '2026-10-15',
     time: '9:00 AM – 4:30 PM (EAT)',
-    venue: 'Grace Main Auditorium & Live Stream',
+    venue: 'Victory InternationalMain Auditorium & Live Stream',
     category: 'Conference',
     description: 'A three-day gathering of pastors, theologians, and ministry workers exploring Scripture, ethics, and modern cultural challenges.',
     imageUrl: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800',
@@ -657,7 +657,7 @@ const initialPublicEvents: PublicEvent[] = [
     title: '51st Commencement Ceremony & Ministerial Ordination Service',
     date: '2026-12-12',
     time: '9:30 AM – 1:00 PM',
-    venue: 'Grace Sports Pavilion & Gardens',
+    venue: 'Victory InternationalSports Pavilion & Gardens',
     category: 'Graduation',
     description: 'Celebrating our 2026 graduating class receiving doctoral, master, bachelor degrees, and ministry diplomas.',
     imageUrl: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=800',
