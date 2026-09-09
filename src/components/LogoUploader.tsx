@@ -54,6 +54,24 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
   const [previewMode, setPreviewMode] = useState<'navy' | 'white'>('navy');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [presets, setPresets] = useState(() => {
+    try {
+      const saved = localStorage.getItem('viab_custom_crest_presets');
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return PRESET_CRESTS;
+  });
+
+  const handleDeletePreset = (e: React.MouseEvent, presetUrl: string) => {
+    e.stopPropagation();
+    const updated = presets.filter((p: any) => p.url !== presetUrl);
+    setPresets(updated);
+    try {
+      localStorage.setItem('viab_custom_crest_presets', JSON.stringify(updated));
+    } catch {}
+    setSuccessMessage('Crest preset deleted.');
+    setTimeout(() => setSuccessMessage(null), 3000);
+  };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -419,13 +437,11 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
           <span className="text-[10px] text-slate-500">Auto-saves to Firestore</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {PRESET_CRESTS.map((preset) => (
-            <button
+          {presets.map((preset: any) => (
+            <div
               key={preset.name}
-              type="button"
-              disabled={uploading || savingUrl}
-              onClick={() => handlePresetSelect(preset.url)}
-              className={`flex items-center gap-2.5 p-2 rounded-xl bg-white border hover:border-emerald-500 hover:shadow-xs text-left transition-all group cursor-pointer ${
+              onClick={() => !uploading && !savingUrl && handlePresetSelect(preset.url)}
+              className={`relative flex items-center gap-2.5 p-2 rounded-xl bg-white border hover:border-emerald-500 hover:shadow-xs text-left transition-all group cursor-pointer ${
                 logoUrl === preset.url ? 'border-emerald-500 ring-2 ring-emerald-500/20 bg-emerald-50/20' : 'border-slate-200'
               }`}
             >
@@ -438,14 +454,29 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
               <div className="min-w-0 flex-1">
                 <div className="text-xs font-bold text-slate-800 truncate group-hover:text-emerald-600 flex items-center justify-between">
                   <span>{preset.name}</span>
-                  {logoUrl === preset.url && (
-                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  )}
+                  <div className="flex items-center gap-1">
+                    {logoUrl === preset.url && (
+                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    )}
+                    <button
+                      type="button"
+                      onClick={(e) => handleDeletePreset(e, preset.url)}
+                      title="Delete Crest Preset"
+                      className="p-1.5 bg-slate-100 hover:bg-rose-50 text-slate-500 hover:text-rose-600 rounded-lg transition-colors ml-1"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
                 <div className="text-[10px] text-slate-400 truncate">{preset.desc}</div>
               </div>
-            </button>
+            </div>
           ))}
+          {presets.length === 0 && (
+            <div className="col-span-full py-6 text-center text-xs text-slate-500 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+              No crest presets available. You can upload or input a custom logo URL above.
+            </div>
+          )}
         </div>
       </div>
     </div>

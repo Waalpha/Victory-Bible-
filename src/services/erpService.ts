@@ -1157,7 +1157,21 @@ export const erpService = {
 
   // Website CMS: Hero Slides
   getHeroSlides: (): HeroSlide[] => getCollection('websiteHeroSlides', initialHeroSlides),
-  saveHeroSlides: (items: HeroSlide[]) => saveCollection('websiteHeroSlides', items),
+  saveHeroSlides: (items: HeroSlide[]) => {
+    saveCollection('websiteHeroSlides', items);
+    if (db && Array.isArray(items)) {
+      items.forEach(slide => {
+        const slideId = slide.id || 'slide-' + Date.now();
+        const firestoreData = cleanFirestoreData({
+          ...slide,
+          _firestoreSyncedAt: new Date().toISOString()
+        });
+        setDoc(doc(db, 'websiteHeroSlides', slideId), firestoreData, { merge: true }).catch(err => {
+          console.warn('Firestore websiteHeroSlides sync note:', err);
+        });
+      });
+    }
+  },
   addHeroSlide: (slide: Omit<HeroSlide, 'id' | 'createdAt' | 'updatedAt'>): HeroSlide => {
     const slides = erpService.getHeroSlides();
     const now = new Date().toISOString();
@@ -1167,26 +1181,32 @@ export const erpService = {
       createdAt: now,
       updatedAt: now
     };
-    saveCollection('websiteHeroSlides', [...slides, newSlide]);
+    const updated = [...slides, newSlide];
+    erpService.saveHeroSlides(updated);
     return newSlide;
   },
   updateHeroSlide: (id: string, updates: Partial<HeroSlide>): HeroSlide | null => {
     const slides = erpService.getHeroSlides();
     const idx = slides.findIndex(s => s.id === id);
     if (idx === -1) return null;
-    const updated: HeroSlide = {
+    const updatedSlide: HeroSlide = {
       ...slides[idx],
       ...updates,
       updatedAt: new Date().toISOString()
     };
-    slides[idx] = updated;
-    saveCollection('websiteHeroSlides', slides);
-    return updated;
+    slides[idx] = updatedSlide;
+    erpService.saveHeroSlides(slides);
+    return updatedSlide;
   },
   deleteHeroSlide: (id: string) => {
     const slides = erpService.getHeroSlides();
     const filtered = slides.filter(s => s.id !== id);
-    saveCollection('websiteHeroSlides', filtered);
+    erpService.saveHeroSlides(filtered);
+    if (db) {
+      deleteDoc(doc(db, 'websiteHeroSlides', id)).catch(err => {
+        console.warn('Firestore websiteHeroSlides delete note:', err);
+      });
+    }
   },
 
   // Website Settings & Announcement Bar
