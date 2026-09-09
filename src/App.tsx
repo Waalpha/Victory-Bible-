@@ -30,40 +30,19 @@ export function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isFirestoreModalOpen, setIsFirestoreModalOpen] = useState(false);
 
-  // Synchronized route & experience state (supports both direct URLs and hash fallback like #/admin)
-  const resolveCurrentPath = (): string => {
-    if (typeof window === 'undefined') return '/';
-    if (window.location.hash) {
-      const cleanHash = window.location.hash.replace(/^#\/?/, '/');
-      if (cleanHash && cleanHash !== '/') return cleanHash;
-    }
-    const p = window.location.pathname;
-    return p && p !== '/' ? p : '/';
-  };
+  // Default to the public website on initial load and every browser refresh
+  const [currentPath, setCurrentPath] = useState<string>('/');
+  const [experience, setExperience] = useState<'website' | 'erp'>('website');
 
-  const resolveExperience = (path: string): 'website' | 'erp' => {
-    if (path.startsWith('/admin') || (typeof window !== 'undefined' && window.location.hash.includes('admin'))) {
-      return 'erp';
-    }
-    return 'website';
-  };
-
-  const [currentPath, setCurrentPath] = useState<string>(() => resolveCurrentPath());
-  const [experience, setExperience] = useState<'website' | 'erp'>(() => resolveExperience(resolveCurrentPath()));
-
+  // On page load or browser refresh, reset the URL and always return to the public website
   useEffect(() => {
-    const handleRoute = () => {
-      const path = resolveCurrentPath();
-      setCurrentPath(path);
-      setExperience(resolveExperience(path));
-    };
-
-    window.addEventListener('popstate', handleRoute);
-    window.addEventListener('hashchange', handleRoute);
-    return () => {
-      window.removeEventListener('popstate', handleRoute);
-      window.removeEventListener('hashchange', handleRoute);
-    };
+    if (typeof window !== 'undefined') {
+      if (window.location.pathname !== '/' || window.location.hash) {
+        window.history.replaceState({}, '', '/');
+      }
+      setCurrentPath('/');
+      setExperience('website');
+    }
   }, []);
 
   // Initialize Cloud Firestore Auto-Sync Engine
@@ -118,9 +97,11 @@ export function App() {
         currentPath={currentPath}
         onNavigate={(path) => {
           setCurrentPath(path);
-          window.history.pushState({}, '', path);
           if (path.startsWith('/admin')) {
             setExperience('erp');
+          }
+          if (typeof window !== 'undefined') {
+            window.history.replaceState({}, '', '/');
           }
         }}
         onEnterErp={(role) => {
@@ -129,7 +110,9 @@ export function App() {
           else setUserRole('SUPER_ADMIN');
           setExperience('erp');
           setCurrentPath('/admin');
-          window.history.pushState({}, '', '/admin');
+          if (typeof window !== 'undefined') {
+            window.history.replaceState({}, '', '/');
+          }
         }}
       />
     );
@@ -158,7 +141,9 @@ export function App() {
             const path = page.startsWith('/') ? page : `/${page}`;
             setCurrentPath(path);
             setExperience('website');
-            window.history.pushState({}, '', path);
+            if (typeof window !== 'undefined') {
+              window.history.replaceState({}, '', '/');
+            }
           }}
           onOpenFirestoreSync={() => setIsFirestoreModalOpen(true)}
           onNavigateModule={(mod) => setCurrentModule(mod)}
@@ -223,7 +208,9 @@ export function App() {
                   onNavigatePublic={(route) => {
                     setCurrentPath(route);
                     setExperience('website');
-                    window.history.pushState({}, '', route);
+                    if (typeof window !== 'undefined') {
+                      window.history.replaceState({}, '', '/');
+                    }
                   }} 
                 />
               )}
