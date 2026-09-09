@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Globe, Sparkles, Image as ImageIcon, Save, CheckCircle2, Eye, Plus, 
   Trash2, Edit3, ArrowRight, Bell, Share2, MapPin, Phone, Mail, 
@@ -9,6 +9,7 @@ import { LogoUploader } from '../../components/LogoUploader';
 import { WebsiteCustomizerModal } from './components/WebsiteCustomizerModal';
 import { erpService } from '../../services/erpService';
 import { firestoreSyncService } from '../../services/firestoreSync';
+import { brandingService, getInstitutionId } from '../../services/brandingService';
 import { 
   WebsiteSettings, HeroSlide, NewsArticle, PublicEvent, Testimonial 
 } from '../../types';
@@ -40,6 +41,33 @@ export const WebsiteCmsModule: React.FC<WebsiteCmsModuleProps> = ({ onNavigatePu
   const [editingArticle, setEditingArticle] = useState<NewsArticle | null>(null);
   const [editingEvent, setEditingEvent] = useState<PublicEvent | null>(null);
   const [editingTestimonial, setEditingTestimonial] = useState<Testimonial | null>(null);
+
+  // Requirement 4: Load the logo and branding from Firestore when the page loads
+  useEffect(() => {
+    let isMounted = true;
+    const loadBrandingFromFirestore = async () => {
+      try {
+        const instId = settings.institutionId || getInstitutionId(settings);
+        const tenantSettings = await brandingService.fetchInstitutionWebsiteSettings(instId);
+        if (isMounted && tenantSettings && tenantSettings.logoUrl !== undefined) {
+          setSettings(prev => ({
+            ...prev,
+            branding: {
+              ...prev.branding,
+              logoUrl: tenantSettings.logoUrl || ''
+            }
+          }));
+        }
+      } catch (err) {
+        console.warn('Could not load branding settings from Firestore:', err);
+      }
+    };
+
+    loadBrandingFromFirestore();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const showSuccess = (msg: string) => {
     setSavedNotice(msg);
@@ -322,12 +350,13 @@ export const WebsiteCmsModule: React.FC<WebsiteCmsModuleProps> = ({ onNavigatePu
           <LogoUploader
             currentLogoUrl={settings.branding.logoUrl || ''}
             onLogoChange={(newUrl) => {
-              setSettings({
-                ...settings,
-                branding: { ...settings.branding, logoUrl: newUrl }
-              });
+              setSettings(prev => ({
+                ...prev,
+                branding: { ...prev.branding, logoUrl: newUrl }
+              }));
             }}
             institutionName={settings.branding.institutionName}
+            institutionId={settings.institutionId || getInstitutionId(settings)}
           />
 
           <form onSubmit={handleSaveSettings} className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xs space-y-6">

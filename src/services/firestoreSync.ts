@@ -166,6 +166,22 @@ class FirestoreSyncService {
         });
       }
 
+      // Explicitly guarantee institutional tenant settings document persistence
+      try {
+        const currentWeb = erpService.getWebsiteSettings();
+        const instId = currentWeb.institutionId || 'victory-international';
+        const tenantLogoUrl = currentWeb.branding?.logoUrl || erpService.getSettings().logoUrl || null;
+        const tenantDocRef = doc(db, 'institutions', instId, 'settings', 'website');
+        await setDoc(tenantDocRef, cleanFirestoreData({
+          institutionId: instId,
+          logoUrl: tenantLogoUrl,
+          updatedAt: serverTimestamp()
+        }), { merge: true });
+        totalDocsPushed += 1;
+      } catch (tenantErr) {
+        console.warn('Tenant document sync notice:', tenantErr);
+      }
+
       const syncTimestamp = new Date().toLocaleString();
       localStorage.setItem('theo_erp_last_firestore_sync', syncTimestamp);
 

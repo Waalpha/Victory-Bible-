@@ -36,12 +36,27 @@
         "status": { "type": "string" }
       },
       "required": ["id", "studentNumber", "fullName", "email", "status"]
+    },
+    "InstitutionWebsiteSettings": {
+      "title": "InstitutionWebsiteSettings",
+      "description": "Multi-tenant institution website branding and logo configuration",
+      "type": "object",
+      "properties": {
+        "institutionId": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["institutionId"]
     }
   },
   "firestore": {
     "/users/{userId}": {
       "schema": "UserProfile",
       "description": "User accounts and authentication profiles"
+    },
+    "/institutions/{institutionId}/settings/{settingId}": {
+      "schema": "InstitutionWebsiteSettings",
+      "description": "Institution branding and website customization settings"
     },
     "/students/{studentId}": {
       "schema": "Student",

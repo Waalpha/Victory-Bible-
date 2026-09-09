@@ -6,12 +6,13 @@ import {
   HeroSlide, WebsiteSettings, Testimonial, NewsArticle, PublicEvent, ContactMessage
 } from '../types';
 import { db, cleanFirestoreData } from './firebase';
-import { doc, setDoc, deleteDoc } from 'firebase/firestore';
+import { doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 
 // Storage keys for robust local persistence that mirrors Firestore collections
 const STORAGE_PREFIX = 'theo_erp_';
 
 export const defaultSettings: SystemSettings = {
+  institutionId: 'victory-international',
   institutionName: 'Victory International Apostolic Biblical Institute',
   tagline: 'Equipping Faithful Leaders for Global Gospel Ministry',
   address: '124 Covenant Way, Redeemer City, RC 40210',
@@ -407,6 +408,7 @@ const initialAuditLogs: AuditLogItem[] = [
 ];
 
 export const defaultWebsiteSettings: WebsiteSettings = {
+  institutionId: 'victory-international',
   announcementBarEnabled: true,
   announcementText: '2027 Admissions Now Open — Apply Today for January & September Intakes',
   announcementLinkText: 'APPLY NOW',
@@ -740,6 +742,16 @@ export const erpService = {
       setDoc(doc(db, 'settings', 'institution-settings'), firestoreData, { merge: true }).catch(err => {
         console.warn('Firestore settings sync note:', err);
       });
+
+      // Maintain tenant-isolated institution document
+      const instId = settings.institutionId || 'victory-international';
+      setDoc(doc(db, 'institutions', instId, 'settings', 'website'), cleanFirestoreData({
+        institutionId: instId,
+        logoUrl: settings.logoUrl || null,
+        updatedAt: serverTimestamp()
+      }), { merge: true }).catch(err => {
+        console.warn('Firestore tenant settings sync note:', err);
+      });
     }
   },
 
@@ -1066,6 +1078,16 @@ export const erpService = {
       });
       setDoc(doc(db, 'websiteSettings', 'public-config'), firestoreData, { merge: true }).catch(err => {
         console.warn('Firestore websiteSettings sync note:', err);
+      });
+
+      // Maintain tenant-isolated institution document
+      const instId = settings.institutionId || 'victory-international';
+      setDoc(doc(db, 'institutions', instId, 'settings', 'website'), cleanFirestoreData({
+        institutionId: instId,
+        logoUrl: settings.branding?.logoUrl || null,
+        updatedAt: serverTimestamp()
+      }), { merge: true }).catch(err => {
+        console.warn('Firestore tenant website settings sync note:', err);
       });
     }
   },

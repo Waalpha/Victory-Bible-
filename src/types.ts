@@ -417,6 +417,7 @@ export interface AuditLogItem {
 }
 
 export interface SystemSettings {
+  institutionId?: string;
   institutionName: string;
   tagline: string;
   address: string;
@@ -450,6 +451,7 @@ export interface HeroSlide {
 }
 
 export interface WebsiteSettings {
+  institutionId?: string;
   announcementBarEnabled: boolean;
   announcementText: string;
   announcementLinkText: string;

@@ -1,6 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, Firestore } from 'firebase/firestore';
+import { getFirestore, initializeFirestore, Firestore, setLogLevel } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import appletConfig from '../../firebase-applet-config.json';
 
@@ -26,16 +26,22 @@ try {
   app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
   auth = getAuth(app);
   
-  // Use specific firestoreDatabaseId if provided, or default
-  if (firebaseConfig.firestoreDatabaseId && firebaseConfig.firestoreDatabaseId !== '(default)') {
-    try {
-      db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
-    } catch (e) {
-      console.warn("Could not init with custom firestoreDatabaseId, falling back to default db", e);
-      db = getFirestore(app);
-    }
-  } else {
-    db = getFirestore(app);
+  // Set Firestore log level to silent to prevent offline/retry warnings in iframe sandboxes
+  setLogLevel('silent');
+
+  const customDbId = (firebaseConfig.firestoreDatabaseId && firebaseConfig.firestoreDatabaseId !== '(default)')
+    ? firebaseConfig.firestoreDatabaseId
+    : undefined;
+
+  // Use initializeFirestore with experimentalAutoDetectLongPolling for optimal connectivity in iframes/proxies
+  try {
+    db = initializeFirestore(app, {
+      experimentalAutoDetectLongPolling: true,
+      ignoreUndefinedProperties: true
+    }, customDbId);
+  } catch (e) {
+    // If already initialized or custom settings fail, fall back to getFirestore
+    db = customDbId ? getFirestore(app, customDbId) : getFirestore(app);
   }
 
   storage = getStorage(app);

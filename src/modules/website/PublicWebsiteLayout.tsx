@@ -4,6 +4,7 @@ import { TopAnnouncementBar } from './components/TopAnnouncementBar';
 import { WebsiteNavbar } from './components/WebsiteNavbar';
 import { WebsiteFooter } from './components/WebsiteFooter';
 import { erpService } from '../../services/erpService';
+import { brandingService } from '../../services/brandingService';
 import { WebsiteSettings } from '../../types';
 
 // Pages
@@ -40,7 +41,29 @@ export const PublicWebsiteLayout: React.FC<PublicWebsiteLayoutProps> = ({
   // Parse sub-route params e.g. /programs/:id or /news/:id or /apply?program=xxx
   const [route, setRoute] = useState(currentPath || '/');
   const [subParam, setSubParam] = useState<string | null>(null);
-  const settings = erpService.getWebsiteSettings();
+  const [settings, setSettings] = useState<WebsiteSettings>(() => erpService.getWebsiteSettings());
+
+  // Load latest logo and branding from Firestore on mount
+  useEffect(() => {
+    let isMounted = true;
+    brandingService.fetchInstitutionWebsiteSettings().then(tenantDoc => {
+      if (isMounted && tenantDoc && tenantDoc.logoUrl !== undefined) {
+        setSettings(prev => ({
+          ...prev,
+          branding: {
+            ...prev.branding,
+            logoUrl: tenantDoc.logoUrl || ''
+          }
+        }));
+      }
+    }).catch(err => {
+      console.warn('Could not fetch institution logo for public website:', err);
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     // Handle route changes

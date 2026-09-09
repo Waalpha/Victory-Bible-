@@ -1,15 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Settings, Save, CheckCircle, Database, CloudUpload, Server, ShieldCheck, Loader2, Globe, ExternalLink } from 'lucide-react';
 import { erpService } from '../../services/erpService';
 import { firestoreSyncService } from '../../services/firestoreSync';
 import { firebaseConfig } from '../../services/firebase';
 import { LogoUploader } from '../../components/LogoUploader';
+import { brandingService, getInstitutionId } from '../../services/brandingService';
 
 export const SettingsModule: React.FC = () => {
   const [settings, setSettings] = useState(erpService.getSettings());
   const [saved, setSaved] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [syncMsg, setSyncMsg] = useState<string | null>(null);
+
+  // Load latest branding and logo from Firestore on mount
+  useEffect(() => {
+    let isMounted = true;
+    const loadFirestoreLogo = async () => {
+      try {
+        const instId = settings.institutionId || getInstitutionId(settings);
+        const tenantDoc = await brandingService.fetchInstitutionWebsiteSettings(instId);
+        if (isMounted && tenantDoc && tenantDoc.logoUrl !== undefined) {
+          setSettings(prev => ({
+            ...prev,
+            logoUrl: tenantDoc.logoUrl || ''
+          }));
+        }
+      } catch (err) {
+        console.warn('Could not load logo from Firestore in SettingsModule:', err);
+      }
+    };
+    loadFirestoreLogo();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();

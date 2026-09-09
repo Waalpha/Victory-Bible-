@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, Save, CheckCircle2, Globe, Sparkles, Image as ImageIcon, 
   Bell, MapPin, Phone, Mail, Award, ExternalLink 
 } from 'lucide-react';
 import { LogoUploader } from '../../../components/LogoUploader';
 import { erpService } from '../../../services/erpService';
+import { brandingService, getInstitutionId } from '../../../services/brandingService';
 import { WebsiteSettings } from '../../../types';
 
 interface WebsiteCustomizerModalProps {
@@ -23,6 +24,31 @@ export const WebsiteCustomizerModal: React.FC<WebsiteCustomizerModalProps> = ({
   const [settings, setSettings] = useState<WebsiteSettings>(() => erpService.getWebsiteSettings());
   const [activeSection, setActiveSection] = useState<'logo' | 'announcement' | 'branding' | 'stats' | 'contact'>('logo');
   const [savedSuccess, setSavedSuccess] = useState(false);
+
+  // Requirement 4: Load Firestore branding on modal open
+  useEffect(() => {
+    if (!isOpen) return;
+    let isMounted = true;
+    const loadTenantLogo = async () => {
+      try {
+        const instId = settings.institutionId || getInstitutionId(settings);
+        const tenantSettings = await brandingService.fetchInstitutionWebsiteSettings(instId);
+        if (isMounted && tenantSettings && tenantSettings.logoUrl !== undefined) {
+          setSettings(prev => ({
+            ...prev,
+            branding: {
+              ...prev.branding,
+              logoUrl: tenantSettings.logoUrl || ''
+            }
+          }));
+        }
+      } catch (err) {
+        console.warn('Could not load tenant branding in modal:', err);
+      }
+    };
+    loadTenantLogo();
+    return () => { isMounted = false; };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -174,12 +200,13 @@ export const WebsiteCustomizerModal: React.FC<WebsiteCustomizerModalProps> = ({
               <LogoUploader
                 currentLogoUrl={settings.branding.logoUrl || ''}
                 onLogoChange={(newUrl) => {
-                  setSettings({
-                    ...settings,
-                    branding: { ...settings.branding, logoUrl: newUrl }
-                  });
+                  setSettings(prev => ({
+                    ...prev,
+                    branding: { ...prev.branding, logoUrl: newUrl }
+                  }));
                 }}
                 institutionName={settings.branding.institutionName}
+                institutionId={settings.institutionId || getInstitutionId(settings)}
               />
             </div>
           )}

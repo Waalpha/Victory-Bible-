@@ -21,6 +21,7 @@ import { WebsiteCmsModule } from './modules/website/WebsiteCmsModule';
 import { FirestoreSyncModal } from './components/FirestoreSyncModal';
 import { firestoreSyncService } from './services/firestoreSync';
 import { erpService } from './services/erpService';
+import { brandingService } from './services/brandingService';
 import { UserRole } from './types';
 
 export function App() {
@@ -52,12 +53,11 @@ export function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // Auto-push initial database to Firestore if not done yet
+  // Fetch latest logo and institution branding from Firestore on mount
   useEffect(() => {
-    const hasPushed = localStorage.getItem('theo_erp_last_firestore_sync');
-    if (!hasPushed) {
-      firestoreSyncService.pushAllToFirestore();
-    }
+    brandingService.fetchInstitutionWebsiteSettings().catch(() => {
+      // Local fallback active if offline
+    });
   }, []);
 
   const settings = erpService.getSettings();
