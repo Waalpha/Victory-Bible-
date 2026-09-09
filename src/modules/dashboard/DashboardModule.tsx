@@ -85,9 +85,9 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
       title: 'Active Applicants', 
       value: '2', 
       icon: UserPlus, 
-      color: 'text-amber-600', 
-      bg: 'bg-amber-50', 
-      border: 'border-amber-100',
+      color: 'text-emerald-700', 
+      bg: 'bg-emerald-50', 
+      border: 'border-emerald-100',
       change: '5 pending review', 
       changeType: 'neutral',
       module: 'admissions' 
@@ -151,9 +151,9 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
       title: 'Eligible for Graduation', 
       value: '38', 
       icon: GraduationCap, 
-      color: 'text-amber-700', 
-      bg: 'bg-amber-50', 
-      border: 'border-amber-100',
+      color: 'text-emerald-700', 
+      bg: 'bg-emerald-50', 
+      border: 'border-emerald-100',
       change: 'Class of 2026', 
       changeType: 'positive',
       module: 'graduation' 
@@ -163,14 +163,14 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
   // Quick Action Links
   const quickActions = [
     { label: '+ Register Student', module: 'students', icon: Users, color: 'text-blue-700 hover:bg-blue-50/80 border-blue-200' },
-    { label: '+ New Admission', module: 'admissions', icon: UserPlus, color: 'text-amber-700 hover:bg-amber-50/80 border-amber-200' },
+    { label: '+ New Admission', module: 'admissions', icon: UserPlus, color: 'text-emerald-700 hover:bg-emerald-50/80 border-emerald-200' },
     { label: '+ Record Payment', module: 'finance', icon: DollarSign, color: 'text-emerald-700 hover:bg-emerald-50/80 border-emerald-200' },
     { label: '+ Create Examination', module: 'examinations', icon: Award, color: 'text-indigo-700 hover:bg-indigo-50/80 border-indigo-200' },
     { label: '+ Mark Attendance', module: 'chapel', icon: Sparkles, color: 'text-purple-700 hover:bg-purple-50/80 border-purple-200' },
     { label: '+ Add Course', module: 'academics', icon: BookOpen, color: 'text-slate-800 hover:bg-slate-100 border-slate-200' },
     { label: '+ Generate Transcript', module: 'reports', icon: FileText, color: 'text-slate-800 hover:bg-slate-100 border-slate-200' },
-    { label: '+ Issue Certificate', module: 'certificates', icon: ShieldCheck, color: 'text-amber-800 hover:bg-amber-50 border-amber-200' },
-    { label: '🌐 Customize Website', module: 'website-cms', icon: ExternalLink, color: 'text-amber-900 bg-amber-50 hover:bg-amber-100/80 border-amber-300 font-bold' }
+    { label: '+ Issue Certificate', module: 'certificates', icon: ShieldCheck, color: 'text-emerald-800 hover:bg-emerald-50 border-emerald-200' },
+    { label: '🌐 Customize Website', module: 'website-cms', icon: ExternalLink, color: 'text-emerald-900 bg-emerald-50 hover:bg-emerald-100/80 border-emerald-300 font-bold' }
   ];
 
   // Revenue & Fee Collections Trend Data
@@ -264,7 +264,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
       time: '4 hours ago', 
       icon: ShieldCheck, 
       status: 'Signed', 
-      statusColor: 'bg-amber-50 text-amber-800' 
+      statusColor: 'bg-emerald-50 text-emerald-800' 
     },
     { 
       id: 5, 
@@ -286,29 +286,29 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
   return (
     <div className="space-y-8 animate-fade-in pb-16">
       {/* 1. Academic Session & Executive Hero Banner */}
-      <div className="bg-gradient-to-r from-[#0a1120] via-[#0f172a] to-[#1e293b] rounded-2xl md:rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-slate-800">
-        <div className="absolute right-0 top-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="bg-gradient-to-r from-[#0B1F17] via-[#133327] to-[#0B1F17] rounded-2xl md:rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-[#153F33]/60">
+        <div className="absolute right-0 top-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="space-y-2.5 relative z-10 max-w-3xl">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 bg-amber-500/15 text-amber-400 rounded-full text-xs font-bold border border-amber-500/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+          <div className="inline-flex items-center space-x-2 px-3 py-1 bg-[#153F33]/80 text-emerald-200 rounded-full text-xs font-semibold border border-[#1E5A44]/70">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             <span>Academic Session: 2026/2027 — Semester 1</span>
           </div>
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-white">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-white font-serif">
             Institutional Executive Dashboard
           </h1>
-          <p className="text-xs md:text-sm text-slate-300/90 leading-relaxed max-w-2xl font-normal">
+          <p className="text-xs md:text-sm text-emerald-100/80 leading-relaxed max-w-2xl font-normal">
             Real-time analytics, admissions workflows, student enrollment tracking, academic performance, ministry formation, and financial reconciliation.
           </p>
         </div>
 
         <div className="flex items-center space-x-3 relative z-10 shrink-0">
-          <div className="px-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-2xl text-left shadow-lg">
+          <div className="px-4 py-3 bg-[#071711]/90 border border-[#153F33]/80 rounded-2xl text-left shadow-lg">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">System Status</span>
+              <span className="text-[10px] font-bold text-emerald-300/80 uppercase tracking-wider">System Status</span>
               <button 
                 onClick={handleRefreshSync}
                 title="Refresh Status"
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-emerald-300/80 hover:text-white transition-colors"
               >
                 <RefreshCw className={`w-3 h-3 ${isSyncing ? 'animate-spin' : ''}`} />
               </button>
@@ -317,7 +317,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-xs font-bold text-emerald-400">Firestore Online</span>
             </div>
-            <p className="text-[10px] text-slate-400 font-mono mt-0.5">Last sync: {syncTime}</p>
+            <p className="text-[10px] text-emerald-300/60 font-mono mt-0.5">Last sync: {syncTime}</p>
           </div>
         </div>
       </div>
@@ -330,7 +330,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
             <div 
               key={i} 
               onClick={() => triggerNavigation(stat.module)}
-              className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md hover:border-amber-300 transition-all duration-200 cursor-pointer group flex flex-col justify-between"
+              className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md hover:border-emerald-300 transition-all duration-200 cursor-pointer group flex flex-col justify-between"
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{stat.title}</span>
@@ -341,7 +341,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
               <div>
                 <div className="flex items-baseline justify-between">
                   <h3 className="text-2xl font-black text-slate-900 tracking-tight">{stat.value}</h3>
-                  <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-amber-500 transition-colors" />
+                  <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-emerald-600 transition-colors" />
                 </div>
                 <div className="flex items-center gap-1 mt-1 text-xs">
                   <span className={`font-semibold ${
@@ -410,7 +410,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
             </div>
             <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
               <span className="text-[10px] font-bold text-slate-400 uppercase">Graduation Ready</span>
-              <p className="text-lg font-black text-amber-700 mt-0.5">38</p>
+              <p className="text-lg font-black text-emerald-700 mt-0.5">38</p>
             </div>
             <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center col-span-2 sm:col-span-1">
               <span className="text-[10px] font-bold text-slate-400 uppercase">Avg Cumulative GPA</span>
@@ -454,7 +454,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
             </div>
             <button 
               onClick={() => triggerNavigation('admissions')}
-              className="text-xs font-bold text-amber-700 hover:underline"
+              className="text-xs font-bold text-emerald-700 hover:underline"
             >
               Manage
             </button>
@@ -463,8 +463,8 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
           <div className="space-y-3">
             {[
               { label: 'Applications Received', count: 24, percent: 100, color: 'bg-slate-900' },
-              { label: 'Under Faculty Review', count: 5, percent: 79, color: 'bg-amber-600' },
-              { label: 'Accepted Candidates', count: 14, percent: 58, color: 'bg-emerald-600' },
+              { label: 'Under Faculty Review', count: 5, percent: 79, color: 'bg-emerald-600' },
+              { label: 'Accepted Candidates', count: 14, percent: 58, color: 'bg-emerald-500' },
               { label: 'Rejected / Incomplete', count: 3, percent: 12, color: 'bg-rose-500' },
               { label: 'Enrolled & Paid', count: 2, percent: 8, color: 'bg-blue-600' }
             ].map((st, i) => (
@@ -508,7 +508,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
                 onClick={() => setFinancePeriod(p)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${
                   financePeriod === p
-                    ? 'bg-amber-500 text-slate-950 shadow-xs'
+                    ? 'bg-[#15803D] text-white shadow-xs'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                 }`}
               >
@@ -548,20 +548,20 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
             <AreaChart data={activeRevenueData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorCollected" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.35}/>
-                  <stop offset="95%" stopColor="#f59e0b" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#16a34a" stopOpacity={0.35}/>
+                  <stop offset="95%" stopColor="#16a34a" stopOpacity={0}/>
                 </linearGradient>
                 <linearGradient id="colorInvoiced" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0f172a" stopOpacity={0.2}/>
-                  <stop offset="95%" stopColor="#0f172a" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#052e16" stopOpacity={0.2}/>
+                  <stop offset="95%" stopColor="#052e16" stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
               <XAxis dataKey="period" stroke="#94a3b8" fontSize={11} />
               <YAxis stroke="#94a3b8" fontSize={11} />
               <Tooltip />
-              <Area type="monotone" dataKey="invoiced" name="Invoiced ($)" stroke="#0f172a" strokeWidth={2} fillOpacity={1} fill="url(#colorInvoiced)" />
-              <Area type="monotone" dataKey="collected" name="Collected ($)" stroke="#f59e0b" strokeWidth={2.5} fillOpacity={1} fill="url(#colorCollected)" />
+              <Area type="monotone" dataKey="invoiced" name="Invoiced ($)" stroke="#052e16" strokeWidth={2} fillOpacity={1} fill="url(#colorInvoiced)" />
+              <Area type="monotone" dataKey="collected" name="Collected ($)" stroke="#16a34a" strokeWidth={2.5} fillOpacity={1} fill="url(#colorCollected)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -634,7 +634,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
               </div>
               <div className="h-3 w-full bg-slate-100 rounded-full flex overflow-hidden">
                 <div className="h-full bg-emerald-600" style={{ width: '85.1%' }} title="Local 85.1%" />
-                <div className="h-full bg-amber-500" style={{ width: '14.9%' }} title="International 14.9%" />
+                <div className="h-full bg-emerald-400" style={{ width: '14.9%' }} title="International 14.9%" />
               </div>
               <div className="flex justify-between text-[10px] text-slate-400">
                 <span>Local Students: 85%</span>
@@ -668,23 +668,23 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 border-b border-slate-100 pb-4">
             <div>
               <div className="flex items-center gap-2">
-                <Church className="w-5 h-5 text-amber-600" />
+                <Church className="w-5 h-5 text-emerald-600" />
                 <h3 className="text-base font-bold text-slate-900">Ministry Formation & Practicum Analytics</h3>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">Ecclesiastical field attachments, evangelism outreach, and pastoral mentoring</p>
             </div>
             <button 
               onClick={() => triggerNavigation('ministry')}
-              className="text-xs font-bold text-amber-700 hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1"
             >
               Open Ministry Module <ChevronRight className="w-3 h-3" />
             </button>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="bg-amber-50/60 p-3 rounded-xl border border-amber-100 text-center">
-              <span className="text-[10px] font-bold text-amber-900 uppercase">In Ministry Formation</span>
-              <p className="text-xl font-black text-amber-800 mt-0.5">112</p>
+            <div className="bg-emerald-50/70 p-3 rounded-xl border border-emerald-100 text-center">
+              <span className="text-[10px] font-bold text-emerald-900 uppercase">In Ministry Formation</span>
+              <p className="text-xl font-black text-emerald-800 mt-0.5">112</p>
             </div>
             <div className="bg-emerald-50/60 p-3 rounded-xl border border-emerald-100 text-center">
               <span className="text-[10px] font-bold text-emerald-900 uppercase">Active Placements</span>
@@ -710,7 +710,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
                   <XAxis type="number" stroke="#94a3b8" fontSize={11} />
                   <YAxis type="category" dataKey="area" stroke="#94a3b8" fontSize={11} />
                   <Tooltip />
-                  <Bar dataKey="count" fill="#d97706" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="count" fill="#16a34a" radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -721,7 +721,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
         <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-5">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-amber-500" />
+              <Sparkles className="w-5 h-5 text-emerald-600" />
               <div>
                 <h3 className="text-base font-bold text-slate-900">Chapel & Spiritual Life</h3>
                 <p className="text-xs text-slate-500">Communal spiritual formation</p>
@@ -729,7 +729,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
             </div>
             <button
               onClick={() => triggerNavigation('chapel')}
-              className="text-xs font-bold text-amber-700 hover:underline"
+              className="text-xs font-bold text-emerald-700 hover:underline"
             >
               Chapel Log
             </button>
@@ -738,7 +738,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-slate-50 p-3 rounded-xl text-center border border-slate-100">
               <span className="text-[10px] font-bold text-slate-400 uppercase">Chapel Attendance</span>
-              <p className="text-2xl font-black text-amber-600 mt-0.5">94%</p>
+              <p className="text-2xl font-black text-emerald-600 mt-0.5">94%</p>
             </div>
             <div className="bg-slate-50 p-3 rounded-xl text-center border border-slate-100">
               <span className="text-[10px] font-bold text-slate-400 uppercase">Weekly Services</span>
@@ -754,10 +754,10 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
             </div>
           </div>
 
-          <div className="p-3.5 bg-amber-50/50 rounded-xl border border-amber-200/60 text-xs space-y-1">
-            <div className="font-bold text-amber-900">Next Convocation Revival</div>
+          <div className="p-3.5 bg-emerald-50/70 rounded-xl border border-emerald-200/80 text-xs space-y-1">
+            <div className="font-bold text-emerald-950">Next Convocation Revival</div>
             <p className="text-slate-600 text-[11px]">Thursday Chapel: 10:00 AM — Main Auditorium</p>
-            <p className="text-amber-800 text-[11px] font-medium">Guest Speaker: Rev. Dr. Ezekiel Mwangi</p>
+            <p className="text-emerald-800 text-[11px] font-medium">Guest Speaker: Rev. Dr. Ezekiel Mwangi</p>
           </div>
         </div>
       </div>
@@ -837,7 +837,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
             </div>
             <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
               <span className="text-[10px] font-bold text-slate-400 uppercase">Occupancy</span>
-              <p className="text-lg font-black text-amber-700 mt-0.5">72.8%</p>
+              <p className="text-lg font-black text-emerald-700 mt-0.5">72.8%</p>
             </div>
           </div>
           <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
@@ -851,14 +851,14 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
         <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 border-b border-slate-100 pb-4">
           <div>
             <div className="flex items-center gap-2">
-              <GraduationCap className="w-5 h-5 text-amber-600" />
+              <GraduationCap className="w-5 h-5 text-emerald-600" />
               <h3 className="text-base font-bold text-slate-900">Graduation Readiness & Clearance</h3>
             </div>
             <p className="text-xs text-slate-500 mt-0.5">Convocation eligibility audit for Senior Class of 2026</p>
           </div>
           <button 
             onClick={() => triggerNavigation('graduation')}
-            className="text-xs font-bold text-amber-700 hover:underline"
+            className="text-xs font-bold text-emerald-700 hover:underline"
           >
             View Graduation Clearance Roll (38)
           </button>
@@ -869,7 +869,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
             { label: 'Eligible Candidates', val: '38', sub: 'Class of 2026', color: 'text-slate-900' },
             { label: 'Academic Cleared', val: '34', sub: 'Credits passed', color: 'text-blue-700' },
             { label: 'Finance Cleared', val: '29', sub: 'Zero fee balance', color: 'text-emerald-700' },
-            { label: 'Ministry Cleared', val: '31', sub: 'Practicum done', color: 'text-amber-700' },
+            { label: 'Ministry Cleared', val: '31', sub: 'Practicum done', color: 'text-emerald-700' },
             { label: 'Library Cleared', val: '36', sub: 'All books returned', color: 'text-indigo-700' },
             { label: 'Ready to Graduate', val: '27', sub: 'All 4 clearances', color: 'text-emerald-600 font-black' }
           ].map((item, idx) => (
@@ -895,7 +895,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
               const Icon = act.icon;
               return (
                 <div key={act.id} className="py-3 flex items-start space-x-3 group">
-                  <div className="p-2 rounded-xl bg-slate-100 text-slate-700 shrink-0 group-hover:bg-amber-50 group-hover:text-amber-700 transition-colors">
+                  <div className="p-2 rounded-xl bg-slate-100 text-slate-700 shrink-0 group-hover:bg-emerald-50 group-hover:text-emerald-700 transition-colors">
                     <Icon className="w-4 h-4" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -919,12 +919,12 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
           <div>
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-amber-600" />
+                <ShieldCheck className="w-5 h-5 text-emerald-600" />
                 <h3 className="text-base font-bold text-slate-900">Certificate Verification</h3>
               </div>
               <button
                 onClick={() => triggerNavigation('certificates')}
-                className="text-xs font-bold text-amber-700 hover:underline"
+                className="text-xs font-bold text-emerald-700 hover:underline"
               >
                 Full Registry
               </button>
@@ -936,11 +936,11 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
                 value={certQuery}
                 onChange={(e) => setCertQuery(e.target.value)}
                 placeholder="e.g. CERT-2026-00124"
-                className="flex-1 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500"
+                className="flex-1 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl transition-colors shadow-xs"
+                className="px-4 py-2 bg-[#15803D] hover:bg-[#14532D] text-white font-bold text-xs rounded-xl transition-colors shadow-xs cursor-pointer"
               >
                 Verify
               </button>
@@ -949,7 +949,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
             {certResult && (
               <div className="mt-4 p-4 bg-slate-50/80 rounded-xl border border-slate-200/80 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-bold text-amber-800">{certResult.certNumber}</span>
+                  <span className="text-xs font-mono font-bold text-emerald-800">{certResult.certNumber}</span>
                   <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full">
                     <CheckCircle2 className="w-3 h-3" /> {certResult.status}
                   </span>
@@ -957,7 +957,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
                 <div className="text-xs space-y-1">
                   <p className="font-bold text-slate-900">{certResult.studentName}</p>
                   <p className="text-slate-600">{certResult.program}</p>
-                  <p className="text-amber-800 font-semibold">{certResult.classification}</p>
+                  <p className="text-emerald-800 font-semibold">{certResult.classification}</p>
                   <p className="text-[11px] text-slate-400">Awarded: {certResult.dateIssued}</p>
                 </div>
               </div>

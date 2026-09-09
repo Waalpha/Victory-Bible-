@@ -573,13 +573,13 @@ export const FeeStructureModal: React.FC<FeeStructureModalProps> = ({
           {/* Website Publishing Toggle */}
           <div className="flex items-center justify-between p-4 bg-slate-900 text-white rounded-2xl">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center">
+              <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center">
                 <Globe className="w-4 h-4" />
               </div>
               <div>
                 <span className="font-bold block text-xs text-white">Publish to Public Website Fee Schedule</span>
                 <span className="text-[10px] text-slate-400">
-                  When enabled, this fee structure is instantly visible to prospective students on the public website (<code className="text-amber-300 font-mono">/fees</code>)
+                  When enabled, this fee structure is instantly visible to prospective students on the public website (<code className="text-emerald-300 font-mono">/fees</code>)
                 </span>
               </div>
             </div>
@@ -590,22 +590,22 @@ export const FeeStructureModal: React.FC<FeeStructureModalProps> = ({
                 onChange={e => handleFieldChange('publishedToWebsite', e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-slate-700 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-500" />
+              <div className="w-11 h-6 bg-slate-700 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#15803D]" />
             </label>
           </div>
 
           {/* Live Total Calculation Card */}
-          <div className="bg-gradient-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 border border-amber-500/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="bg-gradient-to-r from-emerald-500/10 via-emerald-500/20 to-emerald-500/10 border border-emerald-500/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <span className="text-xs font-bold text-amber-900 uppercase tracking-wider block">
+              <span className="text-xs font-bold text-emerald-950 uppercase tracking-wider block">
                 Total Semester Package Fee
               </span>
-              <p className="text-[11px] text-amber-800">
+              <p className="text-[11px] text-emerald-900">
                 Sum of tuition, registration, ancillary services, hostel and custom items
               </p>
             </div>
             <div className="text-right">
-              <span className="text-xs font-bold text-amber-800 mr-1.5">{formData.currency}</span>
+              <span className="text-xs font-bold text-emerald-800 mr-1.5">{formData.currency}</span>
               <span className="text-3xl font-black font-mono text-slate-950">
                 {calculateTotal(formData).toLocaleString()}
               </span>
@@ -623,7 +623,7 @@ export const FeeStructureModal: React.FC<FeeStructureModalProps> = ({
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer"
+              className="px-6 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer"
             >
               <Check className="w-4 h-4" />
               <span>{initialData ? 'Save Changes' : 'Save & Publish Fee Structure'}</span>

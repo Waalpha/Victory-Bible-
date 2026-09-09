@@ -467,7 +467,7 @@ export const CertificatesModule: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
           <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <Search className="w-4 h-4 text-amber-600" /> Verify Credential
+            <Search className="w-4 h-4 text-emerald-600" /> Verify Credential
           </h3>
           <p className="text-xs text-slate-600">Enter certificate serial number or student identification barcode.</p>
           <form onSubmit={handleVerify} className="space-y-3">
@@ -478,12 +478,12 @@ export const CertificatesModule: React.FC = () => {
                 value={certQuery}
                 onChange={(e) => setCertQuery(e.target.value)}
                 placeholder="e.g. CERT-2026-00124"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
               />
             </div>
             <button
               type="submit"
-              className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl transition-colors shadow-xs"
+              className="w-full py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold text-xs rounded-xl transition-colors shadow-xs cursor-pointer"
             >
               Verify Credential
             </button>
@@ -498,11 +498,11 @@ export const CertificatesModule: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600">
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
                 <FileText className="w-6 h-6" />
               </div>
               <div>
-                <span className="text-[10px] font-mono text-amber-700 font-bold">{result.certNumber}</span>
+                <span className="text-[10px] font-mono text-emerald-700 font-bold">{result.certNumber}</span>
                 <h3 className="text-base font-bold text-slate-900">{result.studentName}</h3>
               </div>
             </div>
@@ -514,7 +514,7 @@ export const CertificatesModule: React.FC = () => {
               </div>
               <div>
                 <div className="text-[11px] text-slate-400 font-semibold uppercase">Academic Distinction</div>
-                <div className="text-amber-700 font-bold mt-0.5">{result.honors}</div>
+                <div className="text-emerald-700 font-bold mt-0.5">{result.honors}</div>
               </div>
               <div>
                 <div className="text-[11px] text-slate-400 font-semibold uppercase">Conferment Date</div>

@@ -90,7 +90,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <h2 className="text-sm sm:text-base md:text-lg font-bold text-slate-900 tracking-tight leading-tight truncate">
               {institutionName || 'Victory International'}
             </h2>
-            <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200/60 shrink-0">
+            <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/60 shrink-0">
               Seminary ERP
             </span>
           </div>
@@ -105,11 +105,11 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Mobile View Public Website Button */}
         <button 
           onClick={() => onNavigatePublic('/')}
-          className="p-2 text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-xl flex md:hidden items-center justify-center transition-colors border border-amber-200/80 shrink-0"
+          className="p-2 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-xl flex md:hidden items-center justify-center transition-colors border border-emerald-200/80 shrink-0"
           title="View Public Seminary Website"
           aria-label="View Public Seminary Website"
         >
-          <Globe className="w-4 h-4 text-amber-600" />
+          <Globe className="w-4 h-4 text-emerald-600" />
         </button>
         {/* Campus Switcher */}
         <div className="relative hidden 2xl:block" ref={campusRef}>
@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setShowCampusDropdown(!showCampusDropdown)}
             className="flex items-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200/80 transition-colors"
           >
-            <MapPin className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+            <MapPin className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
             <span className="truncate max-w-[140px]">{currentCampus}</span>
             <ChevronDown className="w-3 h-3 text-slate-400" />
           </button>
@@ -135,11 +135,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setShowCampusDropdown(false);
                   }}
                   className={`w-full text-left px-3 py-2 text-xs font-medium hover:bg-slate-50 flex items-center justify-between ${
-                    currentCampus === c ? 'text-amber-700 bg-amber-50/70 font-bold' : 'text-slate-700'
+                    currentCampus === c ? 'text-emerald-700 bg-emerald-50/70 font-bold' : 'text-slate-700'
                   }`}
                 >
                   <span>{c}</span>
-                  {currentCampus === c && <CheckCircle2 className="w-3.5 h-3.5 text-amber-600" />}
+                  {currentCampus === c && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
                 </button>
               ))}
             </div>
@@ -152,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setShowSessionDropdown(!showSessionDropdown)}
             className="flex items-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200/80 transition-colors"
           >
-            <Calendar className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+            <Calendar className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
             <span>{currentSession}</span>
             <ChevronDown className="w-3 h-3 text-slate-400" />
           </button>
@@ -170,11 +170,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setShowSessionDropdown(false);
                   }}
                   className={`w-full text-left px-3 py-2 text-xs font-medium hover:bg-slate-50 flex items-center justify-between ${
-                    currentSession === s ? 'text-blue-700 bg-blue-50/70 font-bold' : 'text-slate-700'
+                    currentSession === s ? 'text-emerald-700 bg-emerald-50/70 font-bold' : 'text-slate-700'
                   }`}
                 >
                   <span>{s}</span>
-                  {currentSession === s && <CheckCircle2 className="w-3.5 h-3.5 text-blue-600" />}
+                  {currentSession === s && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
                 </button>
               ))}
             </div>
@@ -189,7 +189,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             placeholder="Search students, courses..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-12 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 transition-all"
+            className="w-full pl-9 pr-12 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all"
           />
           <kbd className="absolute right-2.5 px-1.5 py-0.5 text-[9px] font-mono text-slate-400 bg-slate-200/70 rounded">
             ⌘K
@@ -200,24 +200,24 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="hidden md:flex items-center space-x-1.5 border-r border-slate-200/80 pr-2.5">
           <button 
             onClick={() => onNavigatePublic('/')}
-            className="px-2.5 py-1.5 text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-xl flex items-center space-x-1.5 transition-colors cursor-pointer border border-amber-200/80"
+            className="px-2.5 py-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-xl flex items-center space-x-1.5 transition-colors cursor-pointer border border-emerald-200/80"
             title="View Public Seminary Website"
           >
-            <Globe className="w-3.5 h-3.5 text-amber-600" />
+            <Globe className="w-3.5 h-3.5 text-emerald-600" />
             <span>Public Website</span>
           </button>
           <button 
             onClick={() => onNavigatePublic('/verify')}
             className="px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-900 rounded-xl flex items-center space-x-1.5 transition-colors cursor-pointer"
           >
-            <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
             <span>Verify Cert</span>
           </button>
           <button 
             onClick={() => onNavigatePublic('/apply')}
             className="px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-900 rounded-xl flex items-center space-x-1.5 transition-colors cursor-pointer"
           >
-            <ExternalLink className="w-3.5 h-3.5 text-amber-600" />
+            <ExternalLink className="w-3.5 h-3.5 text-emerald-600" />
             <span>Apply Online</span>
           </button>
         </div>
@@ -227,7 +227,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => onNavigateModule('website-cms')}
             title="Super Admin: Customize Public Website, Logo & Content"
-            className="flex items-center space-x-1.5 px-3 py-2 bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
+            className="flex items-center space-x-1.5 px-3 py-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
           >
             <Globe className="w-3.5 h-3.5" />
             <span className="hidden md:inline">Customize Website</span>
@@ -238,9 +238,9 @@ export const Navbar: React.FC<NavbarProps> = ({
         <button
           onClick={onOpenFirestoreSync}
           title="Cloud Firestore Database Sync Center"
-          className="flex items-center space-x-1.5 px-3 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-xs transition-colors ring-1 ring-slate-800"
+          className="flex items-center space-x-1.5 px-3 py-2 bg-[#0B1F17] hover:bg-[#133327] text-white rounded-xl text-xs font-bold shadow-xs transition-colors ring-1 ring-[#153F33] cursor-pointer"
         >
-          <Database className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <Database className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
           <span className="hidden sm:inline">Push to Firestore</span>
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
         </button>
@@ -253,20 +253,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="p-2 text-slate-600 hover:bg-slate-100 rounded-xl relative transition-colors"
           >
             <Bell className="w-5 h-5" />
-            <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-amber-500 rounded-full ring-2 ring-white" />
+            <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-emerald-600 rounded-full ring-2 ring-white" />
           </button>
 
           {showNotifDropdown && (
             <div className="absolute right-0 mt-2 w-80 bg-white border border-slate-200 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in zoom-in-95">
               <div className="px-4 py-2 border-b border-slate-100 flex items-center justify-between">
                 <p className="text-xs font-bold text-slate-900">Institutional Alerts</p>
-                <span className="text-[10px] font-semibold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-semibold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">
                   2 unread
                 </span>
               </div>
               <div className="divide-y divide-slate-50 max-h-72 overflow-y-auto">
                 {notifications.map(n => (
-                  <div key={n.id} className={`p-3 text-xs hover:bg-slate-50 transition-colors ${n.unread ? 'bg-amber-50/30' : ''}`}>
+                  <div key={n.id} className={`p-3 text-xs hover:bg-slate-50 transition-colors ${n.unread ? 'bg-emerald-50/40' : ''}`}>
                     <div className="flex items-start justify-between gap-2">
                       <p className={`font-medium ${n.unread ? 'text-slate-900 font-semibold' : 'text-slate-600'}`}>{n.title}</p>
                       <span className="text-[10px] text-slate-400 shrink-0">{n.time}</span>
@@ -275,7 +275,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 ))}
               </div>
               <div className="px-4 py-2 border-t border-slate-100 text-center">
-                <span className="text-[11px] font-semibold text-amber-700 hover:underline cursor-pointer">
+                <span className="text-[11px] font-semibold text-emerald-700 hover:underline cursor-pointer">
                   View All Seminary Notifications
                 </span>
               </div>
@@ -289,14 +289,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setShowProfileDropdown(!showProfileDropdown)}
             className="flex items-center space-x-2.5 p-1.5 pr-2.5 bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 rounded-xl transition-all"
           >
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-amber-500 to-amber-600 text-slate-950 font-bold text-xs flex items-center justify-center shadow-xs">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-emerald-600 to-emerald-700 text-white font-bold text-xs flex items-center justify-center shadow-xs">
               {userRole.substring(0, 2)}
             </div>
             <div className="hidden sm:block text-left">
               <span className="block text-xs font-bold text-slate-900 leading-none">
                 {userRole === 'SUPER_ADMIN' ? 'Dean of Administration' : userRole.replace('_', ' ')}
               </span>
-              <span className="block text-[10px] font-semibold text-amber-700 font-mono mt-0.5">
+              <span className="block text-[10px] font-semibold text-emerald-700 font-mono mt-0.5">
                 {userRole}
               </span>
             </div>
@@ -328,11 +328,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                       setShowProfileDropdown(false);
                     }}
                     className={`w-full text-left px-4 py-1.5 text-xs font-medium hover:bg-slate-50 flex items-center justify-between ${
-                      userRole === r ? 'text-amber-700 bg-amber-50/60 font-bold' : 'text-slate-700'
+                      userRole === r ? 'text-emerald-700 bg-emerald-50/60 font-bold' : 'text-slate-700'
                     }`}
                   >
                     <span>{r.replace('_', ' ')}</span>
-                    {userRole === r && <span className="w-2 h-2 rounded-full bg-amber-500" />}
+                    {userRole === r && <span className="w-2 h-2 rounded-full bg-emerald-600" />}
                   </button>
                 ))}
               </div>

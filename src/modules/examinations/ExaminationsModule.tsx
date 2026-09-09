@@ -42,7 +42,7 @@ export const ExaminationsModule: React.FC = () => {
         <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
           <div className="p-6 border-b border-slate-100 flex justify-between items-center">
             <h3 className="font-bold text-slate-900 text-base">Examination Results Approval Queue</h3>
-            <span className="text-xs font-semibold text-amber-700 bg-amber-50 px-3 py-1 rounded-full">Dean Review & Registrar Publishing</span>
+            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">Dean Review & Registrar Publishing</span>
           </div>
           <table className="w-full text-left border-collapse">
             <thead>
@@ -62,7 +62,7 @@ export const ExaminationsModule: React.FC = () => {
                   <td className="p-4 font-bold text-slate-900">{r.studentName}</td>
                   <td className="p-4 font-mono">{r.courseCode}</td>
                   <td className="p-4 font-mono font-bold">{r.marksObtained} / {r.maxMarks}</td>
-                  <td className="p-4 font-bold text-amber-600 font-mono text-sm">{r.grade}</td>
+                  <td className="p-4 font-bold text-emerald-600 font-mono text-sm">{r.grade}</td>
                   <td className="p-4 font-mono">{r.gradePoint}</td>
                   <td className="p-4">
                     <span className="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md font-semibold text-[10px]">
@@ -112,7 +112,7 @@ export const ExaminationsModule: React.FC = () => {
             <div className="text-center space-y-2 border-b-2 border-slate-900 pb-6">
               <h1 className="text-2xl font-extrabold tracking-widest uppercase">{settings.institutionName}</h1>
               <p className="text-xs font-sans text-slate-600 font-medium">{settings.address} • Tel: {settings.phone}</p>
-              <h2 className="text-lg font-bold text-amber-800 uppercase tracking-wide pt-2">Official Academic Transcript</h2>
+              <h2 className="text-lg font-bold text-emerald-800 uppercase tracking-wide pt-2">Official Academic Transcript</h2>
             </div>
 
             {/* Student Meta */}
@@ -153,21 +153,21 @@ export const ExaminationsModule: React.FC = () => {
                     <td className="p-3 font-mono font-bold">OT101</td>
                     <td className="p-3 font-semibold">Pentateuch & Historical Books</td>
                     <td className="p-3">3</td>
-                    <td className="p-3 font-bold text-amber-800">A</td>
+                    <td className="p-3 font-bold text-emerald-800">A</td>
                     <td className="p-3 font-mono">4.0</td>
                   </tr>
                   <tr>
                     <td className="p-3 font-mono font-bold">THEO201</td>
                     <td className="p-3 font-semibold">Systematic Theology I</td>
                     <td className="p-3">4</td>
-                    <td className="p-3 font-bold text-amber-800">A</td>
+                    <td className="p-3 font-bold text-emerald-800">A</td>
                     <td className="p-3 font-mono">4.0</td>
                   </tr>
                   <tr>
                     <td className="p-3 font-mono font-bold">HOM301</td>
                     <td className="p-3 font-semibold">Biblical Preaching & Homiletics</td>
                     <td className="p-3">3</td>
-                    <td className="p-3 font-bold text-amber-800">B+</td>
+                    <td className="p-3 font-bold text-emerald-800">B+</td>
                     <td className="p-3 font-mono">3.5</td>
                   </tr>
                 </tbody>
@@ -175,12 +175,12 @@ export const ExaminationsModule: React.FC = () => {
             </div>
 
             {/* GPA Summary */}
-            <div className="flex justify-between items-center bg-amber-50 p-6 rounded-2xl border border-amber-200 font-sans text-xs">
+            <div className="flex justify-between items-center bg-emerald-50/60 p-6 rounded-2xl border border-emerald-200 font-sans text-xs">
               <div>
                 <span className="text-slate-600">Semester GPA: <strong className="font-mono text-slate-900 text-sm">3.85</strong></span>
               </div>
               <div>
-                <span className="text-slate-600">Cumulative GPA (CGPA): <strong className="font-mono text-amber-800 text-sm">{targetStudent.cgpa}</strong></span>
+                <span className="text-slate-600">Cumulative GPA (CGPA): <strong className="font-mono text-emerald-800 text-sm">{targetStudent.cgpa}</strong></span>
               </div>
               <div>
                 <span className="text-slate-600">Classification: <strong className="text-slate-900">First Class Honors</strong></span>
@@ -219,7 +219,7 @@ export const ExaminationsModule: React.FC = () => {
             </div>
             <button
               onClick={() => window.print()}
-              className="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-xl text-xs flex items-center space-x-2"
+              className="px-5 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs flex items-center space-x-2 transition-colors shadow-xs cursor-pointer"
             >
               <Printer className="w-4 h-4" />
               <span>Print Secure Certificate</span>
@@ -227,22 +227,22 @@ export const ExaminationsModule: React.FC = () => {
           </div>
 
           {/* Certificate View */}
-          <div className="bg-amber-50/40 p-16 rounded-3xl border-8 border-double border-amber-600/60 shadow-2xl max-w-4xl mx-auto text-center space-y-8 font-serif">
+          <div className="bg-emerald-50/25 p-16 rounded-3xl border-8 border-double border-emerald-600/60 shadow-2xl max-w-4xl mx-auto text-center space-y-8 font-serif">
             <div className="space-y-3">
-              <div className="w-16 h-16 mx-auto bg-amber-600 text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
+              <div className="w-16 h-16 mx-auto bg-emerald-700 text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
                 ✝
               </div>
               <h2 className="text-2xl font-extrabold uppercase tracking-widest text-slate-900">{settings.institutionName}</h2>
-              <p className="text-xs font-sans tracking-widest text-amber-800 uppercase font-bold">Behold the Word of Truth</p>
+              <p className="text-xs font-sans tracking-widest text-emerald-800 uppercase font-bold">Behold the Word of Truth</p>
             </div>
 
             <div className="space-y-4 py-4">
               <p className="text-sm italic text-slate-600">This is to certify that</p>
-              <h1 className="text-4xl font-extrabold text-slate-900 tracking-wide font-serif underline decoration-amber-600/60 decoration-1 underline-offset-8">
+              <h1 className="text-4xl font-extrabold text-slate-900 tracking-wide font-serif underline decoration-emerald-600/60 decoration-1 underline-offset-8">
                 {targetStudent.fullName}
               </h1>
               <p className="text-sm italic text-slate-600 pt-2">having successfully completed the prescribed course of study and fulfilled all academic and spiritual formation requirements has been conferred the award of</p>
-              <h3 className="text-2xl font-bold text-amber-900 uppercase tracking-wide pt-2">
+              <h3 className="text-2xl font-bold text-emerald-900 uppercase tracking-wide pt-2">
                 {targetStudent.programName}
               </h3>
               <p className="text-xs font-sans text-slate-500">with all the rights, honors, and privileges appertaining thereto.</p>
@@ -254,7 +254,7 @@ export const ExaminationsModule: React.FC = () => {
                 <p className="text-slate-500">Victory International Apostolic Biblical Institute Seminary</p>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <div className="w-16 h-16 bg-amber-500/10 rounded-full border border-amber-500/30 flex items-center justify-center text-amber-700 font-bold text-xs">
+                <div className="w-16 h-16 bg-emerald-500/10 rounded-full border border-emerald-500/30 flex items-center justify-center text-emerald-700 font-bold text-xs">
                   SEAL
                 </div>
                 <span className="text-[10px] text-slate-400 mt-1 font-mono">Cert #: GRC-2026-8801</span>

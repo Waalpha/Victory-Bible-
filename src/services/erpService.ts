@@ -424,9 +424,9 @@ export const defaultWebsiteSettings: WebsiteSettings = {
     institutionName: 'Victory International Apostolic Biblical Institute',
     tagline: 'Equipping Faithful Leaders for Global Gospel Ministry',
     motto: 'Veritas, Pietas, Missio — Biblical Truth, Spiritual Piety, Global Mission',
-    primaryColor: '#0b1528',
-    secondaryColor: '#1e3a8a',
-    accentColor: '#d97706',
+    primaryColor: '#0B1F17',
+    secondaryColor: '#133327',
+    accentColor: '#15803D',
     logoUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=200'
   },
   contact: {

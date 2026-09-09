@@ -172,7 +172,7 @@ export function App() {
                 </button>
                 <button
                   onClick={() => setUserRole('SUPER_ADMIN')}
-                  className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs transition-colors"
+                  className="px-4 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs transition-colors shadow-xs"
                 >
                   Switch to Super Admin
                 </button>
@@ -218,7 +218,7 @@ export function App() {
                   </p>
                   <button
                     onClick={() => setCurrentModule('dashboard')}
-                    className="px-5 py-2.5 bg-amber-500 text-slate-950 font-bold rounded-xl text-xs"
+                    className="px-5 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs transition-colors shadow-xs"
                   >
                     Return to Dashboard
                   </button>

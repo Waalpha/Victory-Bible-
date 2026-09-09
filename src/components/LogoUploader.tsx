@@ -88,33 +88,29 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
       return;
     }
 
-    // Create a temporary object URL strictly for visual preview during upload
+    // Create a temporary object URL strictly for visual preview during processing
     const tempUrl = URL.createObjectURL(file);
     setTempPreviewUrl(tempUrl);
     updateUploadState(true);
 
     try {
-      // Upload directly to Firebase Storage: institutions/{institutionId}/branding/logo
-      // And automatically persist download URL to Firestore: institutions/{institutionId}/settings/website
-      const downloadUrl = await brandingService.uploadInstitutionLogo(file, activeInstitutionId);
+      // Process, optimize with canvas transparency, and persist directly to Firestore & ERP
+      const savedLogoUrl = await brandingService.uploadInstitutionLogo(file, activeInstitutionId);
 
-      // Clean up temporary object URL
+      // Clean up temporary preview
       URL.revokeObjectURL(tempUrl);
       setTempPreviewUrl(null);
 
-      // Update local state and inform parent of new permanent Firebase Storage URL
-      setLogoUrl(downloadUrl);
-      setUrlInput(downloadUrl);
-      onLogoChange(downloadUrl);
-      setSuccessMessage('Logo successfully uploaded to Firebase Storage and persisted to Firestore.');
+      // Update local state and propagate
+      setLogoUrl(savedLogoUrl);
+      setUrlInput(savedLogoUrl.startsWith('data:') ? '' : savedLogoUrl);
+      onLogoChange(savedLogoUrl);
+      setSuccessMessage('Institution emblem successfully optimized, saved to Firestore, and updated across the ERP.');
     } catch (err: any) {
-      console.error('Firebase Storage upload failed:', err);
-      // Clean up temp preview
+      console.error('Logo upload or save encountered an issue:', err);
       URL.revokeObjectURL(tempUrl);
       setTempPreviewUrl(null);
-
-      // Requirement 7: Keep previous saved logo and show clear error message
-      setErrorMessage(err.message || 'Firebase Storage upload failed. Previous logo was preserved.');
+      setErrorMessage(err.message || 'Could not save logo. Please try again or use an image link.');
     } finally {
       updateUploadState(false);
     }
@@ -135,11 +131,6 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
     const trimmed = urlInput.trim();
     if (!trimmed) {
       setErrorMessage('Please enter an image URL.');
-      return;
-    }
-
-    if (trimmed.startsWith('data:')) {
-      setErrorMessage('Base64 data URLs cannot be saved. Please upload the image file directly.');
       return;
     }
 
@@ -167,7 +158,7 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
       setUrlInput('');
       setTempPreviewUrl(null);
       onLogoChange('');
-      setSuccessMessage('Logo removed from Firestore and institution branding.');
+      setSuccessMessage('Logo removed from Firestore and reset to default.');
     } catch (err: any) {
       console.error('Failed to remove logo:', err);
       setErrorMessage('Failed to remove logo from Firestore. Please try again.');
@@ -201,14 +192,14 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h3 className="font-serif font-bold text-slate-900 text-base flex items-center gap-2">
-            <ImageIcon className="w-4 h-4 text-amber-600" />
+            <ImageIcon className="w-4 h-4 text-emerald-600" />
             <span>Institution Logo & Seal</span>
-            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">
-              Firebase Storage + Firestore
+            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">
+              Firestore Verified
             </span>
           </h3>
           <p className="text-xs text-slate-500">
-            Upload your official institution emblem or coat of arms. It will persist permanently in Firebase Storage and Firestore.
+            Upload your official institution emblem or coat of arms. It will persist permanently in Firestore and across all views.
           </p>
         </div>
 
@@ -229,7 +220,7 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
         <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl flex items-start gap-2.5 text-xs text-rose-700 font-medium animate-fade-in">
           <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
           <div className="flex-1">
-            <p className="font-bold">Logo Upload Error</p>
+            <p className="font-bold">Logo Upload Notice</p>
             <p>{errorMessage}</p>
           </div>
           <button 
@@ -246,7 +237,7 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
         <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl flex items-start gap-2.5 text-xs text-emerald-800 font-medium animate-fade-in">
           <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
           <div className="flex-1">
-            <p className="font-bold">Persistence Confirmed</p>
+            <p className="font-bold">Saved Successfully</p>
             <p>{successMessage}</p>
           </div>
           <button 
@@ -269,10 +260,10 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
             onClick={() => !uploading && fileInputRef.current?.click()}
             className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 ${
               uploading 
-                ? 'border-amber-400 bg-amber-50/50 cursor-wait' 
+                ? 'border-emerald-400 bg-emerald-50/50 cursor-wait' 
                 : isDragging 
-                ? 'border-amber-500 bg-amber-500/10' 
-                : 'border-slate-300 hover:border-amber-500 hover:bg-slate-50'
+                ? 'border-emerald-500 bg-emerald-500/10' 
+                : 'border-slate-300 hover:border-emerald-500 hover:bg-slate-50'
             }`}
           >
             <input
@@ -289,19 +280,19 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
               }}
             />
 
-            <div className="w-12 h-12 mx-auto rounded-full bg-amber-100 flex items-center justify-center text-amber-600 mb-3 shadow-xs">
+            <div className="w-12 h-12 mx-auto rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mb-3 shadow-xs">
               {uploading ? (
-                <Loader2 className="w-6 h-6 animate-spin text-amber-600" />
+                <Loader2 className="w-6 h-6 animate-spin text-emerald-600" />
               ) : (
                 <Upload className="w-6 h-6" />
               )}
             </div>
 
             <p className="text-sm font-bold text-slate-800 mb-1">
-              {uploading ? 'Uploading to Firebase Storage...' : 'Click to Upload or Drag & Drop'}
+              {uploading ? 'Processing & Saving Logo...' : 'Click to Upload or Drag & Drop'}
             </p>
             <p className="text-xs text-slate-500">
-              High resolution PNG with transparent background recommended (max 5MB). Stored at <span className="font-mono text-[11px] text-slate-700 bg-slate-100 px-1 py-0.5 rounded">institutions/{activeInstitutionId}/branding/logo</span>
+              High resolution PNG with transparent background recommended (max 5MB). Stored at <span className="font-mono text-[11px] text-slate-700 bg-slate-100 px-1 py-0.5 rounded">institutions/{activeInstitutionId}/settings/website</span>
             </p>
           </div>
 
@@ -317,14 +308,14 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
                 onChange={(e) => setUrlInput(e.target.value)}
                 placeholder="Or paste an image URL (https://...)"
                 disabled={uploading || savingUrl}
-                className="w-full pl-9 pr-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 text-slate-800 disabled:bg-slate-100"
+                className="w-full pl-9 pr-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-800 disabled:bg-slate-100"
               />
             </div>
             <button
               type="button"
               onClick={handleUrlApply}
               disabled={uploading || savingUrl || !urlInput.trim()}
-              className="px-4 py-2 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-400 text-white rounded-xl text-xs font-semibold shrink-0 transition-colors flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-[#15803D] hover:bg-[#14532D] disabled:bg-slate-400 text-white rounded-xl text-xs font-semibold shrink-0 transition-colors flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
             >
               {savingUrl ? (
                 <>
@@ -344,8 +335,8 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
             <div className="flex items-center gap-1.5">
               <span>Live Logo Preview</span>
               {uploading && (
-                <span className="text-[10px] text-amber-600 font-bold animate-pulse">
-                  (Uploading...)
+                <span className="text-[10px] text-emerald-600 font-bold animate-pulse">
+                  (Saving...)
                 </span>
               )}
             </div>
@@ -354,10 +345,10 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
                 type="button"
                 onClick={() => setPreviewMode('navy')}
                 className={`px-2 py-0.5 rounded-md text-[11px] font-bold transition-colors ${
-                  previewMode === 'navy' ? 'bg-[#0A192F] text-white' : 'text-slate-600 hover:text-slate-900'
+                  previewMode === 'navy' ? 'bg-[#0B1F17] text-white' : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                Dark Nav
+                Dark
               </button>
               <button
                 type="button"
@@ -374,7 +365,7 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
           <div 
             className={`h-36 rounded-xl flex items-center justify-center p-4 transition-colors border ${
               previewMode === 'navy' 
-                ? 'bg-[#0A192F] border-slate-800 text-white' 
+                ? 'bg-[#0B1F17] border-[#153F33] text-white' 
                 : 'bg-white border-slate-200 text-slate-900'
             }`}
           >
@@ -393,14 +384,14 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
                   <div className="font-serif font-black text-sm leading-tight truncate max-w-[160px]">
                     {institutionName}
                   </div>
-                  <div className="text-[10px] font-mono tracking-widest text-amber-400 uppercase font-semibold">
+                  <div className="text-[10px] font-mono tracking-widest text-emerald-400 uppercase font-semibold">
                     Seminary Seal
                   </div>
                 </div>
               </div>
             ) : (
               <div className="text-center space-y-2">
-                <div className="w-12 h-12 mx-auto rounded-xl bg-amber-500 flex items-center justify-center text-slate-950 font-black text-xl shadow-md">
+                <div className="w-12 h-12 mx-auto rounded-xl bg-[#15803D] flex items-center justify-center text-white font-black text-xl shadow-md">
                   ✝
                 </div>
                 <div className="text-xs text-slate-400 font-medium">Default Cross Seal Active</div>
@@ -411,14 +402,9 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
           <div className="text-[11px] text-slate-500 text-center space-y-1">
             <p>
               {displayLogo 
-                ? (tempPreviewUrl ? '⏳ Uploading to Firebase Storage...' : '✓ Permanent logo persisted in Firestore') 
+                ? (tempPreviewUrl ? '⏳ Saving logo to Firestore...' : '✓ Logo saved and persisted in Firestore') 
                 : 'No custom image set; default institution seal is active'}
             </p>
-            {logoUrl && logoUrl.startsWith('https://firebasestorage.googleapis.com') && (
-              <p className="text-[10px] font-mono text-emerald-600 font-semibold truncate max-w-xs mx-auto">
-                ✓ Cloud Storage Verified
-              </p>
-            )}
           </div>
         </div>
       </div>
@@ -427,7 +413,7 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
       <div className="pt-2 border-t border-slate-200/80">
         <div className="flex items-center justify-between mb-2.5">
           <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             <span>Quick Theological Crest Presets (Click to use)</span>
           </div>
           <span className="text-[10px] text-slate-500">Auto-saves to Firestore</span>
@@ -439,8 +425,8 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
               type="button"
               disabled={uploading || savingUrl}
               onClick={() => handlePresetSelect(preset.url)}
-              className={`flex items-center gap-2.5 p-2 rounded-xl bg-white border hover:border-amber-500 hover:shadow-xs text-left transition-all group cursor-pointer ${
-                logoUrl === preset.url ? 'border-amber-500 ring-2 ring-amber-500/20 bg-amber-50/20' : 'border-slate-200'
+              className={`flex items-center gap-2.5 p-2 rounded-xl bg-white border hover:border-emerald-500 hover:shadow-xs text-left transition-all group cursor-pointer ${
+                logoUrl === preset.url ? 'border-emerald-500 ring-2 ring-emerald-500/20 bg-emerald-50/20' : 'border-slate-200'
               }`}
             >
               <img
@@ -450,10 +436,10 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
                 referrerPolicy="no-referrer"
               />
               <div className="min-w-0 flex-1">
-                <div className="text-xs font-bold text-slate-800 truncate group-hover:text-amber-600 flex items-center justify-between">
+                <div className="text-xs font-bold text-slate-800 truncate group-hover:text-emerald-600 flex items-center justify-between">
                   <span>{preset.name}</span>
                   {logoUrl === preset.url && (
-                    <Check className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   )}
                 </div>
                 <div className="text-[10px] text-slate-400 truncate">{preset.desc}</div>

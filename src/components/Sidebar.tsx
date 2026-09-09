@@ -105,15 +105,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-xs lg:hidden" onClick={onClose} />
       )}
       <aside 
-        className={`fixed top-0 left-0 z-50 h-full bg-[#0a1120] text-slate-100 flex flex-col transition-all duration-300 ease-in-out border-r border-slate-800/80 shadow-2xl lg:static lg:translate-x-0 ${
+        className={`fixed top-0 left-0 z-50 h-full bg-[#0B1F17] text-slate-100 flex flex-col transition-all duration-300 ease-in-out border-r border-[#153F33]/60 shadow-2xl lg:static lg:translate-x-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } ${isCollapsed ? 'lg:w-20' : 'lg:w-72 w-72'}`}
       >
         {/* Brand header */}
-        <div className="p-4.5 border-b border-slate-800/80 flex items-center justify-between bg-[#080d1a]">
+        <div className="p-4.5 border-b border-[#153F33]/60 flex items-center justify-between bg-[#071711]">
           <div className="flex items-center space-x-3 overflow-hidden">
             {currentSettings?.branding?.logoUrl ? (
-              <div className="w-10 h-10 shrink-0 rounded-xl bg-white/10 p-1 border border-amber-500/30 flex items-center justify-center overflow-hidden shadow-inner">
+              <div className="w-10 h-10 shrink-0 rounded-xl bg-white/10 p-1 border border-emerald-500/30 flex items-center justify-center overflow-hidden shadow-inner">
                 <img
                   src={currentSettings.branding.logoUrl}
                   alt={currentSettings.branding.institutionName}
@@ -125,14 +125,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 />
               </div>
             ) : (
-              <div className="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/30 flex items-center justify-center text-amber-400 font-serif font-bold text-xl shadow-inner">
+              <div className="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-serif font-bold text-xl shadow-inner">
                 ✝
               </div>
             )}
             {!isCollapsed && (
               <div className="min-w-0 transition-opacity duration-200">
                 <h1 className="font-extrabold text-sm tracking-wider text-white truncate">THEOLOGICAL ERP</h1>
-                <p className="text-[11px] text-amber-400/90 font-medium truncate flex items-center gap-1">
+                <p className="text-[11px] text-emerald-300/80 font-medium truncate flex items-center gap-1">
                   <span>Seminary & Bible College</span>
                 </p>
               </div>
@@ -143,7 +143,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <button
             onClick={toggleCollapse}
             title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
-            className="hidden lg:flex p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/80 transition-colors"
+            className="hidden lg:flex p-1.5 rounded-lg text-emerald-200/70 hover:text-white hover:bg-emerald-900/40 transition-colors"
           >
             {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
           </button>
@@ -154,12 +154,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
           {groups.map(grp => (
             <div key={grp.name} className="space-y-1">
               {grp.name !== 'CORE' && !isCollapsed && (
-                <div className="px-3 pt-2 pb-1 text-[10px] font-bold tracking-wider text-slate-400 uppercase">
+                <div className="px-3 pt-2 pb-1 text-[10px] font-bold tracking-wider text-emerald-300/60 uppercase">
                   {grp.name}
                 </div>
               )}
               {grp.name !== 'CORE' && isCollapsed && (
-                <div className="my-2 border-t border-slate-800/80 mx-2" />
+                <div className="my-2 border-t border-[#153F33]/60 mx-2" />
               )}
               {grp.items.map(item => {
                 const Icon = item.icon;
@@ -176,12 +176,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       isCollapsed ? 'justify-center px-0 py-2.5' : 'space-x-3 px-3 py-2.5'
                     } rounded-xl text-xs font-semibold transition-all duration-150 ${
                       isActive 
-                        ? 'bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/25 ring-1 ring-amber-400/50' 
-                        : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
+                        ? 'bg-[#15803D] text-white font-bold shadow-sm shadow-emerald-950/40' 
+                        : 'text-emerald-100/80 hover:bg-[#133327] hover:text-white'
                     }`}
                   >
                     <Icon className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-105 ${
-                      isActive ? 'text-slate-950' : 'text-slate-400 group-hover:text-amber-400'
+                      isActive ? 'text-white' : 'text-emerald-300/70 group-hover:text-emerald-300'
                     }`} />
                     
                     {!isCollapsed && (
@@ -190,7 +190,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
                     {!isCollapsed && item.badge && (
                       <span className={`px-1.5 py-0.5 text-[10px] font-bold rounded-full ${
-                        isActive ? 'bg-slate-950 text-amber-400' : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                        isActive ? 'bg-[#071711] text-emerald-300' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
                       }`}>
                         {item.badge}
                       </span>
@@ -198,9 +198,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
                     {/* Tooltip on hover when collapsed */}
                     {isCollapsed && (
-                      <div className="absolute left-full ml-3 px-2.5 py-1 bg-slate-900 text-white text-xs font-medium rounded-lg shadow-xl border border-slate-700 whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
+                      <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#0B1F17] text-white text-xs font-medium rounded-lg shadow-xl border border-emerald-800/80 whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
                         {item.label}
-                        {item.badge && <span className="ml-1.5 text-amber-400 font-bold">({item.badge})</span>}
+                        {item.badge && <span className="ml-1.5 text-emerald-400 font-bold">({item.badge})</span>}
                       </div>
                     )}
                   </button>
@@ -211,9 +211,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Footer user badge */}
-        <div className="p-3 border-t border-slate-800/80 bg-[#080d1a]">
+        <div className="p-3 border-t border-[#153F33]/60 bg-[#071711]">
           <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'space-x-3'}`}>
-            <div className="w-9 h-9 shrink-0 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/80 flex items-center justify-center font-bold text-amber-400 text-xs shadow-inner">
+            <div className="w-9 h-9 shrink-0 rounded-xl bg-gradient-to-br from-[#153F33] to-[#0B1F17] border border-[#1E5A44]/80 flex items-center justify-center font-bold text-emerald-300 text-xs shadow-inner">
               {userRole.substring(0, 2)}
             </div>
             {!isCollapsed && (
@@ -222,7 +222,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   <p className="text-[11px] font-bold text-white truncate">Theological Admin</p>
                 </div>
-                <p className="text-[10px] text-amber-400/90 font-mono font-medium truncate">{userRole}</p>
+                <p className="text-[10px] text-emerald-400/90 font-mono font-medium truncate">{userRole}</p>
               </div>
             )}
           </div>

@@ -264,7 +264,7 @@ export const StudentsModule: React.FC = () => {
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-bold text-slate-900">Student Information System (SIS)</h2>
-            <span className="px-2.5 py-0.5 bg-amber-100 text-amber-900 font-bold text-[11px] rounded-md font-mono">
+            <span className="px-2.5 py-0.5 bg-emerald-100 text-emerald-900 font-bold text-[11px] rounded-md font-mono">
               {students.length} Enrolled
             </span>
           </div>
@@ -275,7 +275,7 @@ export const StudentsModule: React.FC = () => {
 
         <button
           onClick={openAddModal}
-          className="w-full sm:w-auto px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-xs transition-all active:scale-95"
+          className="w-full sm:w-auto px-5 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-xs transition-all active:scale-95 cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>Admit New Student</span>
@@ -292,7 +292,7 @@ export const StudentsModule: React.FC = () => {
               placeholder="Search by student name, Admission No, Reg No, email, next of kin..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-amber-500/30"
+              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/30"
             />
             {searchTerm && (
               <button onClick={() => setSearchTerm('')} className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-slate-600">
@@ -305,7 +305,7 @@ export const StudentsModule: React.FC = () => {
             <select
               value={selectedProgram}
               onChange={e => setSelectedProgram(e.target.value)}
-              className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 font-medium focus:outline-hidden focus:ring-2 focus:ring-amber-500/30"
+              className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 font-medium focus:outline-hidden focus:ring-2 focus:ring-emerald-500/30"
             >
               <option value="ALL">All Programs</option>
               {programs.map(p => (
@@ -316,7 +316,7 @@ export const StudentsModule: React.FC = () => {
             <select
               value={selectedStatus}
               onChange={e => setSelectedStatus(e.target.value)}
-              className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 font-medium focus:outline-hidden focus:ring-2 focus:ring-amber-500/30"
+              className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 font-medium focus:outline-hidden focus:ring-2 focus:ring-emerald-500/30"
             >
               <option value="ALL">All Statuses</option>
               <option value="Active">Active</option>
@@ -336,7 +336,7 @@ export const StudentsModule: React.FC = () => {
                 setSelectedProgram('ALL');
                 setSelectedStatus('ALL');
               }}
-              className="text-amber-700 font-bold hover:underline"
+              className="text-emerald-700 font-bold hover:underline"
             >
               Clear Filters
             </button>
@@ -354,13 +354,13 @@ export const StudentsModule: React.FC = () => {
             {/* Top row: Avatar, Name, Admission # */}
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 overflow-hidden flex items-center justify-center font-bold text-base text-amber-700 shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 overflow-hidden flex items-center justify-center font-bold text-base text-emerald-700 shrink-0">
                   {st.photoUrl ? <img src={st.photoUrl} alt="" className="w-full h-full object-cover" /> : st.fullName[0]}
                 </div>
                 <div>
                   <h3 className="font-bold text-slate-900 text-sm">{st.fullName}</h3>
                   <div className="flex flex-wrap items-center gap-1.5 mt-0.5">
-                    <span className="px-1.5 py-0.5 bg-amber-50 text-amber-900 font-mono font-bold text-[10px] rounded border border-amber-200/60">
+                    <span className="px-1.5 py-0.5 bg-emerald-50 text-emerald-900 font-mono font-bold text-[10px] rounded border border-emerald-200/60">
                       {st.admissionNumber || 'ADM-PENDING'}
                     </span>
                     <span className="text-[10px] font-mono text-slate-500">
@@ -379,7 +379,7 @@ export const StudentsModule: React.FC = () => {
             <div className="space-y-1 text-xs">
               <div className="flex items-center gap-2 text-slate-600">
                 <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                <a href={`mailto:${st.email}`} className="text-amber-800 font-mono font-medium truncate underline">
+                <a href={`mailto:${st.email}`} className="text-emerald-800 font-mono font-medium truncate underline">
                   {st.email}
                 </a>
               </div>
@@ -403,7 +403,7 @@ export const StudentsModule: React.FC = () => {
               </div>
               <div className="font-semibold text-slate-800">{st.nextOfKinName || 'Not designated'}</div>
               {st.nextOfKinPhone && (
-                <a href={`tel:${st.nextOfKinPhone}`} className="text-[11px] text-slate-600 font-mono flex items-center gap-1 hover:text-amber-700">
+                <a href={`tel:${st.nextOfKinPhone}`} className="text-[11px] text-slate-600 font-mono flex items-center gap-1 hover:text-emerald-700">
                   <Phone className="w-3 h-3 text-slate-400" /> {st.nextOfKinPhone}
                 </a>
               )}
@@ -461,7 +461,7 @@ export const StudentsModule: React.FC = () => {
                 <tr key={st.id} className="hover:bg-slate-50/80 transition-colors">
                   <td className="p-4">
                     <div className="flex flex-col">
-                      <span className="font-mono font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded border border-amber-200/60 inline-block w-fit">
+                      <span className="font-mono font-bold text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60 inline-block w-fit">
                         {st.admissionNumber || 'ADM-PENDING'}
                       </span>
                       <span className="font-mono text-[10px] text-slate-500 mt-1">
@@ -471,7 +471,7 @@ export const StudentsModule: React.FC = () => {
                   </td>
                   <td className="p-4">
                     <div className="flex items-center space-x-3">
-                      <div className="w-9 h-9 rounded-full bg-amber-500/10 border border-amber-500/20 overflow-hidden flex items-center justify-center font-bold text-amber-700 shrink-0">
+                      <div className="w-9 h-9 rounded-full bg-emerald-500/10 border border-emerald-500/20 overflow-hidden flex items-center justify-center font-bold text-emerald-700 shrink-0">
                         {st.photoUrl ? <img src={st.photoUrl} alt="" className="w-full h-full object-cover" /> : st.fullName[0]}
                       </div>
                       <span className="font-bold text-slate-900">{st.fullName}</span>
@@ -479,7 +479,7 @@ export const StudentsModule: React.FC = () => {
                   </td>
                   <td className="p-4">
                     <div className="space-y-0.5">
-                      <a href={`mailto:${st.email}`} className="text-amber-800 font-mono font-medium hover:underline block truncate max-w-[160px]">
+                      <a href={`mailto:${st.email}`} className="text-emerald-800 font-mono font-medium hover:underline block truncate max-w-[160px]">
                         {st.email}
                       </a>
                       <span className="text-slate-400 font-mono text-[11px] block">{st.phone}</span>
@@ -532,7 +532,7 @@ export const StudentsModule: React.FC = () => {
                       </button>
                       <button
                         onClick={() => setEditingStudent(st)}
-                        className="p-1.5 bg-slate-100 hover:bg-amber-100 text-slate-700 hover:text-amber-800 rounded-lg"
+                        className="p-1.5 bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 rounded-lg"
                         title="Edit Student Profile"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
@@ -560,13 +560,13 @@ export const StudentsModule: React.FC = () => {
             {/* Header */}
             <div className="p-5 sm:p-6 border-b border-slate-800 bg-slate-950 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div className="flex items-center space-x-4">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-amber-500/20 border border-amber-500/30 overflow-hidden flex items-center justify-center font-bold text-2xl text-amber-400 shrink-0">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 overflow-hidden flex items-center justify-center font-bold text-2xl text-emerald-400 shrink-0">
                   {selectedStudent.photoUrl ? <img src={selectedStudent.photoUrl} alt="" className="w-full h-full object-cover" /> : selectedStudent.fullName[0]}
                 </div>
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
                     <h3 className="text-lg sm:text-xl font-bold">{selectedStudent.fullName}</h3>
-                    <span className="px-2.5 py-0.5 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-md text-xs font-mono font-bold flex items-center gap-1">
+                    <span className="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-md text-xs font-mono font-bold flex items-center gap-1">
                       <span>ADM: {selectedStudent.admissionNumber || 'ADM-PENDING'}</span>
                       <button 
                         onClick={() => copyToClipboard(selectedStudent.admissionNumber, 'Admission Number')}
@@ -581,7 +581,7 @@ export const StudentsModule: React.FC = () => {
                     </span>
                   </div>
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-400 mt-1">
-                    <span className="text-amber-200/90 font-medium">{selectedStudent.programName}</span>
+                    <span className="text-emerald-200/90 font-medium">{selectedStudent.programName}</span>
                     <span>•</span>
                     <a href={`mailto:${selectedStudent.email}`} className="text-slate-300 hover:text-white font-mono flex items-center gap-1">
                       <Mail className="w-3 h-3" /> {selectedStudent.email}
@@ -598,7 +598,7 @@ export const StudentsModule: React.FC = () => {
               <div className="flex items-center gap-2 self-end sm:self-center">
                 <button
                   onClick={() => setShowIdCardModal(true)}
-                  className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 text-xs font-semibold rounded-xl flex items-center gap-1.5 transition-colors"
+                  className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 text-xs font-semibold rounded-xl flex items-center gap-1.5 transition-colors"
                   title="View Student ID Badge"
                 >
                   <IdCard className="w-3.5 h-3.5" />
@@ -606,7 +606,7 @@ export const StudentsModule: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setEditingStudent(selectedStudent)}
-                  className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors"
+                  className="px-3 py-1.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors shadow-xs cursor-pointer"
                 >
                   <Edit2 className="w-3.5 h-3.5" />
                   <span>Edit</span>
@@ -627,7 +627,7 @@ export const StudentsModule: React.FC = () => {
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
-                    activeTab === tab ? 'bg-amber-500 text-slate-950 font-bold shadow-xs' : 'text-slate-600 hover:bg-slate-200/60'
+                    activeTab === tab ? 'bg-[#15803D] text-white font-bold shadow-xs' : 'text-slate-600 hover:bg-slate-200/60'
                   }`}
                 >
                   {tab}
@@ -640,7 +640,7 @@ export const StudentsModule: React.FC = () => {
               {activeTab === 'Overview' && (
                 <div className="space-y-6">
                   {/* Highlight Banner: Next of Kin & Primary Contact */}
-                  <div className="bg-gradient-to-br from-emerald-50 via-amber-50/40 to-white p-6 rounded-2xl border border-emerald-200/80 shadow-xs space-y-4">
+                  <div className="bg-gradient-to-br from-emerald-50 via-emerald-50/30 to-white p-6 rounded-2xl border border-emerald-200/80 shadow-xs space-y-4">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-emerald-200/60 pb-3">
                       <div className="flex items-center gap-2.5">
                         <div className="p-2 bg-emerald-600 text-white rounded-xl shadow-xs">
@@ -669,9 +669,9 @@ export const StudentsModule: React.FC = () => {
                         <span className="text-[10px] uppercase font-bold text-slate-400 block">Next of Kin Phone</span>
                         <a 
                           href={`tel:${selectedStudent.nextOfKinPhone}`} 
-                          className="font-mono font-bold text-amber-800 text-sm mt-0.5 flex items-center gap-1.5 hover:underline"
+                          className="font-mono font-bold text-emerald-800 text-sm mt-0.5 flex items-center gap-1.5 hover:underline"
                         >
-                          <PhoneCall className="w-3.5 h-3.5 text-amber-600" />
+                          <PhoneCall className="w-3.5 h-3.5 text-emerald-600" />
                           <span>{selectedStudent.nextOfKinPhone || 'N/A'}</span>
                         </a>
                         <button 
@@ -686,7 +686,7 @@ export const StudentsModule: React.FC = () => {
                         <span className="text-[10px] uppercase font-bold text-slate-400 block">Next of Kin Email</span>
                         <div className="font-mono text-slate-800 text-xs mt-0.5 truncate">
                           {selectedStudent.nextOfKinEmail ? (
-                            <a href={`mailto:${selectedStudent.nextOfKinEmail}`} className="text-amber-800 hover:underline">
+                            <a href={`mailto:${selectedStudent.nextOfKinEmail}`} className="text-emerald-800 hover:underline">
                               {selectedStudent.nextOfKinEmail}
                             </a>
                           ) : (
@@ -722,7 +722,7 @@ export const StudentsModule: React.FC = () => {
                         <div>
                           <span className="text-slate-400 block font-medium">Official Admission Number</span>
                           <div className="flex items-center gap-2 mt-0.5">
-                            <span className="font-mono font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                            <span className="font-mono font-bold text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                               {selectedStudent.admissionNumber || 'ADM-PENDING'}
                             </span>
                             <button 
@@ -742,15 +742,15 @@ export const StudentsModule: React.FC = () => {
 
                         <div>
                           <span className="text-slate-400 block font-medium">Official Student Email</span>
-                          <a href={`mailto:${selectedStudent.email}`} className="font-semibold text-amber-800 hover:underline flex items-center gap-1 mt-0.5">
-                            <Mail className="w-3 h-3 text-amber-600" />
+                          <a href={`mailto:${selectedStudent.email}`} className="font-semibold text-emerald-800 hover:underline flex items-center gap-1 mt-0.5">
+                            <Mail className="w-3 h-3 text-emerald-600" />
                             <span>{selectedStudent.email}</span>
                           </a>
                         </div>
 
                         <div>
                           <span className="text-slate-400 block font-medium">Student Phone Number</span>
-                          <a href={`tel:${selectedStudent.phone}`} className="font-semibold text-slate-900 hover:text-amber-800 flex items-center gap-1 mt-0.5">
+                          <a href={`tel:${selectedStudent.phone}`} className="font-semibold text-slate-900 hover:text-emerald-800 flex items-center gap-1 mt-0.5">
                             <Phone className="w-3 h-3 text-slate-400" />
                             <span>{selectedStudent.phone}</span>
                           </a>
@@ -798,7 +798,7 @@ export const StudentsModule: React.FC = () => {
                           </div>
                           <div className="flex justify-between items-center">
                             <span className="text-slate-500">Cumulative CGPA</span>
-                            <span className="font-bold font-mono text-amber-600">{selectedStudent.cgpa}</span>
+                            <span className="font-bold font-mono text-emerald-600">{selectedStudent.cgpa}</span>
                           </div>
                           <div className="flex justify-between items-center">
                             <span className="text-slate-500">Attendance Rate</span>
@@ -865,7 +865,7 @@ export const StudentsModule: React.FC = () => {
                     </div>
                     <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
                       <div className="text-slate-400 font-bold uppercase text-[10px]">Cumulative Standing</div>
-                      <div className="font-bold text-amber-600 text-base mt-1">{selectedStudent.cgpa} CGPA</div>
+                      <div className="font-bold text-emerald-700 text-base mt-1">{selectedStudent.cgpa} CGPA</div>
                       <div className="text-emerald-600 font-semibold text-[11px]">Good Academic Standing</div>
                     </div>
                   </div>
@@ -876,12 +876,12 @@ export const StudentsModule: React.FC = () => {
                 <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
                   <div className="flex justify-between items-center">
                     <h4 className="font-bold text-slate-900 text-sm">Registered Theological Courses ({selectedStudent.semester})</h4>
-                    <span className="text-xs text-amber-800 font-bold">13 Credit Hours Enrolled</span>
+                    <span className="text-xs text-emerald-800 font-bold">13 Credit Hours Enrolled</span>
                   </div>
                   <ul className="divide-y divide-slate-100">
                     <li className="py-3 flex justify-between items-center">
                       <div>
-                        <span className="font-mono font-bold text-amber-900 mr-2">OT101</span>
+                        <span className="font-mono font-bold text-emerald-900 mr-2">OT101</span>
                         <span className="font-semibold text-slate-900">Pentateuch & Historical Books</span>
                         <span className="text-slate-400 block text-[11px]">Lecturer: Dr. Jonathan Vance</span>
                       </div>
@@ -889,7 +889,7 @@ export const StudentsModule: React.FC = () => {
                     </li>
                     <li className="py-3 flex justify-between items-center">
                       <div>
-                        <span className="font-mono font-bold text-amber-900 mr-2">THEO201</span>
+                        <span className="font-mono font-bold text-emerald-900 mr-2">THEO201</span>
                         <span className="font-semibold text-slate-900">Systematic Theology I</span>
                         <span className="text-slate-400 block text-[11px]">Lecturer: Dr. Sarah Kageni</span>
                       </div>
@@ -897,7 +897,7 @@ export const StudentsModule: React.FC = () => {
                     </li>
                     <li className="py-3 flex justify-between items-center">
                       <div>
-                        <span className="font-mono font-bold text-amber-900 mr-2">HOM301</span>
+                        <span className="font-mono font-bold text-emerald-900 mr-2">HOM301</span>
                         <span className="font-semibold text-slate-900">Biblical Preaching & Homiletics</span>
                         <span className="text-slate-400 block text-[11px]">Lecturer: Rev. Dr. Samuel Okoro</span>
                       </div>
@@ -905,7 +905,7 @@ export const StudentsModule: React.FC = () => {
                     </li>
                     <li className="py-3 flex justify-between items-center">
                       <div>
-                        <span className="font-mono font-bold text-amber-900 mr-2">HEB101</span>
+                        <span className="font-mono font-bold text-emerald-900 mr-2">HEB101</span>
                         <span className="font-semibold text-slate-900">Elementary Biblical Hebrew I</span>
                         <span className="text-slate-400 block text-[11px]">Lecturer: Dr. Rebecca Stern</span>
                       </div>
@@ -982,7 +982,7 @@ export const StudentsModule: React.FC = () => {
 
               {activeTab !== 'Overview' && activeTab !== 'Academic' && activeTab !== 'Courses' && activeTab !== 'Fees' && activeTab !== 'Ministry' && (
                 <div className="bg-white p-8 rounded-2xl border border-slate-200 space-y-3 text-center py-12">
-                  <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
                     <BookOpen className="w-6 h-6" />
                   </div>
                   <h4 className="font-bold text-slate-900 text-sm">{activeTab} Records for {selectedStudent.fullName}</h4>
@@ -1014,7 +1014,7 @@ export const StudentsModule: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setEditingStudent(selectedStudent)}
-                  className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors"
+                  className="px-4 py-2 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors shadow-xs cursor-pointer"
                 >
                   <Edit2 className="w-3.5 h-3.5" /> Edit Profile
                 </button>
@@ -1036,7 +1036,7 @@ export const StudentsModule: React.FC = () => {
           <div className="bg-white rounded-3xl max-w-2xl w-full my-8 p-6 sm:p-8 space-y-6 shadow-2xl animate-scale-up border border-slate-200">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold">
                   <Plus className="w-5 h-5" />
                 </div>
                 <div>
@@ -1054,8 +1054,8 @@ export const StudentsModule: React.FC = () => {
 
             <form onSubmit={handleAddStudent} className="space-y-4 text-xs">
               {/* Section 1: Identification */}
-              <div className="p-4 bg-amber-50/50 rounded-2xl border border-amber-100 space-y-3">
-                <h4 className="font-bold text-amber-900 text-xs uppercase tracking-wider">Institutional Identification</h4>
+              <div className="p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100 space-y-3">
+                <h4 className="font-bold text-emerald-900 text-xs uppercase tracking-wider">Institutional Identification</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block font-semibold text-slate-700 mb-1">
@@ -1066,7 +1066,7 @@ export const StudentsModule: React.FC = () => {
                       required
                       value={newStudent.admissionNumber}
                       onChange={e => setNewStudent({ ...newStudent, admissionNumber: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl font-mono font-bold text-amber-900"
+                      className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl font-mono font-bold text-emerald-900"
                       placeholder="ADM-2026-XXXX"
                     />
                   </div>
@@ -1317,7 +1317,7 @@ export const StudentsModule: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-xs transition-colors"
+                  className="px-6 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl shadow-xs transition-colors cursor-pointer"
                 >
                   Admit Student
                 </button>
@@ -1333,7 +1333,7 @@ export const StudentsModule: React.FC = () => {
           <div className="bg-white rounded-3xl max-w-2xl w-full my-8 p-6 sm:p-8 space-y-6 shadow-2xl animate-scale-up border border-slate-200">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold">
                   <Edit2 className="w-5 h-5" />
                 </div>
                 <div>
@@ -1351,7 +1351,7 @@ export const StudentsModule: React.FC = () => {
 
             <form onSubmit={handleUpdateStudent} className="space-y-4 text-xs">
               {/* Identification */}
-              <div className="p-4 bg-amber-50/50 rounded-2xl border border-amber-100 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block font-semibold text-slate-700 mb-1">Admission Number</label>
                   <input
@@ -1359,7 +1359,7 @@ export const StudentsModule: React.FC = () => {
                     required
                     value={editingStudent.admissionNumber}
                     onChange={e => setEditingStudent({ ...editingStudent, admissionNumber: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl font-mono font-bold text-amber-900"
+                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl font-mono font-bold text-emerald-900"
                   />
                 </div>
                 <div>
@@ -1548,7 +1548,7 @@ export const StudentsModule: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-xs transition-colors"
+                  className="px-6 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl shadow-xs transition-colors cursor-pointer"
                 >
                   Save Changes
                 </button>
@@ -1601,7 +1601,7 @@ export const StudentsModule: React.FC = () => {
           <div className="bg-white rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl animate-scale-up border border-slate-200">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <IdCard className="w-4 h-4 text-amber-600" /> Student Identification Card
+                <IdCard className="w-4 h-4 text-emerald-600" /> Student Identification Card
               </h3>
               <button onClick={() => setShowIdCardModal(false)} className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
                 ✕
@@ -1609,19 +1609,19 @@ export const StudentsModule: React.FC = () => {
             </div>
 
             {/* Visual Student Card */}
-            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 text-white p-5 rounded-2xl border border-slate-700 shadow-xl space-y-4">
-              <div className="flex justify-between items-start border-b border-slate-700/80 pb-3">
+            <div className="bg-gradient-to-br from-[#0B1F17] via-[#133327] to-[#071711] text-white p-5 rounded-2xl border border-[#153F33]/80 shadow-xl space-y-4">
+              <div className="flex justify-between items-start border-b border-[#153F33]/80 pb-3">
                 <div>
-                  <div className="text-[9px] uppercase font-bold text-amber-400 tracking-widest">Victory International Apostolic Biblical Institute</div>
+                  <div className="text-[9px] uppercase font-bold text-emerald-400 tracking-widest">Victory International Apostolic Biblical Institute</div>
                   <div className="text-xs font-semibold text-slate-300">Official Student Identity Card</div>
                 </div>
-                <span className="px-2 py-0.5 bg-amber-500/20 text-amber-400 font-mono text-[10px] font-bold rounded border border-amber-500/40">
+                <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold rounded border border-emerald-500/40">
                   {selectedStudent.status}
                 </span>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-20 h-24 rounded-xl bg-slate-800 border border-slate-700 overflow-hidden flex items-center justify-center text-amber-400 font-bold text-3xl shrink-0 shadow-inner">
+                <div className="w-20 h-24 rounded-xl bg-slate-900/80 border border-emerald-700/50 overflow-hidden flex items-center justify-center text-emerald-400 font-bold text-3xl shrink-0 shadow-inner">
                   {selectedStudent.photoUrl ? (
                     <img src={selectedStudent.photoUrl} alt="" className="w-full h-full object-cover" />
                   ) : (
@@ -1631,10 +1631,10 @@ export const StudentsModule: React.FC = () => {
 
                 <div className="space-y-1 text-xs">
                   <div className="font-bold text-base text-white">{selectedStudent.fullName}</div>
-                  <div className="text-amber-300 text-[11px] font-medium leading-tight">{selectedStudent.programName}</div>
+                  <div className="text-emerald-300 text-[11px] font-medium leading-tight">{selectedStudent.programName}</div>
                   <div className="font-mono text-xs pt-1">
                     <span className="text-slate-400 text-[10px] block">Admission Number</span>
-                    <span className="text-amber-400 font-bold">{selectedStudent.admissionNumber || 'ADM-PENDING'}</span>
+                    <span className="text-emerald-400 font-bold">{selectedStudent.admissionNumber || 'ADM-PENDING'}</span>
                   </div>
                   <div className="font-mono text-[11px] text-slate-300">
                     Reg: {selectedStudent.studentNumber}

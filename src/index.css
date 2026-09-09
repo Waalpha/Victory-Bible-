@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+:root {
+  --primary-green: #15803D;
+  --dark-green: #0B1F17;
+  --secondary-green: #2D7A58;
+  --light-green-bg: #F4F8F5;
+  --deep-green: #133327;
+  --green-hover: #14532D;
+  --green-active: #0F3E22;
+  --green-border: #C6E2D5;
+  --green-text: #15803D;
+  --green-text-dark: #0B1F17;
+}
+
+@theme {
+  --color-theo-primary: #15803D;
+  --color-theo-dark: #0B1F17;
+  --color-theo-secondary: #2D7A58;
+  --color-theo-light: #F4F8F5;
+  --color-theo-deep: #133327;
+  --color-theo-hover: #14532D;
+  --color-theo-active: #0F3E22;
+  --color-theo-border: #C6E2D5;
+}

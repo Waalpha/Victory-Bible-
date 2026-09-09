@@ -112,7 +112,7 @@ export const AdmissionsModule: React.FC = () => {
         </div>
         <button
           onClick={() => setShowNewModal(true)}
-          className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center space-x-2 transition-colors"
+          className="px-4 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs flex items-center space-x-2 transition-colors shadow-xs cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>New Application</span>
@@ -127,7 +127,7 @@ export const AdmissionsModule: React.FC = () => {
               key={st}
               onClick={() => setFilterStatus(st)}
               className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
-                filterStatus === st ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                filterStatus === st ? 'bg-[#15803D] text-white font-bold' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               {st}
@@ -141,7 +141,7 @@ export const AdmissionsModule: React.FC = () => {
             placeholder="Search by name or number..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-hidden focus:ring-2 focus:ring-amber-500/30"
+            className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-hidden focus:ring-2 focus:ring-emerald-500/30"
           />
         </div>
       </div>
@@ -193,7 +193,7 @@ export const AdmissionsModule: React.FC = () => {
                     {app.status !== 'Enrolled' && (
                       <button
                         onClick={() => handleConvertToStudent(app)}
-                        className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg font-semibold inline-flex items-center space-x-1"
+                        className="px-3 py-1.5 bg-[#15803D] hover:bg-[#14532D] text-white rounded-lg font-semibold inline-flex items-center space-x-1 shadow-xs cursor-pointer"
                       >
                         <UserCheck className="w-3.5 h-3.5" />
                         <span>Enroll</span>
@@ -213,7 +213,7 @@ export const AdmissionsModule: React.FC = () => {
           <div className="bg-white rounded-3xl max-w-2xl w-full p-8 space-y-6 max-h-[90vh] overflow-y-auto shadow-2xl animate-scale-up">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div>
-                <span className="text-xs font-mono text-amber-600 font-bold">{selectedApplicant.applicationNumber}</span>
+                <span className="text-xs font-mono text-emerald-600 font-bold">{selectedApplicant.applicationNumber}</span>
                 <h3 className="text-xl font-bold text-slate-900">{selectedApplicant.fullName}</h3>
               </div>
               <button 
@@ -251,7 +251,7 @@ export const AdmissionsModule: React.FC = () => {
                     key={st}
                     onClick={() => handleStatusChange(selectedApplicant.id, st)}
                     className={`px-3.5 py-2 rounded-xl text-xs font-semibold ${
-                      selectedApplicant.status === st ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      selectedApplicant.status === st ? 'bg-[#15803D] text-white font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                     }`}
                   >
                     {st}
@@ -370,7 +370,7 @@ export const AdmissionsModule: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-amber-500 text-slate-950 font-bold rounded-xl"
+                  className="px-5 py-2 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl shadow-xs transition-colors cursor-pointer"
                 >
                   Save Application
                 </button>

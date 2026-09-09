@@ -47,7 +47,7 @@ export const AcademicsModule: React.FC = () => {
             <div key={prog.id} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4 flex flex-col justify-between">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-1 bg-amber-500/10 text-amber-700 font-bold rounded-lg font-mono text-[10px]">{prog.code}</span>
+                  <span className="px-2.5 py-1 bg-emerald-500/10 text-emerald-700 font-bold rounded-lg font-mono text-[10px]">{prog.code}</span>
                   <span className="text-xs font-semibold text-slate-500">{prog.durationYears} Year(s)</span>
                 </div>
                 <h3 className="font-bold text-slate-900 text-base">{prog.name}</h3>
@@ -99,7 +99,7 @@ export const AcademicsModule: React.FC = () => {
                 <tr key={c.id} className="hover:bg-slate-50">
                   <td className="p-4 font-mono font-bold text-slate-900">{c.code}</td>
                   <td className="p-4 font-bold text-slate-900">{c.title}</td>
-                  <td className="p-4"><span className="px-2.5 py-1 bg-amber-50 text-amber-800 rounded-md">{c.category}</span></td>
+                  <td className="p-4"><span className="px-2.5 py-1 bg-emerald-50 text-emerald-800 rounded-md">{c.category}</span></td>
                   <td className="p-4 font-mono">{c.creditHours} Credits</td>
                   <td className="p-4 text-slate-900 font-medium">{c.lecturerName || 'TBA'}</td>
                   <td className="p-4 text-slate-500">{c.department}</td>
@@ -126,7 +126,7 @@ export const AcademicsModule: React.FC = () => {
             <tbody className="divide-y divide-slate-100 text-xs text-slate-700">
               {timetable.map(t => (
                 <tr key={t.id} className="hover:bg-slate-50">
-                  <td className="p-4 font-bold text-amber-700">{t.day}</td>
+                  <td className="p-4 font-bold text-emerald-700">{t.day}</td>
                   <td className="p-4 font-mono">{t.startTime} - {t.endTime}</td>
                   <td className="p-4 font-bold text-slate-900">{t.courseCode}: {t.courseTitle}</td>
                   <td className="p-4">{t.lecturerName}</td>
@@ -151,7 +151,7 @@ export const AcademicsModule: React.FC = () => {
               <p className="text-xs text-slate-600">{a.description}</p>
               <div className="pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
                 <span className="text-slate-400">Max Marks: {a.maxMarks}</span>
-                <span className="font-semibold text-amber-700">Published</span>
+                <span className="font-semibold text-emerald-700">Published</span>
               </div>
             </div>
           ))}

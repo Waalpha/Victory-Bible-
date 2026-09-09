@@ -175,7 +175,7 @@ export const SettingsModule: React.FC = () => {
         <div className="pt-4 border-t border-slate-100 flex justify-end">
           <button
             type="submit"
-            className="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center space-x-2 transition-colors shadow-sm"
+            className="px-6 py-3 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs flex items-center space-x-2 transition-colors shadow-sm cursor-pointer"
           >
             <Save className="w-4 h-4" />
             <span>Save Configuration Changes</span>
@@ -186,7 +186,7 @@ export const SettingsModule: React.FC = () => {
       {/* Cloud Firestore Persistence Section */}
       <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-xs space-y-5 max-w-3xl">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-500 font-bold">
+          <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-600 font-bold">
             <Database className="w-5 h-5" />
           </div>
           <div>
@@ -226,12 +226,12 @@ export const SettingsModule: React.FC = () => {
           >
             {syncing ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin text-amber-400" />
+                <Loader2 className="w-4 h-4 animate-spin text-emerald-400" />
                 <span>Synchronizing to Firestore...</span>
               </>
             ) : (
               <>
-                <CloudUpload className="w-4 h-4 text-amber-400" />
+                <CloudUpload className="w-4 h-4 text-emerald-400" />
                 <span>Push All Records to Firestore</span>
               </>
             )}
