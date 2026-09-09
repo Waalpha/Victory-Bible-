@@ -30,27 +30,40 @@ export function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isFirestoreModalOpen, setIsFirestoreModalOpen] = useState(false);
 
-  // Synchronized route & experience state
-  const [currentPath, setCurrentPath] = useState<string>(() => {
-    return window.location.pathname && window.location.pathname !== '/' ? window.location.pathname : '/';
-  });
+  // Synchronized route & experience state (supports both direct URLs and hash fallback like #/admin)
+  const resolveCurrentPath = (): string => {
+    if (typeof window === 'undefined') return '/';
+    if (window.location.hash) {
+      const cleanHash = window.location.hash.replace(/^#\/?/, '/');
+      if (cleanHash && cleanHash !== '/') return cleanHash;
+    }
+    const p = window.location.pathname;
+    return p && p !== '/' ? p : '/';
+  };
 
-  const [experience, setExperience] = useState<'website' | 'erp'>(() => {
-    return window.location.pathname.startsWith('/admin') ? 'erp' : 'website';
-  });
+  const resolveExperience = (path: string): 'website' | 'erp' => {
+    if (path.startsWith('/admin') || (typeof window !== 'undefined' && window.location.hash.includes('admin'))) {
+      return 'erp';
+    }
+    return 'website';
+  };
+
+  const [currentPath, setCurrentPath] = useState<string>(() => resolveCurrentPath());
+  const [experience, setExperience] = useState<'website' | 'erp'>(() => resolveExperience(resolveCurrentPath()));
 
   useEffect(() => {
-    const handlePopState = () => {
-      const path = window.location.pathname || '/';
+    const handleRoute = () => {
+      const path = resolveCurrentPath();
       setCurrentPath(path);
-      if (path.startsWith('/admin')) {
-        setExperience('erp');
-      } else {
-        setExperience('website');
-      }
+      setExperience(resolveExperience(path));
     };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+
+    window.addEventListener('popstate', handleRoute);
+    window.addEventListener('hashchange', handleRoute);
+    return () => {
+      window.removeEventListener('popstate', handleRoute);
+      window.removeEventListener('hashchange', handleRoute);
+    };
   }, []);
 
   // Initialize Cloud Firestore Auto-Sync Engine
