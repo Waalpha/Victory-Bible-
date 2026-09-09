@@ -11,6 +11,33 @@ import { doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 // Storage keys for robust local persistence that mirrors Firestore collections
 const STORAGE_PREFIX = 'theo_erp_';
 
+export type ErpChangeCallback = (collectionName: string, docId?: string, action?: 'set' | 'delete') => void;
+const changeCallbacks: ErpChangeCallback[] = [];
+
+/**
+ * Register a callback whenever ERP data changes (used by Firestore Auto-Sync Engine)
+ */
+export function onErpDataChanged(cb: ErpChangeCallback): () => void {
+  changeCallbacks.push(cb);
+  return () => {
+    const idx = changeCallbacks.indexOf(cb);
+    if (idx > -1) changeCallbacks.splice(idx, 1);
+  };
+}
+
+/**
+ * Broadcast an ERP data modification event to auto-sync listeners
+ */
+export function notifyErpDataChanged(collectionName: string, docId?: string, action: 'set' | 'delete' = 'set'): void {
+  changeCallbacks.forEach(cb => {
+    try {
+      cb(collectionName, docId, action);
+    } catch (e) {
+      console.warn('ERP change callback notification error:', e);
+    }
+  });
+}
+
 export const defaultSettings: SystemSettings = {
   institutionId: 'victory-international',
   institutionName: 'Victory International Apostolic Biblical Institute',
@@ -700,6 +727,8 @@ export function getCollection<T>(collectionName: string, defaultData: T[]): T[] 
 export function saveCollection<T>(collectionName: string, items: T[]): void {
   try {
     localStorage.setItem(STORAGE_PREFIX + collectionName, JSON.stringify(items));
+    // Broadcast event for automatic Firestore background synchronization
+    notifyErpDataChanged(collectionName);
     // Asynchronously synchronize with Cloud Firestore
     if (db && Array.isArray(items)) {
       items.forEach((item: any) => {
@@ -734,6 +763,7 @@ export const erpService = {
   },
   updateSettings: (settings: SystemSettings) => {
     localStorage.setItem(STORAGE_PREFIX + 'settings', JSON.stringify(settings));
+    notifyErpDataChanged('settings', 'institution-settings');
     if (db) {
       const firestoreData = cleanFirestoreData({
         ...settings,
@@ -1071,6 +1101,7 @@ export const erpService = {
   },
   saveWebsiteSettings: (settings: WebsiteSettings) => {
     localStorage.setItem(STORAGE_PREFIX + 'websiteSettings', JSON.stringify(settings));
+    notifyErpDataChanged('websiteSettings', 'public-config');
     if (db) {
       const firestoreData = cleanFirestoreData({
         ...settings,

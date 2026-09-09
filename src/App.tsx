@@ -53,6 +53,12 @@ export function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  // Initialize Cloud Firestore Auto-Sync Engine
+  useEffect(() => {
+    const cleanup = firestoreSyncService.initAutoSync();
+    return () => cleanup();
+  }, []);
+
   // Fetch latest logo and institution branding from Firestore on mount
   useEffect(() => {
     brandingService.fetchInstitutionWebsiteSettings().catch(() => {

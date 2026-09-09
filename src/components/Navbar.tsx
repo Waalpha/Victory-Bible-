@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { 
   Menu, Search, Bell, Shield, ExternalLink, Globe, Database, 
   ChevronDown, MapPin, Calendar, CheckCircle2, User, Sparkles, X, ShieldCheck,
-  LogOut, KeyRound, Lock
+  LogOut, KeyRound, Lock, Cloud, RefreshCw
 } from 'lucide-react';
 import { UserRole, UserAccount } from '../types';
+import { firestoreSyncService, SyncProgress } from '../services/firestoreSync';
 
 interface NavbarProps {
   onToggleSidebar: () => void;
@@ -36,6 +37,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   
   const [currentCampus, setCurrentCampus] = useState('Main Campus — Nairobi');
   const [currentSession, setCurrentSession] = useState('2026/2027 — Sem 1');
+  const [syncProgress, setSyncProgress] = useState<SyncProgress>(() => firestoreSyncService.getProgress());
+
+  useEffect(() => {
+    const unsub = firestoreSyncService.subscribe(setSyncProgress);
+    return () => unsub();
+  }, []);
 
   const profileRef = useRef<HTMLDivElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
@@ -234,15 +241,37 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         )}
 
-        {/* Cloud Firestore Push / Sync button */}
+        {/* Cloud Firestore Auto-Sync Status badge / button */}
         <button
           onClick={onOpenFirestoreSync}
-          title="Cloud Firestore Database Sync Center"
+          title={
+            syncProgress.isAutoSyncing 
+              ? "Cloud Firestore Auto-Sync in progress..." 
+              : syncProgress.autoSyncEnabled 
+                ? "Cloud Firestore Auto-Sync is Active • All changes sync automatically"
+                : "Cloud Firestore Auto-Sync is Paused • Click to configure"
+          }
           className="flex items-center space-x-1.5 px-3 py-2 bg-[#0B1F17] hover:bg-[#133327] text-white rounded-xl text-xs font-bold shadow-xs transition-colors ring-1 ring-[#153F33] cursor-pointer"
         >
-          <Database className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-          <span className="hidden sm:inline">Push to Firestore</span>
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
+          {syncProgress.isAutoSyncing ? (
+            <>
+              <RefreshCw className="w-3.5 h-3.5 text-emerald-400 shrink-0 animate-spin" />
+              <span className="hidden sm:inline text-emerald-300">Auto-Syncing...</span>
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping ml-0.5" />
+            </>
+          ) : syncProgress.autoSyncEnabled ? (
+            <>
+              <Cloud className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span className="hidden sm:inline">Auto-Sync: Live</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
+            </>
+          ) : (
+            <>
+              <Cloud className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+              <span className="hidden sm:inline text-slate-300">Auto-Sync: Off</span>
+              <span className="w-2 h-2 rounded-full bg-amber-400 ml-0.5" />
+            </>
+          )}
         </button>
 
         {/* Notifications Dropdown */}
