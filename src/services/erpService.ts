@@ -6,7 +6,7 @@ import {
   HeroSlide, WebsiteSettings, Testimonial, NewsArticle, PublicEvent, ContactMessage
 } from '../types';
 import { db, cleanFirestoreData } from './firebase';
-import { doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, setDoc, deleteDoc, collection, getDocs, serverTimestamp } from 'firebase/firestore';
 
 // Storage keys for robust local persistence that mirrors Firestore collections
 const STORAGE_PREFIX = 'theo_erp_';
@@ -46,7 +46,7 @@ export const defaultSettings: SystemSettings = {
   phone: '+1 (800) 555-THEO',
   email: 'registrar@gracetheo.edu',
   website: 'https://www.gracetheo.edu',
-  currency: '$',
+  currency: 'Ksh',
   currentAcademicYear: '2026/2027',
   currentSemester: 'Semester 1',
   logoUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=200',
@@ -87,107 +87,8 @@ const initialCourses: Course[] = [
   { id: 'crs-401', code: 'HEB101', title: 'Elementary Biblical Hebrew I', category: 'Biblical Languages', creditHours: 3, department: 'Biblical Languages', programId: 'prog-3', level: '200', semester: 'Semester 1', lecturerId: 'stf-4', lecturerName: 'Dr. Rebecca Stern', description: 'Introduction to Hebrew alphabet, grammar, morphology, and basic vocabulary.', learningOutcomes: ['Reading Biblical Hebrew', 'Morphological analysis', 'Lexicon usage'] }
 ];
 
-const initialStudents: Student[] = [
-  {
-    id: 'std-1',
-    studentNumber: 'GRC/2026/001',
-    admissionNumber: 'ADM-2026-8901',
-    fullName: 'Caleb Kiprop Koech',
-    email: 'caleb.koech@gracetheo.edu',
-    phone: '+254 712 345 678',
-    gender: 'Male',
-    dateOfBirth: '1999-05-14',
-    nationality: 'Kenyan',
-    address: 'P.O. Box 450, Eldoret',
-    photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
-    nextOfKinName: 'Esther Koech',
-    nextOfKinRelationship: 'Mother',
-    nextOfKinPhone: '+254 722 000 111',
-    nextOfKinEmail: 'esther.koech@gmail.com',
-    emergencyContact: '+254 733 444 555',
-    churchName: 'Victory InternationalBaptist Church, Eldoret',
-    churchPastor: 'Rev. James Mwangi',
-    previousEducation: 'High School KCSE Aggregate B+',
-    programId: 'prog-3',
-    programName: 'Bachelor of Theology (B.Th.)',
-    department: 'Biblical Studies',
-    intake: 'September 2026',
-    academicYear: '2026/2027',
-    semester: 'Semester 1',
-    status: 'Active',
-    gpa: 3.75,
-    cgpa: 3.75,
-    feeBalance: 150.00,
-    attendanceRate: 96.5,
-    createdAt: '2026-08-10'
-  },
-  {
-    id: 'std-2',
-    studentNumber: 'GRC/2026/002',
-    admissionNumber: 'ADM-2026-8902',
-    fullName: 'Abigail Wanjiru Mwangi',
-    email: 'abigail.wanjiru@gracetheo.edu',
-    phone: '+254 734 567 890',
-    gender: 'Female',
-    dateOfBirth: '2001-11-22',
-    nationality: 'Kenyan',
-    address: 'P.O. Box 12, Nairobi',
-    photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200',
-    nextOfKinName: 'David Mwangi',
-    nextOfKinRelationship: 'Father',
-    nextOfKinPhone: '+254 711 222 333',
-    nextOfKinEmail: 'david.mwangi@gmail.com',
-    emergencyContact: '+254 722 555 666',
-    churchName: 'Nairobi Chapel, Ngong Road',
-    churchPastor: 'Rev. Nick Korir',
-    previousEducation: 'High School KCSE Aggregate A-',
-    programId: 'prog-4',
-    programName: 'Master of Divinity (M.Div.)',
-    department: 'Systematic & Historical Theology',
-    intake: 'September 2026',
-    academicYear: '2026/2027',
-    semester: 'Semester 1',
-    status: 'Active',
-    gpa: 3.90,
-    cgpa: 3.90,
-    feeBalance: 0.00,
-    attendanceRate: 98.2,
-    createdAt: '2026-08-12'
-  },
-  {
-    id: 'std-3',
-    studentNumber: 'GRC/2025/014',
-    admissionNumber: 'ADM-2025-7104',
-    fullName: 'Daniel Omondi Odhiambo',
-    email: 'daniel.omondi@gracetheo.edu',
-    phone: '+254 720 987 654',
-    gender: 'Male',
-    dateOfBirth: '1998-02-10',
-    nationality: 'Kenyan',
-    address: 'P.O. Box 89, Kisumu',
-    photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200',
-    nextOfKinName: 'Victory InternationalOdhiambo',
-    nextOfKinRelationship: 'Spouse',
-    nextOfKinPhone: '+254 700 111 222',
-    nextOfKinEmail: 'grace.odhiambo@gmail.com',
-    emergencyContact: '+254 700 333 444',
-    churchName: 'Lake Basin Fellowship',
-    churchPastor: 'Pastor Tom Mboya',
-    previousEducation: 'Diploma in Theology',
-    programId: 'prog-3',
-    programName: 'Bachelor of Theology (B.Th.)',
-    department: 'Biblical Studies',
-    intake: 'September 2025',
-    academicYear: '2026/2027',
-    semester: 'Semester 1',
-    status: 'Active',
-    gpa: 3.40,
-    cgpa: 3.35,
-    feeBalance: 450.00,
-    attendanceRate: 91.0,
-    createdAt: '2025-08-15'
-  }
-];
+// All handcoded students removed - student records are dynamically managed & persisted in Cloud Firestore
+const initialStudents: Student[] = [];
 
 const initialApplicants: Applicant[] = [
   {
@@ -717,7 +618,16 @@ export function getCollection<T>(collectionName: string, defaultData: T[]): T[] 
       localStorage.setItem(STORAGE_PREFIX + collectionName, JSON.stringify(defaultData));
       return defaultData;
     }
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    if (collectionName === 'students' && Array.isArray(parsed)) {
+      // Purge any legacy handcoded mock students so database is clean
+      const cleaned = parsed.filter((s: any) => !['std-1', 'std-2', 'std-3'].includes(s.id));
+      if (cleaned.length !== parsed.length) {
+        localStorage.setItem(STORAGE_PREFIX + 'students', JSON.stringify(cleaned));
+      }
+      return cleaned as unknown as T[];
+    }
+    return parsed;
   } catch (e) {
     console.error(`Error reading collection ${collectionName}:`, e);
     return defaultData;
@@ -747,6 +657,38 @@ export function saveCollection<T>(collectionName: string, items: T[]): void {
   }
 }
 
+// Admission and Registration Number normalizers (enforce VIAB prefix)
+export const normalizeAdmissionNumber = (adm?: string): string => {
+  if (!adm || adm === 'ADM-PENDING') {
+    const year = new Date().getFullYear();
+    const rand = Math.floor(1000 + Math.random() * 9000);
+    return `VIAB-${year}-${rand}`;
+  }
+  const trimmed = adm.trim();
+  if (trimmed.toUpperCase().startsWith('ADM-')) {
+    return 'VIAB-' + trimmed.substring(4);
+  }
+  if (trimmed.toUpperCase().startsWith('ADM')) {
+    return 'VIAB-' + trimmed.substring(3).replace(/^[-_]/, '');
+  }
+  if (trimmed.toUpperCase().startsWith('VIAB')) {
+    return trimmed;
+  }
+  return `VIAB-${trimmed.replace(/^[-_]+/, '')}`;
+};
+
+export const normalizeStudentNumber = (reg?: string): string => {
+  if (!reg) {
+    const year = new Date().getFullYear();
+    return `VIAB/${year}/001`;
+  }
+  const trimmed = reg.trim();
+  if (trimmed.toUpperCase().startsWith('GRC/')) {
+    return 'VIAB/' + trimmed.substring(4);
+  }
+  return trimmed;
+};
+
 // Entity service operations
 export const erpService = {
   getSettings: (): SystemSettings => {
@@ -756,7 +698,12 @@ export const erpService = {
         localStorage.setItem(STORAGE_PREFIX + 'settings', JSON.stringify(defaultSettings));
         return defaultSettings;
       }
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      if (!parsed.currency || parsed.currency === '$') {
+        parsed.currency = 'Ksh';
+        localStorage.setItem(STORAGE_PREFIX + 'settings', JSON.stringify(parsed));
+      }
+      return parsed;
     } catch {
       return defaultSettings;
     }
@@ -786,11 +733,162 @@ export const erpService = {
   },
 
   // Students
-  getStudents: (): Student[] => getCollection('students', initialStudents),
-  saveStudents: (items: Student[]) => saveCollection('students', items),
+  getStudents: (): Student[] => {
+    const raw = getCollection<Student>('students', initialStudents);
+    let changed = false;
+    const normalized = raw.map(s => {
+      const newAdm = normalizeAdmissionNumber(s.admissionNumber);
+      const newReg = normalizeStudentNumber(s.studentNumber);
+      if (newAdm !== s.admissionNumber || newReg !== s.studentNumber) {
+        changed = true;
+        return { ...s, admissionNumber: newAdm, studentNumber: newReg };
+      }
+      return s;
+    });
+    if (changed) {
+      localStorage.setItem(STORAGE_PREFIX + 'students', JSON.stringify(normalized));
+    }
+    return normalized;
+  },
+
+  saveStudents: (items: Student[]) => {
+    const normalized = items.map(s => ({
+      ...s,
+      admissionNumber: normalizeAdmissionNumber(s.admissionNumber),
+      studentNumber: normalizeStudentNumber(s.studentNumber)
+    }));
+    saveCollection('students', normalized);
+  },
+
+  // Save/Update student directly and immediately into Cloud Firestore
+  saveStudentImmediatelyToFirestore: async (student: Student): Promise<Student> => {
+    const cleanedStudent: Student = {
+      ...student,
+      admissionNumber: normalizeAdmissionNumber(student.admissionNumber),
+      studentNumber: normalizeStudentNumber(student.studentNumber)
+    };
+
+    // 1. Immediately persist locally
+    const current = erpService.getStudents();
+    const idx = current.findIndex(s => s.id === cleanedStudent.id);
+    let updatedList: Student[];
+    if (idx >= 0) {
+      updatedList = [...current];
+      updatedList[idx] = cleanedStudent;
+    } else {
+      updatedList = [cleanedStudent, ...current];
+    }
+    localStorage.setItem(STORAGE_PREFIX + 'students', JSON.stringify(updatedList));
+    notifyErpDataChanged('students', cleanedStudent.id, 'set');
+
+    // 2. Immediately commit to Cloud Firestore
+    if (db) {
+      const docRef = doc(db, 'students', cleanedStudent.id);
+      const firestoreData = cleanFirestoreData({
+        ...cleanedStudent,
+        _firestoreSyncedAt: new Date().toISOString(),
+        _lastModified: new Date().toISOString()
+      });
+      await setDoc(docRef, firestoreData, { merge: true });
+    }
+    return cleanedStudent;
+  },
+
+  addStudentImmediately: async (student: Omit<Student, 'id'>): Promise<Student> => {
+    const newStudent: Student = {
+      ...student,
+      admissionNumber: normalizeAdmissionNumber(student.admissionNumber),
+      studentNumber: normalizeStudentNumber(student.studentNumber),
+      id: 'std-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6)
+    };
+    return await erpService.saveStudentImmediatelyToFirestore(newStudent);
+  },
+
+  updateStudentImmediately: async (id: string, updates: Partial<Student>): Promise<Student | null> => {
+    const list = erpService.getStudents();
+    const idx = list.findIndex(s => s.id === id);
+    if (idx === -1) return null;
+    const updated: Student = { 
+      ...list[idx], 
+      ...updates,
+      admissionNumber: updates.admissionNumber ? normalizeAdmissionNumber(updates.admissionNumber) : list[idx].admissionNumber,
+      studentNumber: updates.studentNumber ? normalizeStudentNumber(updates.studentNumber) : list[idx].studentNumber
+    };
+    await erpService.saveStudentImmediatelyToFirestore(updated);
+    return updated;
+  },
+
+  deleteStudentImmediately: async (id: string): Promise<void> => {
+    const list = erpService.getStudents();
+    const filtered = list.filter(s => s.id !== id);
+    localStorage.setItem(STORAGE_PREFIX + 'students', JSON.stringify(filtered));
+    notifyErpDataChanged('students', id, 'delete');
+    if (db) {
+      await deleteDoc(doc(db, 'students', id));
+    }
+  },
+
+  fetchStudentsFromFirestore: async (): Promise<Student[]> => {
+    if (!db) return erpService.getStudents();
+    try {
+      const snap = await getDocs(collection(db, 'students'));
+      const remoteStudents: Student[] = [];
+      const updatePromises: Promise<any>[] = [];
+
+      snap.forEach(d => {
+        const data = d.data();
+        // Purge legacy mock documents if they got synced earlier
+        if (['std-1', 'std-2', 'std-3'].includes(d.id)) {
+          deleteDoc(doc(db, 'students', d.id)).catch(() => {});
+          return;
+        }
+
+        const originalAdm = data.admissionNumber || '';
+        const originalReg = data.studentNumber || '';
+        const normalizedAdm = normalizeAdmissionNumber(originalAdm);
+        const normalizedReg = normalizeStudentNumber(originalReg);
+
+        const record: Student = {
+          ...data,
+          id: d.id,
+          admissionNumber: normalizedAdm,
+          studentNumber: normalizedReg
+        } as Student;
+
+        // If this record had an old non-VIAB admission number, migrate it in Firestore now
+        if (normalizedAdm !== originalAdm || normalizedReg !== originalReg) {
+          updatePromises.push(
+            setDoc(doc(db, 'students', d.id), cleanFirestoreData({
+              ...record,
+              _firestoreSyncedAt: new Date().toISOString(),
+              _lastModified: new Date().toISOString()
+            }), { merge: true }).catch(err => console.warn('Could not auto-update VIAB admission on Firestore:', err))
+          );
+        }
+
+        remoteStudents.push(record);
+      });
+
+      if (updatePromises.length > 0) {
+        await Promise.all(updatePromises);
+      }
+
+      localStorage.setItem(STORAGE_PREFIX + 'students', JSON.stringify(remoteStudents));
+      return remoteStudents;
+    } catch (e) {
+      console.warn('Could not fetch students from Firestore:', e);
+      return erpService.getStudents();
+    }
+  },
+
   addStudent: (student: Omit<Student, 'id'>): Student => {
     const students = erpService.getStudents();
-    const newStudent: Student = { ...student, id: 'std-' + Date.now() };
+    const newStudent: Student = { 
+      ...student, 
+      admissionNumber: normalizeAdmissionNumber(student.admissionNumber),
+      studentNumber: normalizeStudentNumber(student.studentNumber),
+      id: 'std-' + Date.now() 
+    };
     saveCollection('students', [newStudent, ...students]);
     return newStudent;
   },
@@ -798,7 +896,12 @@ export const erpService = {
     const list = erpService.getStudents();
     const idx = list.findIndex(s => s.id === id);
     if (idx === -1) return null;
-    const updated = { ...list[idx], ...updates };
+    const updated = { 
+      ...list[idx], 
+      ...updates,
+      admissionNumber: updates.admissionNumber ? normalizeAdmissionNumber(updates.admissionNumber) : list[idx].admissionNumber,
+      studentNumber: updates.studentNumber ? normalizeStudentNumber(updates.studentNumber) : list[idx].studentNumber
+    };
     list[idx] = updated;
     saveCollection('students', list);
     return updated;

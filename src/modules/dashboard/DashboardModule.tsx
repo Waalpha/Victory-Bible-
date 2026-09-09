@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Users, UserPlus, BookOpen, Award, DollarSign, TrendingUp, 
+  Users, UserPlus, BookOpen, Award, Wallet, TrendingUp, 
   CheckCircle, Clock, ShieldAlert, GraduationCap, ChevronRight,
   Church, Sparkles, Library, Home, FileText, CheckCircle2,
   Calendar, Layers, Filter, Search, ArrowUpRight, ArrowDownRight,
@@ -116,8 +116,8 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
     },
     { 
       title: 'Fees Collected', 
-      value: `$${totalCollected.toLocaleString()}`, 
-      icon: DollarSign, 
+      value: `Ksh ${totalCollected.toLocaleString()}`, 
+      icon: Wallet, 
       color: 'text-emerald-700', 
       bg: 'bg-emerald-50', 
       border: 'border-emerald-100',
@@ -127,7 +127,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
     },
     { 
       title: 'Outstanding Fees', 
-      value: `$${totalOutstanding.toLocaleString()}`, 
+      value: `Ksh ${totalOutstanding.toLocaleString()}`, 
       icon: Clock, 
       color: 'text-rose-600', 
       bg: 'bg-rose-50', 
@@ -164,7 +164,7 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
   const quickActions = [
     { label: '+ Register Student', module: 'students', icon: Users, color: 'text-blue-700 hover:bg-blue-50/80 border-blue-200' },
     { label: '+ New Admission', module: 'admissions', icon: UserPlus, color: 'text-emerald-700 hover:bg-emerald-50/80 border-emerald-200' },
-    { label: '+ Record Payment', module: 'finance', icon: DollarSign, color: 'text-emerald-700 hover:bg-emerald-50/80 border-emerald-200' },
+    { label: '+ Record Payment', module: 'finance', icon: Wallet, color: 'text-emerald-700 hover:bg-emerald-50/80 border-emerald-200' },
     { label: '+ Create Examination', module: 'examinations', icon: Award, color: 'text-indigo-700 hover:bg-indigo-50/80 border-indigo-200' },
     { label: '+ Mark Attendance', module: 'chapel', icon: Sparkles, color: 'text-purple-700 hover:bg-purple-50/80 border-purple-200' },
     { label: '+ Add Course', module: 'academics', icon: BookOpen, color: 'text-slate-800 hover:bg-slate-100 border-slate-200' },
@@ -242,9 +242,9 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
     { 
       id: 2, 
       title: 'Fee Payment Reconciled', 
-      desc: 'Student #BITC-2026-0042 paid KES 25,000 via M-Pesa', 
+      desc: 'Student #VIAB-2026-0042 paid KES 25,000 via M-Pesa', 
       time: '1 hour ago', 
-      icon: DollarSign, 
+      icon: Wallet, 
       status: 'Verified', 
       statusColor: 'bg-blue-50 text-blue-800' 
     },
@@ -522,17 +522,17 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="bg-slate-50/80 p-4 rounded-xl border border-slate-100">
             <span className="text-[11px] font-bold text-slate-400 uppercase">Total Invoiced</span>
-            <p className="text-2xl font-black text-slate-900 mt-1">$3,350</p>
+            <p className="text-2xl font-black text-slate-900 mt-1">Ksh 350,000</p>
             <span className="text-xs text-slate-500 mt-0.5 block">Academic Term 1</span>
           </div>
           <div className="bg-emerald-50/70 p-4 rounded-xl border border-emerald-100">
             <span className="text-[11px] font-bold text-emerald-800 uppercase">Total Collected</span>
-            <p className="text-2xl font-black text-emerald-700 mt-1">${totalCollected.toLocaleString()}</p>
+            <p className="text-2xl font-black text-emerald-700 mt-1">Ksh {totalCollected.toLocaleString()}</p>
             <span className="text-xs text-emerald-700 font-semibold mt-0.5 block">94% Fee Collection</span>
           </div>
           <div className="bg-rose-50/70 p-4 rounded-xl border border-rose-100">
             <span className="text-[11px] font-bold text-rose-800 uppercase">Outstanding Balance</span>
-            <p className="text-2xl font-black text-rose-700 mt-1">${totalOutstanding.toLocaleString()}</p>
+            <p className="text-2xl font-black text-rose-700 mt-1">Ksh {totalOutstanding.toLocaleString()}</p>
             <span className="text-xs text-rose-700 mt-0.5 block">6% Uncollected</span>
           </div>
           <div className="bg-amber-50/70 p-4 rounded-xl border border-amber-100">
@@ -560,8 +560,8 @@ export const DashboardModule: React.FC<DashboardProps> = ({ onNavigateModule }) 
               <XAxis dataKey="period" stroke="#94a3b8" fontSize={11} />
               <YAxis stroke="#94a3b8" fontSize={11} />
               <Tooltip />
-              <Area type="monotone" dataKey="invoiced" name="Invoiced ($)" stroke="#052e16" strokeWidth={2} fillOpacity={1} fill="url(#colorInvoiced)" />
-              <Area type="monotone" dataKey="collected" name="Collected ($)" stroke="#16a34a" strokeWidth={2.5} fillOpacity={1} fill="url(#colorCollected)" />
+              <Area type="monotone" dataKey="invoiced" name="Invoiced (Ksh)" stroke="#052e16" strokeWidth={2} fillOpacity={1} fill="url(#colorInvoiced)" />
+              <Area type="monotone" dataKey="collected" name="Collected (Ksh)" stroke="#16a34a" strokeWidth={2.5} fillOpacity={1} fill="url(#colorCollected)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>

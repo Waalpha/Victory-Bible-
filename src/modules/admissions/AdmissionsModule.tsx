@@ -37,12 +37,12 @@ export const AdmissionsModule: React.FC = () => {
     if (selectedApplicant && selectedApplicant.id === id) {
       setSelectedApplicant({ ...selectedApplicant, status: newStatus });
     }
-    erpService.logAction('admin@gracetheo.edu', 'ADMIN', `Updated applicant status to ${newStatus}`, 'Admissions', id);
+    erpService.logAction('admin@viabi.ac.ke', 'ADMIN', `Updated applicant status to ${newStatus}`, 'Admissions', id);
   };
 
   const handleConvertToStudent = (app: Applicant) => {
-    const studentNumber = 'GRC/2026/' + Math.floor(100 + Math.random() * 900);
-    const admissionNumber = 'ADM-2026-' + Math.floor(1000 + Math.random() * 9000);
+    const studentNumber = 'VIAB/2026/' + Math.floor(100 + Math.random() * 900);
+    const admissionNumber = 'VIAB-2026-' + Math.floor(1000 + Math.random() * 9000);
     const prog = programs.find(p => p.id === app.programId);
 
     erpService.addStudent({

@@ -334,12 +334,12 @@ export const StudentAffairsModule: React.FC = () => {
 
 export const GraduationModule: React.FC = () => {
   const candidates = [
-    { id: '1', name: 'James Mwangi Kamau', matric: 'BITC-2023-0012', program: 'Bachelor of Theology', gpa: 3.72, academic: true, finance: true, ministry: true, library: true, status: 'Ready' },
-    { id: '2', name: 'Grace Wambui Njoroge', matric: 'BITC-2023-0019', program: 'Bachelor of Theology', gpa: 3.85, academic: true, finance: true, ministry: true, library: true, status: 'Ready' },
-    { id: '3', name: 'Paul Kiprop Cheruiyot', matric: 'BITC-2023-0024', program: 'Diploma in Theology', gpa: 3.45, academic: true, finance: false, ministry: true, library: true, status: 'Pending Finance' },
-    { id: '4', name: 'Sarah Achieng Otieno', matric: 'BITC-2023-0031', program: 'Certificate in Theology', gpa: 3.60, academic: true, finance: true, ministry: true, library: false, status: 'Pending Library' },
-    { id: '5', name: 'Emmanuel Mutua Musyoka', matric: 'BITC-2023-0038', program: 'Bachelor of Theology', gpa: 3.91, academic: true, finance: true, ministry: true, library: true, status: 'Ready' },
-    { id: '6', name: 'David Kiprono Tanui', matric: 'BITC-2023-0044', program: 'Christian Ministry', gpa: 3.38, academic: true, finance: true, ministry: false, library: true, status: 'Pending Ministry' }
+    { id: '1', name: 'James Mwangi Kamau', matric: 'VIAB-2023-0012', program: 'Bachelor of Theology', gpa: 3.72, academic: true, finance: true, ministry: true, library: true, status: 'Ready' },
+    { id: '2', name: 'Grace Wambui Njoroge', matric: 'VIAB-2023-0019', program: 'Bachelor of Theology', gpa: 3.85, academic: true, finance: true, ministry: true, library: true, status: 'Ready' },
+    { id: '3', name: 'Paul Kiprop Cheruiyot', matric: 'VIAB-2023-0024', program: 'Diploma in Theology', gpa: 3.45, academic: true, finance: false, ministry: true, library: true, status: 'Pending Finance' },
+    { id: '4', name: 'Sarah Achieng Otieno', matric: 'VIAB-2023-0031', program: 'Certificate in Theology', gpa: 3.60, academic: true, finance: true, ministry: true, library: false, status: 'Pending Library' },
+    { id: '5', name: 'Emmanuel Mutua Musyoka', matric: 'VIAB-2023-0038', program: 'Bachelor of Theology', gpa: 3.91, academic: true, finance: true, ministry: true, library: true, status: 'Ready' },
+    { id: '6', name: 'David Kiprono Tanui', matric: 'VIAB-2023-0044', program: 'Christian Ministry', gpa: 3.38, academic: true, finance: true, ministry: false, library: true, status: 'Pending Ministry' }
   ];
 
   return (

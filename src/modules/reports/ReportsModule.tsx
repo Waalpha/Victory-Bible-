@@ -38,7 +38,7 @@ export const ReportsModule: React.FC = () => {
         <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
           <h3 className="font-bold text-slate-900 text-base border-b pb-2">Financial Reconciliation Summary</h3>
           <div className="space-y-3 text-xs">
-            <div className="flex justify-between"><span className="text-slate-500">Total Verified Collections:</span> <strong className="font-mono text-emerald-600">${totalCollected.toLocaleString()}</strong></div>
+            <div className="flex justify-between"><span className="text-slate-500">Total Verified Collections:</span> <strong className="font-mono text-emerald-600">Ksh {totalCollected.toLocaleString()}</strong></div>
             <div className="flex justify-between"><span className="text-slate-500">Currency:</span> <strong className="font-mono">{settings.currency}</strong></div>
             <div className="flex justify-between"><span className="text-slate-500">Payment Gateway:</span> <strong className="font-mono">M-Pesa & Bank Integration Active</strong></div>
           </div>

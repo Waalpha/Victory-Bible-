@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Users, Search, Plus, Eye, BookOpen, Award, DollarSign, 
   FileText, Home, Library, ShieldAlert, CheckCircle, Mail, 
   Phone, PhoneCall, Copy, Check, Edit2, Trash2, AlertTriangle, 
   Printer, IdCard, ExternalLink, Calendar, MapPin, HeartHandshake,
-  Church, GraduationCap, X, ChevronRight, Filter
+  Church, GraduationCap, X, ChevronRight, Filter, Loader2, Cloud,
+  RefreshCw, Database
 } from 'lucide-react';
 import { erpService } from '../../services/erpService';
 import { Student, Invoice, PaymentRecord, ExamResult, MinistryPlacement } from '../../types';
@@ -18,6 +19,9 @@ export const StudentsModule: React.FC = () => {
   const [selectedStatus, setSelectedStatus] = useState<string>('ALL');
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [isLoadingFirestore, setIsLoadingFirestore] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Modals
   const [showAddModal, setShowAddModal] = useState(false);
@@ -32,6 +36,29 @@ export const StudentsModule: React.FC = () => {
     setTimeout(() => setToastMessage(null), 4000);
   };
 
+  // Direct fetch from Cloud Firestore on mount to keep data synchronized
+  const loadStudentsFromCloud = async (notify = false) => {
+    setIsLoadingFirestore(true);
+    try {
+      const list = await erpService.fetchStudentsFromFirestore();
+      setStudents(list);
+      if (notify) {
+        showToast(`Synchronized ${list.length} student records from Cloud Firestore.`);
+      }
+    } catch (err: any) {
+      console.warn('Firestore load error:', err);
+      if (notify) {
+        showToast(`Cloud fetch note: ${err?.message || 'Using local storage'}`);
+      }
+    } finally {
+      setIsLoadingFirestore(false);
+    }
+  };
+
+  useEffect(() => {
+    loadStudentsFromCloud(false);
+  }, []);
+
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
     setCopiedField(label);
@@ -43,13 +70,13 @@ export const StudentsModule: React.FC = () => {
   const generateAdmissionNumber = () => {
     const year = new Date().getFullYear();
     const rand = Math.floor(1000 + Math.random() * 9000);
-    return `ADM-${year}-${rand}`;
+    return `VIAB-${year}-${rand}`;
   };
 
   const generateStudentNumber = () => {
     const year = new Date().getFullYear();
     const rand = String(students.length + 1).padStart(3, '0');
-    return `GRC/${year}/${rand}`;
+    return `VIAB/${year}/${rand}`;
   };
 
   // New Student Form State
@@ -106,7 +133,7 @@ export const StudentsModule: React.FC = () => {
     setShowAddModal(true);
   };
 
-  const handleAddStudent = (e: React.FormEvent) => {
+  const handleAddStudent = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newStudent.fullName.trim() || !newStudent.email.trim() || !newStudent.admissionNumber.trim()) {
       alert('Please provide Full Name, Email, and Admission Number.');
@@ -114,96 +141,120 @@ export const StudentsModule: React.FC = () => {
     }
 
     const prog = programs.find(p => p.id === newStudent.programId);
+    setIsSaving(true);
 
-    const created = erpService.addStudent({
-      studentNumber: newStudent.studentNumber.trim() || generateStudentNumber(),
-      admissionNumber: newStudent.admissionNumber.trim() || generateAdmissionNumber(),
-      fullName: newStudent.fullName.trim(),
-      email: newStudent.email.trim(),
-      phone: newStudent.phone.trim() || '+254 700 000 000',
-      gender: newStudent.gender,
-      dateOfBirth: newStudent.dateOfBirth,
-      nationality: newStudent.nationality.trim() || 'Kenyan',
-      address: newStudent.address.trim() || 'N/A',
-      photoUrl: newStudent.photoUrl.trim() || undefined,
-      nextOfKinName: newStudent.nextOfKinName.trim() || 'Not Provided',
-      nextOfKinRelationship: newStudent.nextOfKinRelationship.trim() || 'Guardian',
-      nextOfKinPhone: newStudent.nextOfKinPhone.trim() || newStudent.phone.trim() || 'N/A',
-      nextOfKinEmail: newStudent.nextOfKinEmail.trim() || undefined,
-      emergencyContact: newStudent.emergencyContact.trim() || newStudent.nextOfKinPhone.trim() || newStudent.phone.trim() || 'N/A',
-      churchName: newStudent.churchName.trim() || 'Community Church',
-      churchPastor: newStudent.churchPastor.trim() || 'Pastor in Charge',
-      previousEducation: newStudent.previousEducation.trim() || 'High School Certificate',
-      programId: newStudent.programId,
-      programName: prog?.name || 'Christian Ministry Program',
-      department: prog?.department || 'Biblical Studies',
-      intake: newStudent.intake,
-      academicYear: '2026/2027',
-      semester: 'Semester 1',
-      status: newStudent.status,
-      gpa: 3.5,
-      cgpa: 3.5,
-      feeBalance: Number(newStudent.feeBalance) || 0,
-      attendanceRate: 95,
-      createdAt: new Date().toISOString().substring(0, 10)
-    });
+    try {
+      const created = await erpService.addStudentImmediately({
+        studentNumber: newStudent.studentNumber.trim() || generateStudentNumber(),
+        admissionNumber: newStudent.admissionNumber.trim() || generateAdmissionNumber(),
+        fullName: newStudent.fullName.trim(),
+        email: newStudent.email.trim(),
+        phone: newStudent.phone.trim() || '+254 700 000 000',
+        gender: newStudent.gender,
+        dateOfBirth: newStudent.dateOfBirth,
+        nationality: newStudent.nationality.trim() || 'Kenyan',
+        address: newStudent.address.trim() || 'N/A',
+        photoUrl: newStudent.photoUrl.trim() || undefined,
+        nextOfKinName: newStudent.nextOfKinName.trim() || 'Not Provided',
+        nextOfKinRelationship: newStudent.nextOfKinRelationship.trim() || 'Guardian',
+        nextOfKinPhone: newStudent.nextOfKinPhone.trim() || newStudent.phone.trim() || 'N/A',
+        nextOfKinEmail: newStudent.nextOfKinEmail.trim() || undefined,
+        emergencyContact: newStudent.emergencyContact.trim() || newStudent.nextOfKinPhone.trim() || newStudent.phone.trim() || 'N/A',
+        churchName: newStudent.churchName.trim() || 'Community Church',
+        churchPastor: newStudent.churchPastor.trim() || 'Pastor in Charge',
+        previousEducation: newStudent.previousEducation.trim() || 'High School Certificate',
+        programId: newStudent.programId,
+        programName: prog?.name || 'Christian Ministry Program',
+        department: prog?.department || 'Biblical Studies',
+        intake: newStudent.intake,
+        academicYear: '2026/2027',
+        semester: 'Semester 1',
+        status: newStudent.status,
+        gpa: 3.5,
+        cgpa: 3.5,
+        feeBalance: Number(newStudent.feeBalance) || 0,
+        attendanceRate: 95,
+        createdAt: new Date().toISOString().substring(0, 10)
+      });
 
-    const updatedStudents = erpService.getStudents();
-    setStudents(updatedStudents);
-    setShowAddModal(false);
-    setSelectedStudent(created);
-    setActiveTab('Overview');
-    showToast(`Student ${created.fullName} (${created.admissionNumber}) enrolled successfully!`);
+      const updatedStudents = erpService.getStudents();
+      setStudents(updatedStudents);
+      setShowAddModal(false);
+      setSelectedStudent(created);
+      setActiveTab('Overview');
+      showToast(`Student ${created.fullName} (${created.admissionNumber}) saved directly to Cloud Firestore!`);
+    } catch (err: any) {
+      console.error('Error saving student to Firestore:', err);
+      alert(`Could not save to Cloud Firestore: ${err?.message || 'Network error'}`);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
-  const handleUpdateStudent = (e: React.FormEvent) => {
+  const handleUpdateStudent = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingStudent) return;
 
     const prog = programs.find(p => p.id === editingStudent.programId);
+    setIsSaving(true);
 
-    const updated = erpService.updateStudent(editingStudent.id, {
-      ...editingStudent,
-      fullName: editingStudent.fullName.trim(),
-      admissionNumber: editingStudent.admissionNumber.trim(),
-      studentNumber: editingStudent.studentNumber.trim(),
-      email: editingStudent.email.trim(),
-      phone: editingStudent.phone.trim(),
-      nextOfKinName: editingStudent.nextOfKinName.trim(),
-      nextOfKinRelationship: editingStudent.nextOfKinRelationship?.trim() || 'Guardian',
-      nextOfKinPhone: editingStudent.nextOfKinPhone.trim(),
-      nextOfKinEmail: editingStudent.nextOfKinEmail?.trim() || undefined,
-      emergencyContact: editingStudent.emergencyContact.trim(),
-      churchName: editingStudent.churchName.trim(),
-      churchPastor: editingStudent.churchPastor.trim(),
-      address: editingStudent.address.trim(),
-      programName: prog?.name || editingStudent.programName,
-      department: prog?.department || editingStudent.department,
-      feeBalance: Number(editingStudent.feeBalance) || 0
-    });
+    try {
+      const updated = await erpService.updateStudentImmediately(editingStudent.id, {
+        ...editingStudent,
+        fullName: editingStudent.fullName.trim(),
+        admissionNumber: editingStudent.admissionNumber.trim(),
+        studentNumber: editingStudent.studentNumber.trim(),
+        email: editingStudent.email.trim(),
+        phone: editingStudent.phone.trim(),
+        nextOfKinName: editingStudent.nextOfKinName.trim(),
+        nextOfKinRelationship: editingStudent.nextOfKinRelationship?.trim() || 'Guardian',
+        nextOfKinPhone: editingStudent.nextOfKinPhone.trim(),
+        nextOfKinEmail: editingStudent.nextOfKinEmail?.trim() || undefined,
+        emergencyContact: editingStudent.emergencyContact.trim(),
+        churchName: editingStudent.churchName.trim(),
+        churchPastor: editingStudent.churchPastor.trim(),
+        address: editingStudent.address.trim(),
+        programName: prog?.name || editingStudent.programName,
+        department: prog?.department || editingStudent.department,
+        feeBalance: Number(editingStudent.feeBalance) || 0
+      });
 
-    if (updated) {
-      const refreshed = erpService.getStudents();
-      setStudents(refreshed);
-      if (selectedStudent?.id === updated.id) {
-        setSelectedStudent(updated);
+      if (updated) {
+        const refreshed = erpService.getStudents();
+        setStudents(refreshed);
+        if (selectedStudent?.id === updated.id) {
+          setSelectedStudent(updated);
+        }
+        setEditingStudent(null);
+        showToast(`Profile for ${updated.fullName} immediately saved to Cloud Firestore!`);
       }
-      setEditingStudent(null);
-      showToast(`Profile for ${updated.fullName} successfully updated!`);
+    } catch (err: any) {
+      console.error('Error updating student in Firestore:', err);
+      alert(`Could not update student in Cloud Firestore: ${err?.message || 'Network error'}`);
+    } finally {
+      setIsSaving(false);
     }
   };
 
-  const confirmDeleteStudent = () => {
+  const confirmDeleteStudent = async () => {
     if (!deletingStudent) return;
     const name = deletingStudent.fullName;
-    erpService.deleteStudent(deletingStudent.id);
-    const refreshed = erpService.getStudents();
-    setStudents(refreshed);
-    setDeletingStudent(null);
-    if (selectedStudent?.id === deletingStudent.id) {
-      setSelectedStudent(null);
+    setIsDeleting(true);
+    try {
+      await erpService.deleteStudentImmediately(deletingStudent.id);
+      const refreshed = erpService.getStudents();
+      setStudents(refreshed);
+      setDeletingStudent(null);
+      if (selectedStudent?.id === deletingStudent.id) {
+        setSelectedStudent(null);
+      }
+      showToast(`Student ${name} removed from Cloud Firestore.`);
+    } catch (err: any) {
+      console.error('Error deleting student from Firestore:', err);
+      alert(`Could not delete from Firestore: ${err?.message || 'Network error'}`);
+    } finally {
+      setIsDeleting(false);
     }
-    showToast(`Student ${name} removed from registry.`);
   };
 
   // Filter students
@@ -267,19 +318,35 @@ export const StudentsModule: React.FC = () => {
             <span className="px-2.5 py-0.5 bg-emerald-100 text-emerald-900 font-bold text-[11px] rounded-md font-mono">
               {students.length} Enrolled
             </span>
+            <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold text-[11px] rounded-md inline-flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Firestore Active
+            </span>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Complete student profiles featuring official admission numbers, verified email addresses, next of kin contacts, and ministerial formation.
+            Student records persist directly to Cloud Firestore. When you add or edit a student, pressing <strong>Save Changes</strong> immediately updates the live database.
           </p>
         </div>
 
-        <button
-          onClick={openAddModal}
-          className="w-full sm:w-auto px-5 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-xs transition-all active:scale-95 cursor-pointer"
-        >
-          <Plus className="w-4 h-4" />
-          <span>Admit New Student</span>
-        </button>
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <button
+            onClick={() => loadStudentsFromCloud(true)}
+            disabled={isLoadingFirestore}
+            title="Refresh records directly from Cloud Firestore"
+            className="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer disabled:opacity-50"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${isLoadingFirestore ? 'animate-spin text-emerald-600' : ''}`} />
+            <span>{isLoadingFirestore ? 'Syncing...' : 'Sync Cloud'}</span>
+          </button>
+
+          <button
+            onClick={openAddModal}
+            className="flex-1 sm:flex-none px-5 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-xs transition-all active:scale-95 cursor-pointer"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Admit New Student</span>
+          </button>
+        </div>
       </div>
 
       {/* Search & Filters */}
@@ -346,7 +413,25 @@ export const StudentsModule: React.FC = () => {
 
       {/* ================= MOBILE CARDS VIEW (Phone optimized) ================= */}
       <div className="block md:hidden space-y-4">
-        {filtered.map(st => (
+        {filtered.length === 0 ? (
+          <div className="bg-white p-8 rounded-2xl border border-dashed border-slate-300 text-center space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+              <Users className="w-6 h-6" />
+            </div>
+            <h3 className="font-bold text-slate-800 text-sm">No Student Records Found</h3>
+            <p className="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">
+              All hardcoded mock students have been cleared. When you enroll a student, pressing <strong>Save</strong> will immediately commit their record to Cloud Firestore.
+            </p>
+            <button
+              onClick={openAddModal}
+              className="px-4 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs inline-flex items-center gap-2 shadow-xs cursor-pointer"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Admit First Student</span>
+            </button>
+          </div>
+        ) : (
+          filtered.map(st => (
           <div 
             key={st.id} 
             className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3"
@@ -361,7 +446,7 @@ export const StudentsModule: React.FC = () => {
                   <h3 className="font-bold text-slate-900 text-sm">{st.fullName}</h3>
                   <div className="flex flex-wrap items-center gap-1.5 mt-0.5">
                     <span className="px-1.5 py-0.5 bg-emerald-50 text-emerald-900 font-mono font-bold text-[10px] rounded border border-emerald-200/60">
-                      {st.admissionNumber || 'ADM-PENDING'}
+                      {st.admissionNumber || 'VIAB-PENDING'}
                     </span>
                     <span className="text-[10px] font-mono text-slate-500">
                       {st.studentNumber}
@@ -412,7 +497,7 @@ export const StudentsModule: React.FC = () => {
             {/* Footer action buttons on mobile */}
             <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
               <span className={`text-xs font-mono font-bold ${st.feeBalance > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
-                Bal: ${st.feeBalance.toLocaleString()}
+                Bal: Ksh {st.feeBalance.toLocaleString()}
               </span>
 
               <div className="flex items-center gap-2">
@@ -436,7 +521,7 @@ export const StudentsModule: React.FC = () => {
               </div>
             </div>
           </div>
-        ))}
+        )))}
       </div>
 
       {/* ================= DESKTOP TABLE VIEW ================= */}
@@ -457,12 +542,36 @@ export const StudentsModule: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-slate-700">
-              {filtered.map(st => (
+              {filtered.length === 0 ? (
+                <tr>
+                  <td colSpan={9} className="p-12 text-center">
+                    <div className="max-w-md mx-auto space-y-3">
+                      <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+                        <Users className="w-6 h-6" />
+                      </div>
+                      <h3 className="font-bold text-slate-900 text-base">No Student Records Found</h3>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        All hardcoded demo students have been cleared. When you admit a student or modify a profile, clicking <strong>Save</strong> immediately writes to Cloud Firestore.
+                      </p>
+                      <div className="pt-2">
+                        <button
+                          onClick={openAddModal}
+                          className="px-5 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl text-xs inline-flex items-center gap-2 shadow-xs transition-colors cursor-pointer"
+                        >
+                          <Plus className="w-4 h-4" />
+                          <span>Admit New Student to Firestore</span>
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                filtered.map(st => (
                 <tr key={st.id} className="hover:bg-slate-50/80 transition-colors">
                   <td className="p-4">
                     <div className="flex flex-col">
                       <span className="font-mono font-bold text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60 inline-block w-fit">
-                        {st.admissionNumber || 'ADM-PENDING'}
+                        {st.admissionNumber || 'VIAB-PENDING'}
                       </span>
                       <span className="font-mono text-[10px] text-slate-500 mt-1">
                         {st.studentNumber}
@@ -509,7 +618,7 @@ export const StudentsModule: React.FC = () => {
                   </td>
                   <td className="p-4 font-mono">
                     <span className={st.feeBalance > 0 ? 'text-rose-600 font-bold' : 'text-emerald-600 font-bold'}>
-                      ${st.feeBalance.toLocaleString()}
+                      Ksh {st.feeBalance.toLocaleString()}
                     </span>
                   </td>
                   <td className="p-4">
@@ -547,7 +656,7 @@ export const StudentsModule: React.FC = () => {
                     </div>
                   </td>
                 </tr>
-              ))}
+              )))}
             </tbody>
           </table>
         </div>
@@ -567,7 +676,7 @@ export const StudentsModule: React.FC = () => {
                   <div className="flex flex-wrap items-center gap-2">
                     <h3 className="text-lg sm:text-xl font-bold">{selectedStudent.fullName}</h3>
                     <span className="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-md text-xs font-mono font-bold flex items-center gap-1">
-                      <span>ADM: {selectedStudent.admissionNumber || 'ADM-PENDING'}</span>
+                      <span>ADM: {selectedStudent.admissionNumber || 'VIAB-PENDING'}</span>
                       <button 
                         onClick={() => copyToClipboard(selectedStudent.admissionNumber, 'Admission Number')}
                         className="hover:text-white p-0.5"
@@ -723,7 +832,7 @@ export const StudentsModule: React.FC = () => {
                           <span className="text-slate-400 block font-medium">Official Admission Number</span>
                           <div className="flex items-center gap-2 mt-0.5">
                             <span className="font-mono font-bold text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                              {selectedStudent.admissionNumber || 'ADM-PENDING'}
+                              {selectedStudent.admissionNumber || 'VIAB-PENDING'}
                             </span>
                             <button 
                               onClick={() => copyToClipboard(selectedStudent.admissionNumber, 'Admission Number')}
@@ -816,13 +925,13 @@ export const StudentsModule: React.FC = () => {
                       <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
                         <h4 className="font-bold text-slate-900 text-sm border-b pb-2 flex items-center justify-between">
                           <span>Financial Status</span>
-                          <span className="text-[10px] text-slate-400">USD</span>
+                          <span className="text-[10px] text-slate-400">Ksh</span>
                         </h4>
                         <div className="space-y-3">
                           <div className="flex justify-between items-center">
                             <span className="text-slate-500">Outstanding Fee Balance</span>
                             <span className={`font-bold font-mono text-base ${selectedStudent.feeBalance > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
-                              ${selectedStudent.feeBalance.toLocaleString()}
+                              Ksh {selectedStudent.feeBalance.toLocaleString()}
                             </span>
                           </div>
                           <div className="flex justify-between items-center">
@@ -925,7 +1034,7 @@ export const StudentsModule: React.FC = () => {
                     <div className="text-right">
                       <span className="text-[10px] text-slate-400 uppercase font-bold block">Current Balance</span>
                       <span className={`font-mono text-base font-bold ${selectedStudent.feeBalance > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
-                        ${selectedStudent.feeBalance.toLocaleString()}
+                        Ksh {selectedStudent.feeBalance.toLocaleString()}
                       </span>
                     </div>
                   </div>
@@ -944,7 +1053,7 @@ export const StudentsModule: React.FC = () => {
                             <div className="text-[11px] text-slate-400">Due: {inv.dueDate}</div>
                           </div>
                           <div className="text-right">
-                            <span className="font-mono font-bold text-slate-900 block">${inv.totalAmount.toLocaleString()}</span>
+                            <span className="font-mono font-bold text-slate-900 block">Ksh {inv.totalAmount.toLocaleString()}</span>
                             <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                               inv.status === 'Paid' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
                             }`}>
@@ -1067,7 +1176,7 @@ export const StudentsModule: React.FC = () => {
                       value={newStudent.admissionNumber}
                       onChange={e => setNewStudent({ ...newStudent, admissionNumber: e.target.value })}
                       className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl font-mono font-bold text-emerald-900"
-                      placeholder="ADM-2026-XXXX"
+                      placeholder="VIAB-2026-XXXX"
                     />
                   </div>
                   <div>
@@ -1080,7 +1189,7 @@ export const StudentsModule: React.FC = () => {
                       value={newStudent.studentNumber}
                       onChange={e => setNewStudent({ ...newStudent, studentNumber: e.target.value })}
                       className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl font-mono font-bold text-slate-800"
-                      placeholder="GRC/2026/XXX"
+                      placeholder="VIAB/2026/XXX"
                     />
                   </div>
                 </div>
@@ -1297,7 +1406,7 @@ export const StudentsModule: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Initial Fee Balance ($)</label>
+                  <label className="block font-semibold text-slate-700 mb-1">Initial Fee Balance (Ksh)</label>
                   <input
                     type="number"
                     value={newStudent.feeBalance}
@@ -1317,9 +1426,20 @@ export const StudentsModule: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl shadow-xs transition-colors cursor-pointer"
+                  disabled={isSaving}
+                  className="px-6 py-2.5 bg-[#15803D] hover:bg-[#14532D] disabled:opacity-60 text-white font-bold rounded-xl shadow-xs transition-colors cursor-pointer flex items-center gap-2"
                 >
-                  Admit Student
+                  {isSaving ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Saving to Firestore...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Cloud className="w-4 h-4" />
+                      <span>Save Student to Firestore</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
@@ -1426,7 +1546,7 @@ export const StudentsModule: React.FC = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">Fee Balance ($)</label>
+                    <label className="block font-semibold text-slate-700 mb-1">Fee Balance (Ksh)</label>
                     <input
                       type="number"
                       value={editingStudent.feeBalance}
@@ -1548,9 +1668,20 @@ export const StudentsModule: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 bg-[#15803D] hover:bg-[#14532D] text-white font-bold rounded-xl shadow-xs transition-colors cursor-pointer"
+                  disabled={isSaving}
+                  className="px-6 py-2.5 bg-[#15803D] hover:bg-[#14532D] disabled:opacity-60 text-white font-bold rounded-xl shadow-xs transition-colors cursor-pointer flex items-center gap-2"
                 >
-                  Save Changes
+                  {isSaving ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Saving Changes to Firestore...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Cloud className="w-4 h-4" />
+                      <span>Save Changes to Firestore</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
@@ -1586,9 +1717,17 @@ export const StudentsModule: React.FC = () => {
               </button>
               <button
                 onClick={confirmDeleteStudent}
-                className="flex-1 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-xs shadow-xs transition-colors"
+                disabled={isDeleting}
+                className="flex-1 py-2.5 bg-rose-600 hover:bg-rose-500 disabled:opacity-60 text-white font-bold rounded-xl text-xs shadow-xs transition-colors flex items-center justify-center gap-1.5"
               >
-                Yes, Delete Student
+                {isDeleting ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Deleting from Firestore...</span>
+                  </>
+                ) : (
+                  <span>Yes, Delete Student</span>
+                )}
               </button>
             </div>
           </div>
@@ -1634,7 +1773,7 @@ export const StudentsModule: React.FC = () => {
                   <div className="text-emerald-300 text-[11px] font-medium leading-tight">{selectedStudent.programName}</div>
                   <div className="font-mono text-xs pt-1">
                     <span className="text-slate-400 text-[10px] block">Admission Number</span>
-                    <span className="text-emerald-400 font-bold">{selectedStudent.admissionNumber || 'ADM-PENDING'}</span>
+                    <span className="text-emerald-400 font-bold">{selectedStudent.admissionNumber || 'VIAB-PENDING'}</span>
                   </div>
                   <div className="font-mono text-[11px] text-slate-300">
                     Reg: {selectedStudent.studentNumber}

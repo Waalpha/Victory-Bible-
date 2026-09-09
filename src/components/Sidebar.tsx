@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   LayoutDashboard, Users, UserPlus, BookOpen, GraduationCap, FileText, 
-  DollarSign, Library, Home, Church, ShieldAlert, UserCheck, 
+  Wallet, Library, Home, Church, ShieldAlert, UserCheck, 
   Bell, FolderOpen, Settings, BarChart2, Layers, ChevronLeft, ChevronRight,
   Sparkles, ShieldCheck, Globe
 } from 'lucide-react';
@@ -61,7 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { id: 'library', label: 'Library Management', icon: Library, roles: ['ALL'], group: 'STUDENT LIFE' },
     
     // FINANCE
-    { id: 'finance', label: 'Fees & Finance', icon: DollarSign, roles: ['SUPER_ADMIN', 'ADMIN', 'FINANCE', 'FINANCE_OFFICER', 'STUDENT', 'PRINCIPAL'], group: 'FINANCE' },
+    { id: 'finance', label: 'Fees & Finance', icon: Wallet, roles: ['SUPER_ADMIN', 'ADMIN', 'FINANCE', 'FINANCE_OFFICER', 'STUDENT', 'PRINCIPAL'], group: 'FINANCE' },
     
     // PEOPLE
     { id: 'staff', label: 'Staff & Faculty', icon: UserCheck, roles: ['SUPER_ADMIN', 'ADMIN', 'REGISTRAR', 'PRINCIPAL', 'PRESIDENT'], group: 'PEOPLE' },

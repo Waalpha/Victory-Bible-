@@ -170,6 +170,17 @@ export const SettingsModule: React.FC = () => {
               className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium font-mono"
             />
           </div>
+          <div>
+            <label className="block font-semibold text-slate-700 mb-2">Institutional Currency</label>
+            <input
+              type="text"
+              required
+              value={settings.currency || 'Ksh'}
+              onChange={e => setSettings({...settings, currency: e.target.value})}
+              placeholder="e.g. Ksh or KES"
+              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium font-mono"
+            />
+          </div>
         </div>
 
         <div className="pt-4 border-t border-slate-100 flex justify-end">
