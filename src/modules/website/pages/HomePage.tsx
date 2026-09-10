@@ -220,12 +220,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 className="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:border-amber-500/40 hover:shadow-lg transition-all group"
               >
                 <div className="h-56 overflow-hidden bg-slate-200">
-                  <img
-                    src={member.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400'}
-                    alt={member.fullName}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
-                  />
+                  {member.avatarUrl ? (
+                    <img
+                      src={member.avatarUrl}
+                      alt={member.fullName}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-slate-900 flex items-center justify-center text-amber-400 font-serif font-black text-3xl">
+                      {member.fullName.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                    </div>
+                  )}
                 </div>
                 <div className="p-5">
                   <h3 className="font-serif font-bold text-base text-slate-900 mb-1 group-hover:text-amber-700 transition-colors">

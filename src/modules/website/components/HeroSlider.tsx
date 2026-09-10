@@ -15,7 +15,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ slides, onNavigate }) =>
       eyebrow: 'THEOLOGICAL EDUCATION FOR A LIFE OF PURPOSE',
       title: 'Prepare Your Mind. Strengthen Your Faith. Serve Your Calling.',
       description: 'Receive rigorous theological training, practical ministry preparation and spiritual formation in a community committed to serving Christ and the world.',
-      imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=1920',
+      imageUrl: '',
       primaryButtonText: 'EXPLORE PROGRAMS',
       primaryButtonLink: '/programs',
       secondaryButtonText: 'APPLY NOW',

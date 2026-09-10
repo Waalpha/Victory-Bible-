@@ -11,32 +11,32 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
 
   const images = [
     {
-      url: 'https://images.unsplash.com/photo-1543807535-eceef0bc6599?auto=format&fit=crop&q=80&w=1200',
+      url: '',
       title: 'Covenant Chapel Morning Worship',
       category: 'Chapel & Worship'
     },
     {
-      url: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=1200',
+      url: '',
       title: 'Greek Exegesis Seminar in Progress',
       category: 'Academic Life'
     },
     {
-      url: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=1200',
+      url: '',
       title: 'Theological Library Research Stacks',
       category: 'Scholarship'
     },
     {
-      url: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&q=80&w=1200',
+      url: '',
       title: 'Luther Hall Residential Courtyard',
       category: 'Campus Living'
     },
     {
-      url: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=1200',
+      url: '',
       title: 'Community Soccer Tournament',
       category: 'Student Life'
     },
     {
-      url: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=1200',
+      url: '',
       title: 'Annual Commencement Procession',
       category: 'Graduation'
     }

@@ -49,9 +49,9 @@ export const defaultSettings: SystemSettings = {
   currency: 'Ksh',
   currentAcademicYear: '2026/2027',
   currentSemester: 'Semester 1',
-  logoUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=200',
-  stampUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=150',
-  registrarSignatureUrl: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=150',
+  logoUrl: '',
+  stampUrl: '',
+  registrarSignatureUrl: '',
   gradingScale: [
     { grade: 'A', minMark: 70, maxMark: 100, gradePoint: 4.0, description: 'Excellent' },
     { grade: 'B+', minMark: 65, maxMark: 69, gradePoint: 3.5, description: 'Very Good' },
@@ -142,10 +142,10 @@ const initialApplicants: Applicant[] = [
 ];
 
 const initialStaff: StaffMember[] = [
-  { id: 'stf-1', staffNumber: 'STF-001', fullName: 'Dr. Jonathan Vance', email: 'j.vance@gracetheo.edu', phone: '+1 555-0192', department: 'Biblical Studies', position: 'Professor', qualifications: 'Ph.D. in Old Testament, Trinity Evangelical Divinity School', specialization: 'Old Testament Exegesis & Hebrew Poetry', employmentStatus: 'Full-Time', avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200' },
-  { id: 'stf-2', staffNumber: 'STF-002', fullName: 'Dr. Sarah Kageni', email: 's.kageni@gracetheo.edu', phone: '+1 555-0183', department: 'Systematic & Historical Theology', position: 'Senior Lecturer', qualifications: 'Ph.D. in Systematic Theology, Edinburgh University', specialization: 'Trinitarian Dogmatics & Apologetics', employmentStatus: 'Full-Time', avatarUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200' },
-  { id: 'stf-3', staffNumber: 'STF-003', fullName: 'Rev. Dr. Samuel Okoro', email: 's.okoro@gracetheo.edu', phone: '+1 555-0174', department: 'Pastoral Ministry & Leadership', position: 'Dean', qualifications: 'D.Min. in Pastoral Leadership, Fuller Theological Seminary', specialization: 'Homiletics & Church Growth', employmentStatus: 'Full-Time', avatarUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200' },
-  { id: 'stf-4', staffNumber: 'STF-004', fullName: 'Dr. Rebecca Stern', email: 'r.stern@gracetheo.edu', phone: '+1 555-0165', department: 'Biblical Languages', position: 'Lecturer', qualifications: 'Ph.D. in Semitic Languages, Hebrew University of Jerusalem', specialization: 'Biblical Hebrew & Aramaic Syntax', employmentStatus: 'Full-Time', avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200' }
+  { id: 'stf-1', staffNumber: 'STF-001', fullName: 'Dr. Jonathan Vance', email: 'j.vance@gracetheo.edu', phone: '+1 555-0192', department: 'Biblical Studies', position: 'Professor', qualifications: 'Ph.D. in Old Testament, Trinity Evangelical Divinity School', specialization: 'Old Testament Exegesis & Hebrew Poetry', employmentStatus: 'Full-Time', avatarUrl: '' },
+  { id: 'stf-2', staffNumber: 'STF-002', fullName: 'Dr. Sarah Kageni', email: 's.kageni@gracetheo.edu', phone: '+1 555-0183', department: 'Systematic & Historical Theology', position: 'Senior Lecturer', qualifications: 'Ph.D. in Systematic Theology, Edinburgh University', specialization: 'Trinitarian Dogmatics & Apologetics', employmentStatus: 'Full-Time', avatarUrl: '' },
+  { id: 'stf-3', staffNumber: 'STF-003', fullName: 'Rev. Dr. Samuel Okoro', email: 's.okoro@gracetheo.edu', phone: '+1 555-0174', department: 'Pastoral Ministry & Leadership', position: 'Dean', qualifications: 'D.Min. in Pastoral Leadership, Fuller Theological Seminary', specialization: 'Homiletics & Church Growth', employmentStatus: 'Full-Time', avatarUrl: '' },
+  { id: 'stf-4', staffNumber: 'STF-004', fullName: 'Dr. Rebecca Stern', email: 'r.stern@gracetheo.edu', phone: '+1 555-0165', department: 'Biblical Languages', position: 'Lecturer', qualifications: 'Ph.D. in Semitic Languages, Hebrew University of Jerusalem', specialization: 'Biblical Hebrew & Aramaic Syntax', employmentStatus: 'Full-Time', avatarUrl: '' }
 ];
 
 const initialTimetable: TimetableEntry[] = [
@@ -378,8 +378,8 @@ const initialHeroSlides: HeroSlide[] = [
     eyebrow: 'THEOLOGICAL EDUCATION FOR A LIFE OF PURPOSE',
     title: 'Prepare Your Mind. Strengthen Your Faith. Serve Your Calling.',
     description: 'Receive rigorous theological training, practical ministry preparation and spiritual formation in a community committed to serving Christ and the world.',
-    imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=1920',
-    mobileImageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800',
+    imageUrl: '',
+    mobileImageUrl: '',
     primaryButtonText: 'EXPLORE PROGRAMS',
     primaryButtonLink: '/programs',
     secondaryButtonText: 'APPLY NOW',
@@ -394,8 +394,8 @@ const initialHeroSlides: HeroSlide[] = [
     eyebrow: 'DEEP ROOTS. GLOBAL MISSION.',
     title: 'Study Theology. Shape Lives. Transform Communities.',
     description: 'Develop the biblical knowledge, leadership skills and ministry experience required to serve effectively wherever God calls you.',
-    imageUrl: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=1920',
-    mobileImageUrl: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=800',
+    imageUrl: '',
+    mobileImageUrl: '',
     primaryButtonText: 'DISCOVER OUR PROGRAMS',
     primaryButtonLink: '/programs',
     secondaryButtonText: 'START YOUR JOURNEY',
@@ -410,8 +410,8 @@ const initialHeroSlides: HeroSlide[] = [
     eyebrow: 'FORMATION FOR FAITHFUL LEADERSHIP',
     title: 'Where Biblical Scholarship Meets Practical Ministry.',
     description: 'Learn from experienced faculty while developing the spiritual maturity and practical skills needed for Christian leadership.',
-    imageUrl: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=1920',
-    mobileImageUrl: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=800',
+    imageUrl: '',
+    mobileImageUrl: '',
     primaryButtonText: 'MEET OUR FACULTY',
     primaryButtonLink: '/faculty',
     secondaryButtonText: 'LEARN MORE',
@@ -426,8 +426,8 @@ const initialHeroSlides: HeroSlide[] = [
     eyebrow: 'YOUR CALLING. YOUR JOURNEY. YOUR FUTURE.',
     title: 'Take the Next Step in Your Ministry Journey.',
     description: 'Whether you are preparing for pastoral ministry, missions, teaching, leadership or further theological study, we are here to help you grow.',
-    imageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1920',
-    mobileImageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800',
+    imageUrl: '',
+    mobileImageUrl: '',
     primaryButtonText: 'APPLY NOW',
     primaryButtonLink: '/apply',
     secondaryButtonText: 'CONTACT ADMISSIONS',
@@ -447,7 +447,7 @@ const initialTestimonials: Testimonial[] = [
     program: 'Master of Divinity (M.Div.)',
     currentRole: 'Senior Pastor, Nairobi Baptist Fellowship',
     testimonial: 'The balance between rigorous biblical exegesis and deep spiritual mentorship at Victory Internationalshaped not only my mind but my heart for shepherd ministry.',
-    photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
+    photoUrl: '',
     order: 1,
     isActive: true
   },
@@ -458,7 +458,7 @@ const initialTestimonials: Testimonial[] = [
     program: 'Bachelor of Theology (B.Th.)',
     currentRole: 'Church Planter & Missions Director',
     testimonial: 'Victory Internationalprepared me with both intellectual depth and practical field resilience. Cross-cultural evangelism weeks and chapel devotions were truly life-defining.',
-    photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200',
+    photoUrl: '',
     order: 2,
     isActive: true
   },
@@ -469,7 +469,7 @@ const initialTestimonials: Testimonial[] = [
     program: 'Doctor of Ministry (D.Min.)',
     currentRole: 'Regional Overseer, AIC Fellowship',
     testimonial: 'I have sent dozens of ministry leaders and pastors to Victory International Apostolic Biblical Institute. Its unflinching loyalty to Scripture and ministry relevance is unmatched.',
-    photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200',
+    photoUrl: '',
     order: 3,
     isActive: true
   },
@@ -480,7 +480,7 @@ const initialTestimonials: Testimonial[] = [
     program: 'Diploma in Christian Ministry',
     currentRole: 'Hospital & Palliative Care Chaplain',
     testimonial: 'The pastoral counseling practicum and personal mentorship from faculty equipped me with Christlike empathy for patients and families.',
-    photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200',
+    photoUrl: '',
     order: 4,
     isActive: true
   }
@@ -495,7 +495,7 @@ const initialNewsArticles: NewsArticle[] = [
     author: 'Office of the President',
     date: '2026-08-28',
     readTime: '4 min read',
-    featuredImage: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=1200',
+    featuredImage: '',
     summary: 'Over five decades of preparing gospel workers across 20 nations, marked by a thanksgiving convocation and legacy research symposium.',
     content: 'Victory International Apostolic Biblical Institute marked its 50th Golden Jubilee anniversary with an international convocation gathering over 800 alumni, church leaders, and academic partners. Founded on an unyielding dedication to the inerrancy and authority of Scripture, the institution has graduated more than 1,500 pastors, theologians, translators, and educators currently serving in urban church plants, rural mission fields, and academic institutions worldwide.',
     isFeatured: true,
@@ -509,7 +509,7 @@ const initialNewsArticles: NewsArticle[] = [
     author: 'Academic Dean Office',
     date: '2026-08-15',
     readTime: '6 min read',
-    featuredImage: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=1200',
+    featuredImage: '',
     summary: 'Leading African and international scholars gathered at our main campus to address hermeneutics, public theology, and the challenge of syncretism.',
     content: 'The 2026 Annual Theological Symposium brought together senior scholars from across Africa, the UK, and North America. Keynote addresses emphasized faithful expository preaching in African contexts, counteracting prosperity gospels through robust biblical theology, and developing rigorous vernacular theological literature.',
     isFeatured: false,
@@ -523,7 +523,7 @@ const initialNewsArticles: NewsArticle[] = [
     author: 'Director of Field Ministry',
     date: '2026-08-04',
     readTime: '3 min read',
-    featuredImage: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=1200',
+    featuredImage: '',
     summary: 'Students spent two weeks ministering alongside rural church plants, conducting door-to-door evangelism, medical camps, and children Bible clubs.',
     content: 'Practical ministerial formation is the heartbeat of Victory InternationalSeminary. Last month, our student body engaged in our annual 14-day field ministry immersion, partnering with 42 local congregations. Results include over 280 decisions for Christ, 15 new home fellowships established, and invaluable pastoral preaching and counseling experience.',
     isFeatured: true,
@@ -537,7 +537,7 @@ const initialNewsArticles: NewsArticle[] = [
     author: 'University Librarian',
     date: '2026-07-20',
     readTime: '3 min read',
-    featuredImage: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=1200',
+    featuredImage: '',
     summary: 'Subscribed access to ATLA Religion Database, Logos digital library licenses for every student, and upgraded physical study carrels.',
     content: 'Our library expansion project has reached a major milestone, providing our residential and distance students with premier theological research tools, critical commentaries in Greek and Hebrew, and rare historical Protestant and African theological manuscripts.',
     isFeatured: false,
@@ -554,7 +554,7 @@ const initialPublicEvents: PublicEvent[] = [
     venue: 'Victory InternationalMain Auditorium & Live Stream',
     category: 'Conference',
     description: 'A three-day gathering of pastors, theologians, and ministry workers exploring Scripture, ethics, and modern cultural challenges.',
-    imageUrl: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800',
+    imageUrl: '',
     registrationLink: '/events/evt-1',
     isUpcoming: true
   },
@@ -566,7 +566,7 @@ const initialPublicEvents: PublicEvent[] = [
     venue: 'Seminary Quad & Academic Complex',
     category: 'Admissions',
     description: 'Tour our academic campus, meet faculty mentors, sit in on a live theology lecture, and receive on-the-spot application guidance.',
-    imageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800',
+    imageUrl: '',
     registrationLink: '/apply',
     isUpcoming: true
   },
@@ -578,7 +578,7 @@ const initialPublicEvents: PublicEvent[] = [
     venue: 'Covenant Chapel',
     category: 'Chapel',
     description: 'Special evening preaching services, prayer gatherings, and guest missionary testimonies centering on unreached people groups.',
-    imageUrl: 'https://images.unsplash.com/photo-1543807535-eceef0bc6599?auto=format&fit=crop&q=80&w=800',
+    imageUrl: '',
     registrationLink: '/events/evt-3',
     isUpcoming: true
   },
@@ -590,7 +590,7 @@ const initialPublicEvents: PublicEvent[] = [
     venue: 'Victory InternationalSports Pavilion & Gardens',
     category: 'Graduation',
     description: 'Celebrating our 2026 graduating class receiving doctoral, master, bachelor degrees, and ministry diplomas.',
-    imageUrl: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=800',
+    imageUrl: '',
     registrationLink: '/events/evt-4',
     isUpcoming: true
   }

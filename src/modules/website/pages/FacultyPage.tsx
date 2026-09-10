@@ -88,12 +88,18 @@ export const FacultyPage: React.FC<FacultyPageProps> = ({ onNavigate }) => {
             >
               <div>
                 <div className="h-64 overflow-hidden relative bg-slate-100">
-                  <img
-                    src={member.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600'}
-                    alt={member.fullName}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                    referrerPolicy="no-referrer"
-                  />
+                  {member.avatarUrl ? (
+                    <img
+                      src={member.avatarUrl}
+                      alt={member.fullName}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-slate-900 flex items-center justify-center text-amber-400 font-serif font-black text-4xl">
+                      {member.fullName.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                    </div>
+                  )}
                   <div className="absolute top-4 right-4 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-amber-400 border border-amber-500/30 font-mono">
                     {member.department}
                   </div>
@@ -145,12 +151,18 @@ export const FacultyPage: React.FC<FacultyPageProps> = ({ onNavigate }) => {
 
             <div className="p-8">
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 border-b border-slate-100 pb-6 mb-6">
-                <img
-                  src={activeBioMember.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400'}
-                  alt={activeBioMember.fullName}
-                  className="w-24 h-24 rounded-2xl object-cover ring-4 ring-amber-500/20 shadow-md shrink-0"
-                  referrerPolicy="no-referrer"
-                />
+                {activeBioMember.avatarUrl ? (
+                  <img
+                    src={activeBioMember.avatarUrl}
+                    alt={activeBioMember.fullName}
+                    className="w-24 h-24 rounded-2xl object-cover ring-4 ring-amber-500/20 shadow-md shrink-0"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <div className="w-24 h-24 rounded-2xl bg-slate-900 flex items-center justify-center text-amber-400 font-serif font-black text-2xl ring-4 ring-amber-500/20 shadow-md shrink-0">
+                    {activeBioMember.fullName.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                  </div>
+                )}
                 <div>
                   <span className="text-xs font-bold text-amber-700 uppercase tracking-wider block">
                     {activeBioMember.position} • {activeBioMember.department}

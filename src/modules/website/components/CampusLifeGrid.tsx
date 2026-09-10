@@ -10,35 +10,35 @@ export const CampusLifeGrid: React.FC<CampusLifeGridProps> = ({ onNavigate }) =>
     {
       title: 'Covenant Chapel',
       subtitle: 'Daily morning devotions, praise, and communion services',
-      imageUrl: 'https://images.unsplash.com/photo-1543807535-eceef0bc6599?auto=format&fit=crop&q=80&w=800',
+      imageUrl: '',
       category: 'Spiritual Life',
       colSpan: 'lg:col-span-8'
     },
     {
       title: 'Theological Library',
       subtitle: '25,000+ volumes, ancient commentaries, and digital study suites',
-      imageUrl: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=800',
+      imageUrl: '',
       category: 'Scholarship',
       colSpan: 'lg:col-span-4'
     },
     {
       title: 'Academic Lecture Halls',
       subtitle: 'Interactive seminars fostering vigorous exegetical inquiry',
-      imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800',
+      imageUrl: '',
       category: 'Academics',
       colSpan: 'lg:col-span-4'
     },
     {
       title: 'Residential Hostels & Fellowship',
       subtitle: 'Luther & Calvin residential halls nurturing lifelong ministerial brotherhood',
-      imageUrl: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&q=80&w=800',
+      imageUrl: '',
       category: 'Community',
       colSpan: 'lg:col-span-4'
     },
     {
       title: 'Sports, Recreation & Dining',
       subtitle: 'Healthy body, sound mind, fellowship meals, and community sports leagues',
-      imageUrl: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=800',
+      imageUrl: '',
       category: 'Student Life',
       colSpan: 'lg:col-span-4'
     }

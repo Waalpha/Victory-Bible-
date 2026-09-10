@@ -15,11 +15,11 @@ import {
 } from '../../types';
 
 const PRESET_HERO_PHOTOS = [
-  { name: 'Library & Scriptures', url: 'https://images.unsplash.com/photo-1548625361-195fe57e937d?auto=format&fit=crop&q=80&w=1920' },
-  { name: 'Chapel Sanctuary', url: 'https://images.unsplash.com/photo-1519791883288-dc8bd696e667?auto=format&fit=crop&q=80&w=1920' },
-  { name: 'Open Bible Study', url: 'https://images.unsplash.com/photo-1507842229451-79731e71a802?auto=format&fit=crop&q=80&w=1920' },
-  { name: 'Graduation Hall', url: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1920' },
-  { name: 'Worship Service', url: 'https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&q=80&w=1920' }
+  { name: 'Library & Scriptures', url: '' },
+  { name: 'Chapel Sanctuary', url: '' },
+  { name: 'Open Bible Study', url: '' },
+  { name: 'Graduation Hall', url: '' },
+  { name: 'Worship Service', url: '' }
 ];
 
 interface WebsiteCmsModuleProps {
