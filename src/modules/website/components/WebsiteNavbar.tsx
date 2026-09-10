@@ -317,20 +317,6 @@ export const WebsiteNavbar: React.FC<WebsiteNavbarProps> = ({
               </div>
             </div>
 
-            {/* Switch to ERP Portal Button */}
-            <div className="pt-2">
-              <button
-                onClick={() => {
-                  onEnterErp();
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full py-2.5 bg-slate-950 hover:bg-slate-900 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
-              >
-                <ShieldCheck className="w-4 h-4 text-amber-400" />
-                <span>Switch to Seminary Management ERP</span>
-              </button>
-            </div>
-
             {/* Direct Phone / WhatsApp Inquiry */}
             <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-center">
               <p className="text-[11px] text-slate-300">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Phone, Mail, MapPin, ExternalLink, ShieldCheck, 
-  GraduationCap, BookOpen, User, Lock, Heart, ArrowRight 
+  GraduationCap, BookOpen, Heart, ArrowRight 
 } from 'lucide-react';
 import { WebsiteSettings } from '../../../types';
 import { erpService } from '../../../services/erpService';
@@ -9,10 +9,10 @@ import { erpService } from '../../../services/erpService';
 interface WebsiteFooterProps {
   settings?: WebsiteSettings;
   onNavigate: (route: string) => void;
-  onEnterErp: () => void;
+  onEnterErp?: () => void;
 }
 
-export const WebsiteFooter: React.FC<WebsiteFooterProps> = ({ settings: propSettings, onNavigate, onEnterErp }) => {
+export const WebsiteFooter: React.FC<WebsiteFooterProps> = ({ settings: propSettings, onNavigate }) => {
   const settings = propSettings || erpService.getWebsiteSettings();
   return (
     <footer className="bg-slate-950 text-slate-300 pt-16 pb-12 border-t border-slate-800">
@@ -148,38 +148,38 @@ export const WebsiteFooter: React.FC<WebsiteFooterProps> = ({ settings: propSett
             </ul>
           </div>
 
-          {/* Col 4: Portals & Access */}
+          {/* Col 4: Campus & Community */}
           <div>
             <h4 className="font-serif font-bold text-sm text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-              Institutional Portals
+              Campus & Community
             </h4>
-            <div className="space-y-3">
-              <button
-                onClick={() => onNavigate('/login')}
-                className="w-full py-2 px-3 rounded-lg bg-white/5 hover:bg-white/10 text-white text-xs font-semibold flex items-center justify-between border border-white/10 transition-colors cursor-pointer"
-              >
-                <div className="flex items-center gap-2">
-                  <User className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Student Portal</span>
-                </div>
-                <ArrowRight className="w-3 h-3 text-slate-400" />
-              </button>
-
-              <button
-                onClick={onEnterErp}
-                className="w-full py-2 px-3 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-xs font-bold flex items-center justify-between border border-amber-500/25 transition-colors cursor-pointer"
-              >
-                <div className="flex items-center gap-2">
-                  <Lock className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Access Seminary ERP</span>
-                </div>
-                <ArrowRight className="w-3 h-3 text-amber-400" />
-              </button>
-
-              <p className="text-[11px] text-slate-500 leading-relaxed pt-1">
-                Faculty, students, and administrators can sign in directly to manage courses, transcripts, and campus operations.
-              </p>
-            </div>
+            <ul className="space-y-2.5 text-xs">
+              <li>
+                <button onClick={() => onNavigate('/about')} className="hover:text-amber-400 transition-colors text-left cursor-pointer">
+                  About Our Seminary
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('/faculty')} className="hover:text-amber-400 transition-colors text-left cursor-pointer">
+                  Faculty & Leadership
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('/ministry')} className="hover:text-amber-400 transition-colors text-left cursor-pointer">
+                  Ministry Formation
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('/news')} className="hover:text-amber-400 transition-colors text-left cursor-pointer">
+                  News & Campus Events
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('/contact')} className="hover:text-amber-400 transition-colors text-left cursor-pointer">
+                  Contact Admissions
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
 
