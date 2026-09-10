@@ -17,12 +17,20 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const settings = erpService.getWebsiteSettings();
-  const slides = erpService.getHeroSlides();
+  const [slides, setSlides] = React.useState<any[]>(() => erpService.getHeroSlides());
   const programs = erpService.getPrograms();
   const news = erpService.getNewsArticles().slice(0, 3);
   const events = erpService.getPublicEvents().slice(0, 3);
   const staff = erpService.getStaff().slice(0, 4);
   const testimonials = erpService.getTestimonials();
+
+  React.useEffect(() => {
+    erpService.fetchHeroSlidesFromFirestore().then(remote => {
+      if (remote && remote.length > 0) {
+        setSlides(remote);
+      }
+    }).catch(() => {});
+  }, []);
 
   // Featured programs
   const featuredPrograms = programs.slice(0, 4);
