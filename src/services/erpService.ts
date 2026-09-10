@@ -1157,6 +1157,24 @@ export const erpService = {
 
   // Website CMS: Hero Slides
   getHeroSlides: (): HeroSlide[] => getCollection('websiteHeroSlides', initialHeroSlides),
+  fetchHeroSlidesFromFirestore: async (): Promise<HeroSlide[]> => {
+    if (!db) return erpService.getHeroSlides();
+    try {
+      const snap = await getDocs(collection(db, 'websiteHeroSlides'));
+      const remoteSlides: HeroSlide[] = [];
+      snap.forEach(d => {
+        const data = d.data() as HeroSlide;
+        remoteSlides.push({ ...data, id: d.id });
+      });
+      if (remoteSlides.length > 0) {
+        localStorage.setItem(STORAGE_PREFIX + 'websiteHeroSlides', JSON.stringify(remoteSlides));
+        return remoteSlides;
+      }
+    } catch (e) {
+      console.warn('Could not fetch hero slides from Firestore:', e);
+    }
+    return erpService.getHeroSlides();
+  },
   saveHeroSlides: (items: HeroSlide[]) => {
     saveCollection('websiteHeroSlides', items);
     if (db && Array.isArray(items)) {

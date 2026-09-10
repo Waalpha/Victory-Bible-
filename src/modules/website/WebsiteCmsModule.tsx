@@ -45,7 +45,7 @@ export const WebsiteCmsModule: React.FC<WebsiteCmsModuleProps> = ({ onNavigatePu
   // Requirement 4: Load the logo and branding from Firestore when the page loads
   useEffect(() => {
     let isMounted = true;
-    const loadBrandingFromFirestore = async () => {
+    const loadFromFirestore = async () => {
       try {
         const instId = settings.institutionId || getInstitutionId(settings);
         const tenantSettings = await brandingService.fetchInstitutionWebsiteSettings(instId);
@@ -58,12 +58,16 @@ export const WebsiteCmsModule: React.FC<WebsiteCmsModuleProps> = ({ onNavigatePu
             }
           }));
         }
+        const remoteSlides = await erpService.fetchHeroSlidesFromFirestore();
+        if (isMounted && remoteSlides && remoteSlides.length > 0) {
+          setHeroSlides(remoteSlides);
+        }
       } catch (err) {
-        console.warn('Could not load branding settings from Firestore:', err);
+        console.warn('Could not load website data from Firestore:', err);
       }
     };
 
-    loadBrandingFromFirestore();
+    loadFromFirestore();
     return () => {
       isMounted = false;
     };
@@ -677,11 +681,29 @@ export const WebsiteCmsModule: React.FC<WebsiteCmsModuleProps> = ({ onNavigatePu
                         className="hidden"
                         onChange={(e) => {
                           const file = e.target.files?.[0];
-                          if (file) {
+                          if (file && editingSlide) {
                             const reader = new FileReader();
                             reader.onload = (event) => {
-                              const base64 = event.target?.result as string;
-                              if (base64) setEditingSlide({ ...editingSlide, imageUrl: base64 });
+                              const img = new Image();
+                              img.onload = () => {
+                                const canvas = document.createElement('canvas');
+                                let width = img.width;
+                                let height = img.height;
+                                const maxWidth = 1200;
+                                if (width > maxWidth) {
+                                  height = Math.round((height * maxWidth) / width);
+                                  width = maxWidth;
+                                }
+                                canvas.width = width;
+                                canvas.height = height;
+                                const ctx = canvas.getContext('2d');
+                                if (ctx) {
+                                  ctx.drawImage(img, 0, 0, width, height);
+                                  const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+                                  setEditingSlide({ ...editingSlide, imageUrl: compressedDataUrl });
+                                }
+                              };
+                              img.src = event.target?.result as string;
                             };
                             reader.readAsDataURL(file);
                           }
